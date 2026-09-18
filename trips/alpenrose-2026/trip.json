@@ -41,11 +41,70 @@
     "יום רביעי 23.9 צפוי קריר יותר משאר השבוע. אם התנאים באגם לא נעימים, אפשר להתחיל דווקא בגן החיות בבירכלבך ולעשות את הסירות רק אם יהיה נעים.",
     "עגלות ילדים אסורות על גשר Highline179 (114 מ׳ גובה, 406 מ׳ אורך) — למי שרוצה לחצות איתו כדאי מנשאה. המעליות המשופעות לעומת זאת כן מקבלות עגלות.",
     "פארק המגלשות באהרוואלד (Wettersteinbahnen) פעיל רק חמישי–ראשון בסוף ספטמבר, ותלוי מזג אוויר — לוודא לפני היציאה.",
-    "רעיונות גיבוי אם מזג האוויר לא משתף פעולה או שרוצים לשנות תוכניות: Ehrwalder Alm ומגרש המשחקים של Tirolerhaus (כ-10 דק׳, הכי קל להחלפה), גן החיות אלפנצו באינסברוק (כ-שעה, גן חיות של ממש), WONNEMAR בזונטהופן ו-Allgäulino (כ-שעה, אופציות מקורות לימי גשם), אייבזה כבוקר נפרד (כ-30 דק׳), ובלית ברירה — יום שלם במלון.",
+    "יש עוד כמה רעיונות גיבוי — לימי גשם, או סתם אם רוצים להחליף יום — בלשונית \"מידע\", תחת \"פעילויות נוספות אפשריות\".",
     "השעות בתוכנית הן הצעה לארגון, לא לוח זמנים נוקשה — כל השעות הן שעות מקומיות.",
     "זמני הנסיעה הם הערכה לתכנון, לא ניווט חי בזמן אמת — כדאי לבדוק מסלול בערב שלפני."
   ],
   "podcasts": {},
+  "extras": [
+    {
+      "title": "Allgäu Skyline Park",
+      "desc": "פארק שעשועים גדול בבוואריה, יותר מ-60 אטרקציות. לא נכלל בתוכנית הבסיס כי כבר יש יום פעלולים באימסט — אבל אופציה טובה אם הילדים ירצו עוד יום פארק שעשועים קלאסי.",
+      "address": "Skyline-Park-Straße 1, 86871 Rammingen, Germany",
+      "infoUrl": "https://www.skylinepark.de/",
+      "drive": { "time": "כ-1:20–1:25 שעות", "dist": "", "from": "מהמלון" }
+    },
+    {
+      "title": "Schongauer Märchenwald und Tierpark",
+      "desc": "יער אגדות עם פסלי דמויות מהאחים גרים, גן חיות ליטוף ומתקני משחק. התאמת גיל מצוינת ל-3–5, אבל בירכלבך כבר נותן חוויית בעלי חיים קרובה יותר ובלי לקחת יום שלם.",
+      "address": "Diessener Str. 6, 86956 Schongau, Germany",
+      "infoUrl": "https://www.schongauer-maerchenwald.de/",
+      "image": { "file": "images/maerchenwald.jpg", "credit": "Richard Mayer", "license": "CC BY 3.0", "commonsFile": "Märchenwald - panoramio.jpg" },
+      "drive": { "time": "כ-1:05 שעות", "dist": "", "from": "מהמלון" }
+    },
+    {
+      "title": "Ehrwalder Alm ומגרש המשחקים של Tirolerhaus",
+      "desc": "מגרש משחקים נעים ליד מסעדת Tirolerhaus, בתחנת ההר של Ehrwalder Almbahn — הכי קרוב וקל להחלפה של יום אהרוואלד אם פארק המגלשות לא פועל.",
+      "address": "Ehrwalder Alm 1, 6632 Ehrwald, Austria",
+      "infoUrl": "https://www.almbahn.at/en/tirolerhaus/welcome/the-tirolerhaus/",
+      "image": { "file": "images/ehrwalderalm.jpg", "credit": "Tiia Monto", "license": "CC BY-SA 3.0", "commonsFile": "Ehrwalder Almbahn.jpg" },
+      "drive": { "time": "כ-10 דקות", "dist": "", "from": "מהמלון" }
+    },
+    {
+      "title": "Alpenzoo Innsbruck",
+      "desc": "גן חיות אלפיני אמיתי באינסברוק, עם בעלי חיים של הרי האלפים — חלופה אם בא לכם גן חיות של ממש ולא רק פינת ליטוף.",
+      "address": "Weiherburggasse 37, 6020 Innsbruck, Austria",
+      "infoUrl": "https://alpenzoo.at/en/",
+      "image": { "file": "images/alpenzoo.jpg", "credit": "Steffen Flor", "license": "CC BY-SA 4.0", "commonsFile": "Wolf Alpenzoo Innsbruck.jpg" },
+      "drive": { "time": "כ-שעה", "dist": "", "from": "מהמלון" }
+    },
+    {
+      "title": "WONNEMAR זונטהופן",
+      "desc": "בריכת שחייה ומים מקורה בזונטהופן — האופציה הכי טובה ליום גשם כבד.",
+      "address": "Stadionweg 5, 87527 Sonthofen, Germany",
+      "infoUrl": "https://www.wonnemar.de/sonthofen/",
+      "drive": { "time": "כ-שעה", "dist": "", "from": "מהמלון" }
+    },
+    {
+      "title": "Allgäulino, וורטאך",
+      "desc": "מגרש משחקים מקורה בשטח 3,000 מ״ר בוורטאך, מתאים לגילאי 3–12 — אופציה טובה נוספת ליום גשום.",
+      "address": "Alpenstraße 20, 87497 Wertach, Germany",
+      "infoUrl": "https://www.allgaeulino.de/",
+      "drive": { "time": "כ-שעה", "dist": "", "from": "מהמלון" }
+    },
+    {
+      "title": "אייבזה כבוקר נפרד",
+      "desc": "אגם עם נוף מדהים לצוגשפיצה, ליד תחנת הרכבל הבווארית. אפשר כבוקר נפרד, או כתוספת ליום הצוגשפיצה אם הוא לא מתארך מדי.",
+      "address": "Seeweg 2, 82491 Grainau, Germany",
+      "infoUrl": "https://www.grainau.de/en/eibsee/",
+      "image": { "file": "images/eibsee.jpg", "credit": "Armatus1995", "license": "CC BY-SA 4.0", "commonsFile": "Eibsee Grainau Zugspitze.jpg" },
+      "drive": { "time": "כ-25–30 דקות", "dist": "", "from": "מהמלון" }
+    },
+    {
+      "title": "יום שלם במלון",
+      "desc": "אם שישה ילדים קטנים מחליטים בעצמם על התוכנית — יום שלם באלפנרוזה, בלי שום נסיעה, הוא תמיד אופציה לגיטימית."
+    }
+  ],
   "days": [
     {
       "date": "2026-09-22",
@@ -61,7 +120,7 @@
           "coords": { "lat": 47.402991, "lng": 10.8809321, "elev": 987 },
           "wxPlace": "Lermoos, Austria",
           "indoor": true,
-          "image": { "file": "images/lermoos.jpg", "credit": "David Short from Windsor, UK", "license": "CC BY 2.0", "commonsFile": "Lermoos (15062075954).jpg" },
+          "infoUrl": "https://www.hotelalpenrose.at/en/",
           "tips": [
             { "text": "צ׳ק-אין ואיסוף שלושת הרכבים השכורים בשדה עלולים לקחת זמן עם שישה ילדים — כדאי לתכנן את זה מראש.", "warn": true }
           ]
@@ -84,6 +143,7 @@
           "coords": { "lat": 47.4546459, "lng": 10.7585973, "elev": 978 },
           "wxPlace": "Heiterwang am See, Austria",
           "image": { "file": "images/heiterwangersee.jpg", "credit": "Rémih", "license": "CC BY-SA 4.0", "commonsFile": "Heiterwanger See Fischer am See 01.jpg" },
+          "infoUrl": "https://www.fischeramsee.at/en/region-active/summer-autumn/active-at-the-lake/",
           "drive": { "time": "כ-12 דקות", "dist": "", "from": "מהמלון" },
           "tips": [
             { "text": "בודקים את מזג האוויר בבוקר — אם קריר או סוער, אפשר להפוך את הסדר ולהתחיל בגן החיות." }
@@ -98,7 +158,8 @@
           "coords": { "lat": 47.4204978, "lng": 10.789158, "elev": 1078 },
           "wxPlace": "Bichlbach, Austria",
           "hours": "10:00–18:00",
-          "image": { "file": "images/bichlbach.jpg", "credit": "David Short from Windsor, UK", "license": "CC BY 2.0", "commonsFile": "Bichlbach (15811701122).jpg" },
+          "infoUrl": "http://www.streichelzoo.com/",
+          "image": { "file": "images/bichlbach.jpg", "credit": "Edelmauswaldgeist", "license": "CC BY-SA 4.0", "commonsFile": "Tierpark Bichlbach 2.jpg" },
           "drive": { "time": "כ-7 דקות", "dist": "", "from": "מאגם הייטרוואנג" }
         }
       ],
@@ -118,6 +179,8 @@
           "address": "Hoch Imst 19, 6460 Imst, Austria",
           "coords": { "lat": 47.2419032, "lng": 10.7219271, "elev": 1051 },
           "wxPlace": "Imst, Austria",
+          "infoUrl": "https://www.imst.at/en/hoch-imst/alpine-coaster-hoch-imst.html",
+          "image": { "file": "images/imst-familypark.jpg", "credit": "Haeferl", "license": "CC BY-SA 3.0", "commonsFile": "Imst - Hotel und Cafe-Rastaurant mit Vergnügungspark in Hochimst.jpg" },
           "drive": { "time": "כ-30–35 דקות", "dist": "", "from": "מהמלון" }
         },
         {
@@ -128,6 +191,7 @@
           "address": "Hoch Imst 19, 6460 Imst, Austria",
           "coords": { "lat": 47.2419032, "lng": 10.7219271, "elev": 1051 },
           "wxPlace": "Imst, Austria",
+          "infoUrl": "https://www.imst.at/en/hoch-imst/alpine-coaster-hoch-imst.html",
           "image": { "file": "images/imst-coaster.jpg", "credit": "Haeferl", "license": "CC BY-SA 3.0", "commonsFile": "Imst - Alpine Coaster - 17.jpg" },
           "tips": [
             { "text": "הרכיבה מותרת מגיל 3 בליווי מבוגר — הילדים בני שנה ו-2.5 לא יכולים לרכוב, אבל נהנים מפארק ההרים. מומלץ שהאמא ההרה תוותר על הרכבת.", "warn": true }
@@ -151,7 +215,8 @@
           "address": "Obermoos 1, 6632 Ehrwald, Austria",
           "coords": { "lat": 47.4265111, "lng": 10.9428424, "elev": 1222 },
           "wxPlace": "Ehrwald, Austria",
-          "image": { "file": "images/zugspitzbahn.jpg", "credit": "David Short from Windsor, UK", "license": "CC BY 2.0", "commonsFile": "Zugspitze from cable-car station, Ehrwald (24623986816).jpg" },
+          "infoUrl": "https://www.zugspitze.at/en/",
+          "image": { "file": "images/zugspitze-view.jpg", "credit": "Tiia Monto", "license": "CC BY-SA 3.0", "commonsFile": "View from Zugspitze 13.jpg" },
           "drive": { "time": "כ-10 דקות", "dist": "", "from": "מהמלון" },
           "tips": [
             { "text": "אופציה ב׳: במקום מגרש המשחקים, נסיעה לאייבזה (כ-25–30 דק׳) לשעה על שפת האגם — מאריכה את היום בערך בחצי שעה." }
@@ -164,7 +229,9 @@
           "desc": "טרמפולינות, קארטים ומתקני משחק בתחנת העמק של הרכבל — סיום נעים ליום אחרי הפסגה.",
           "address": "Obermoos 1, 6632 Ehrwald, Austria",
           "coords": { "lat": 47.4265111, "lng": 10.9428424, "elev": 1222 },
-          "wxPlace": "Ehrwald, Austria"
+          "wxPlace": "Ehrwald, Austria",
+          "infoUrl": "https://www.zugspitze.at/en/",
+          "image": { "file": "images/zugspitzbahn-valley.jpg", "credit": "David Short from Windsor, UK", "license": "CC BY 2.0", "commonsFile": "Zugspitzbahn (24650180995).jpg" }
         }
       ],
       "returnLeg": { "time": "כ-10 דקות", "dist": "", "from": "מהתחנה", "label": "אלפנרוזה" }
@@ -183,7 +250,8 @@
           "address": "Ebne 50, 6632 Ehrwald, Austria",
           "coords": { "lat": 47.4073844, "lng": 10.9284499, "elev": 1062 },
           "wxPlace": "Ehrwald, Austria",
-          "image": { "file": "images/ehrwald.jpg", "credit": "Axel Schlaefer", "license": "CC BY-SA 3.0", "commonsFile": "2012-06-02 Panoramablick über Ehrwald - panoramio.jpg" },
+          "image": { "file": "images/ehrwald.jpg", "credit": "Axel Schlaefer", "license": "CC BY-SA 3.0", "commonsFile": "2012-06-02 Alpenwiese bei Ehrwald - panoramio.jpg" },
+          "infoUrl": "https://www.wetterstein-bahnen.at/en",
           "drive": { "time": "כ-10 דקות", "dist": "", "from": "מהמלון" },
           "tips": [
             { "text": "הרכבל פעיל רק חמישי–ראשון בסוף ספטמבר, ותלוי מזג אוויר — לוודא לפני היציאה.", "warn": true }
@@ -233,6 +301,7 @@
           "coords": { "lat": 47.3808722, "lng": 10.7288321, "elev": 1365 },
           "wxPlace": "Berwang, Austria",
           "image": { "file": "images/mitteregg.jpg", "credit": "David Short from Windsor, UK", "license": "CC BY 2.0", "commonsFile": "Back to Mitteregg (37867006432).jpg" },
+          "infoUrl": "https://www.berwang.tirol/en/hiking/nature-adventure-trail-mitteregg",
           "drive": { "time": "כ-25–30 דקות", "dist": "", "from": "מהמלון" },
           "tips": [
             { "text": "חניה במיטרג עצמה מוגבלת מאוד — כדאי להגיע מוקדם, בסופי שבוע יכול לא להישאר מקום." }

@@ -16,6 +16,7 @@ let DAYS = [];          // היומן עצמו
 let CHECKLIST = [];     // רשימת לפני-הטיול
 let GENERAL_TIPS = [];  // "כדאי לדעת"
 let PODCASTS = {};      // פרקים לפי אזור
+let EXTRAS = [];         // פעילויות נוספות אפשריות, שלא נכנסו למסלול הקבוע
 let TRIP_INDEX = [];    // רשימת כל הטיולים, מ-trips/index.json
 let TRIP_ID = null;     // מזהה הטיול הפעיל — גם שם התיקייה וגם מרחב השמות באחסון
 
@@ -113,7 +114,7 @@ const STORE_PREFIX = "tp:";
 
 // חותמת גרסה, מוצגת בלשונית "מידע". מעלים אותה בכל דחיפה — כשמישהו אומר
 // "אצלי זה לא עובד", זו הדרך לדעת אם הוא בכלל מריץ את הקוד הנוכחי.
-const APP_BUILD = "2026-09-18.1";
+const APP_BUILD = "2026-09-18.2";
 
 // ה-Service Worker מגיש את המעטפת מהמטמון ומעדכן ברקע; כשהוא מגלה שהקוד
 // השתנה, הדף הזה כבר רץ עם הישן — אז הוא שולח הודעה ומציעים רענון.
@@ -213,6 +214,7 @@ async function loadTrip(id) {
   DAYS = trip.days || [];
   CHECKLIST = trip.checklist || [];
   GENERAL_TIPS = trip.tips || [];
+  EXTRAS = trip.extras || [];
   PODCASTS = trip.podcasts || {};
   markPodcastLeads();
 
@@ -881,6 +883,42 @@ function flightsSectionHTML() {
   `;
 }
 
+// כרטיס פעילות נוספת אפשרית — לא חלק מהמסלול הקבוע, אבל עם אותו מבנה מידע
+// בדיוק כמו תחנה במסלול (תמונה, נסיעה מהבסיס, תיאור, צ׳יפים וטיפים), כדי
+// שאפשר יהיה "לאמץ" אותה ליום אמיתי בעתיד בלי לשכתב כלום.
+function extraCardHTML(item) {
+  return `
+    <details class="day">
+      <summary>
+        <span class="day-summary-left">
+          <span class="day-title">${escapeHTML(item.title)}</span>
+        </span>
+        <span class="day-summary-right">
+          <span class="day-chevron">${ICON.chevron}</span>
+        </span>
+      </summary>
+      <div class="day-body">
+        ${legHTML(item.drive)}
+        ${imageHTML(item.image)}
+        <p>${escapeHTML(item.desc)}</p>
+        ${chipsHTML(item)}
+        ${tipsHTML(item)}
+      </div>
+    </details>
+  `;
+}
+
+function extrasSectionHTML() {
+  if (!EXTRAS.length) return "";
+  return `
+    <div class="info-section">
+      <h2>פעילויות נוספות אפשריות</h2>
+      <p class="ed-hint" style="margin:0 0 10px">רעיונות שלא נכנסו למסלול הקבוע — לפתיחה אם רוצים להחליף יום, או סתם לשמור בצד.</p>
+      ${EXTRAS.map(extraCardHTML).join("")}
+    </div>
+  `;
+}
+
 function renderInfo() {
   const view = $("#view-info");
   view.innerHTML = `
@@ -923,6 +961,8 @@ function renderInfo() {
         ${GENERAL_TIPS.map(t => `<div class="tip">${ICON.bulb}<span>${escapeHTML(t)}</span></div>`).join("")}
       </div>
     </div>` : ""}
+
+    ${extrasSectionHTML()}
   `;
   bindChecklist();
 }
