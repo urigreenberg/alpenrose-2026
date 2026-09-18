@@ -65,6 +65,11 @@ function wazeLink(address, coords) {
   return "https://waze.com/ul?q=" + encodeURIComponent(address) + "&navigate=yes";
 }
 
+// חיפוש גוגל לפי שם המקום — פותח את כרטיס המקום (ביקורות, אתר, שעות, תמונות)
+function searchLink(item) {
+  return "https://www.google.com/search?q=" + encodeURIComponent(item.mapsQuery);
+}
+
 // דף המקום בגוגל מפות (ביקורות, אתר, תמונות) — לפי שם המקום ולא רק כתובת
 function placeLink(item) {
   const q = item.mapsQuery || (TRIP && item.address === TRIP.base.address ? TRIP.base.name + " Lermoos" : item.address);
@@ -124,7 +129,7 @@ const STORE_PREFIX = "tp:";
 
 // חותמת גרסה, מוצגת בלשונית "מידע". מעלים אותה בכל דחיפה — כשמישהו אומר
 // "אצלי זה לא עובד", זו הדרך לדעת אם הוא בכלל מריץ את הקוד הנוכחי.
-const APP_BUILD = "2026-09-19.2";
+const APP_BUILD = "2026-09-19.3";
 
 // ה-Service Worker מגיש את המעטפת מהמטמון ומעדכן ברקע; כשהוא מגלה שהקוד
 // השתנה, הדף הזה כבר רץ עם הישן — אז הוא שולח הודעה ומציעים רענון.
@@ -296,8 +301,8 @@ function chipsHTML(block) {
   if (block.hours) chips.push(`<span class="chip">${ICON.clock} ${escapeHTML(block.hours)}</span>`);
   if (block.address) chips.push(`<a class="chip map" href="${mapLink(block.address)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>`);
   if (block.address) chips.push(`<a class="chip waze" href="${wazeLink(block.address, block.parking || block.coords)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>`);
-  if (block.mapsQuery) chips.push(`<a class="chip info" href="${placeLink(block)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
-  else if (block.infoUrl) chips.push(`<a class="chip info" href="${escapeHTML(block.infoUrl)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
+  const infoHref = block.infoLink || (block.mapsQuery ? searchLink(block) : block.infoUrl);
+  if (infoHref) chips.push(`<a class="chip info" href="${escapeHTML(infoHref)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
   if (!chips.length) return "";
   return `<div class="chips">${chips.join("")}</div>`;
 }
