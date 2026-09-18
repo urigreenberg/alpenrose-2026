@@ -1137,3 +1137,4 @@ label.ed-add { cursor: pointer; }
   background: none; border: 0; font-family: inherit; font-size: 13px; font-weight: 700;
   color: var(--accent-contrast); cursor: pointer;
 }
+.stop-img-link { display: block; }

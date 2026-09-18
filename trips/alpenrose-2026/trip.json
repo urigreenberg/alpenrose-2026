@@ -75,6 +75,16 @@
       "coords": {
         "lat": 48.043024,
         "lng": 10.5916919
+      },
+      "parking": {
+        "lat": 48.0435821,
+        "lng": 10.5903281
+      },
+      "image": {
+        "file": "images/skyline-park.jpg",
+        "credit": "Anton Porsche",
+        "license": "CC BY-SA 4.0",
+        "commonsFile": "Skyline Park Ueberblick.jpg"
       }
     },
     {
@@ -82,12 +92,6 @@
       "desc": "יער אגדות עם פסלי דמויות מהאחים גרים, גן חיות ליטוף ומתקני משחק. התאמת גיל מצוינת ל-3–5, אבל בירכלבך כבר נותן חוויית בעלי חיים קרובה יותר ובלי לקחת יום שלם.",
       "address": "Diessener Str. 6, 86956 Schongau, Germany",
       "infoUrl": "https://www.schongauer-maerchenwald.de/",
-      "image": {
-        "file": "images/maerchenwald.jpg",
-        "credit": "Richard Mayer",
-        "license": "CC BY 3.0",
-        "commonsFile": "Märchenwald - panoramio.jpg"
-      },
       "drive": {
         "time": "כ-1:05 שעות",
         "dist": "",
@@ -102,6 +106,10 @@
       "coords": {
         "lat": 47.8116719,
         "lng": 10.9193191
+      },
+      "parking": {
+        "lat": 47.8116964,
+        "lng": 10.9180494
       }
     },
     {
@@ -109,12 +117,6 @@
       "desc": "רכבל ומסלול שש מגלשות ביער, מהלך בין מגלשה למגלשה — אחת מהן כמעט 36 מטר אורך. הוחלף כפעילות קבועה כי המגלשות עצמן מותרות רק מגיל 6 או מגובה 1.30 מ׳ — שווה לחזור לרעיון הזה בעוד כמה שנים, או אם מישהו מהילדים כבר מגיע לגובה. פעיל רק חמישי–ראשון בסוף ספטמבר, ותלוי מזג אוויר.",
       "address": "Ebne 50, 6632 Ehrwald, Austria",
       "infoUrl": "https://www.wetterstein-bahnen.at/en",
-      "image": {
-        "file": "images/ehrwald-meadow.jpg",
-        "credit": "Axel Schlaefer",
-        "license": "CC BY-SA 3.0",
-        "commonsFile": "2012-06-02 Alpenwiese bei Ehrwald - panoramio.jpg"
-      },
       "drive": {
         "time": "כ-10 דקות",
         "dist": "",
@@ -129,6 +131,10 @@
       "coords": {
         "lat": 47.4073844,
         "lng": 10.9284499
+      },
+      "parking": {
+        "lat": 47.4069409,
+        "lng": 10.928472
       }
     },
     {
@@ -156,6 +162,10 @@
       "coords": {
         "lat": 47.2817268,
         "lng": 11.3975706
+      },
+      "parking": {
+        "lat": 47.2810983,
+        "lng": 11.3992293
       }
     },
     {
@@ -177,6 +187,10 @@
       "coords": {
         "lat": 47.502264,
         "lng": 10.279404
+      },
+      "parking": {
+        "lat": 47.5034708,
+        "lng": 10.2780826
       }
     },
     {
@@ -198,6 +212,10 @@
       "coords": {
         "lat": 47.5986352,
         "lng": 10.4114452
+      },
+      "parking": {
+        "lat": 47.5988967,
+        "lng": 10.4135812
       }
     },
     {
@@ -225,6 +243,10 @@
       "coords": {
         "lat": 47.4582467,
         "lng": 10.9708444
+      },
+      "parking": {
+        "lat": 47.4579449,
+        "lng": 10.98996
       }
     },
     {
@@ -250,6 +272,10 @@
       "coords": {
         "lat": 47.4070363,
         "lng": 10.8746142
+      },
+      "parking": {
+        "lat": 47.4060949,
+        "lng": 10.874309
       }
     },
     {
@@ -274,6 +300,10 @@
       "coords": {
         "lat": 47.3737426,
         "lng": 10.8914345
+      },
+      "parking": {
+        "lat": 47.3743073,
+        "lng": 10.8914824
       }
     },
     {
@@ -304,6 +334,16 @@
       "coords": {
         "lat": 47.5578108,
         "lng": 10.6928012
+      },
+      "parking": {
+        "lat": 47.5580308,
+        "lng": 10.6934239
+      },
+      "image": {
+        "file": "images/ziegelwies.jpg",
+        "credit": "Llez",
+        "license": "CC BY-SA 3.0",
+        "commonsFile": "Baumkronenweg Walderlebniszentrum Ziegelwies 01.jpg"
       }
     },
     {
@@ -325,6 +365,16 @@
       "coords": {
         "lat": 47.5606205,
         "lng": 10.1386342
+      },
+      "parking": {
+        "lat": 47.5604412,
+        "lng": 10.1365381
+      },
+      "image": {
+        "file": "images/alpsee-coaster.jpg",
+        "credit": "qwesy qwesy",
+        "license": "CC BY 3.0",
+        "commonsFile": "Alpsee Coaster - panoramio.jpg"
       }
     }
   ],
@@ -356,7 +406,11 @@
               "text": "גילאים: מתאים לכולם, כולל בעגלה/מנשאה. בהריון: בסדר גמור — רק הליכה בשדה."
             }
           ],
-          "mapsQuery": "REWE Terminalstraße Mitte 18 Flughafen München"
+          "mapsQuery": "REWE Terminalstraße Mitte 18 Flughafen München",
+          "parking": {
+            "lat": 48.3543807,
+            "lng": 11.7760634
+          }
         }
       ]
     },
@@ -396,7 +450,11 @@
               "text": "גילאים: מתאים לכולם, כולל בן/בת השנה בחיק. בהריון: בסדר גמור — שיט רגוע, רק להיזהר בעלייה/ירידה מהסירה."
             }
           ],
-          "mapsQuery": "Fischer am See Heiterwang"
+          "mapsQuery": "Fischer am See Heiterwang",
+          "parking": {
+            "lat": 47.4546316,
+            "lng": 10.7584835
+          }
         },
         {
           "start": "11:30",
@@ -475,7 +533,11 @@
               "warn": true
             }
           ],
-          "mapsQuery": "Alpine Coaster Hoch Imst"
+          "mapsQuery": "Alpine Coaster Hoch Imst",
+          "parking": {
+            "lat": 47.2410897,
+            "lng": 10.7238266
+          }
         },
         {
           "start": "10:45",
@@ -501,7 +563,11 @@
               "text": "גילאים: מתאים לכולם, כולל הקטנים. בהריון: בסדר גמור — הליכה קלה והשגחה."
             }
           ],
-          "mapsQuery": "Hoch Imst Familypark UAlm"
+          "mapsQuery": "Hoch Imst Familypark UAlm",
+          "parking": {
+            "lat": 47.2410897,
+            "lng": 10.7238266
+          }
         },
         {
           "start": "19:30",
@@ -572,7 +638,11 @@
               "text": "גילאים: מתאים לכולם, כולל בעגלה. בהריון: בסדר גמור לרוב ההריונות בביקור קצר בגובה — אם יש חשש רפואי ספציפי כדאי להתייעץ מראש."
             }
           ],
-          "mapsQuery": "Tiroler Zugspitzbahn Ehrwald Talstation"
+          "mapsQuery": "Tiroler Zugspitzbahn Ehrwald Talstation",
+          "parking": {
+            "lat": 47.427147,
+            "lng": 10.9420411
+          }
         },
         {
           "start": "10:45",
@@ -598,7 +668,11 @@
               "text": "גילאים: הטרמפולינות/קארטים בעיקר מגיל 3 ומעלה; הקטנים יותר משחקים באזור הרגוע. בהריון: לצפות, לא להשתתף בטרמפולינות."
             }
           ],
-          "mapsQuery": "Tiroler Zugspitzbahn Talstation Ehrwald"
+          "mapsQuery": "Tiroler Zugspitzbahn Talstation Ehrwald",
+          "parking": {
+            "lat": 47.427147,
+            "lng": 10.9420411
+          }
         }
       ],
       "returnLeg": {
@@ -644,7 +718,11 @@
               "text": "גילאים: מתאים לכולם, המסלול מוגדר רשמית כנגיש לעגלות. בהריון: בסדר גמור — הליכה קלה ומישורית ברובה."
             }
           ],
-          "mapsQuery": "Ehrwalder Almbahn Talstation Ehrwald"
+          "mapsQuery": "Ehrwalder Almbahn Talstation Ehrwald",
+          "parking": {
+            "lat": 47.3883183,
+            "lng": 10.9384442
+          }
         },
         {
           "start": "19:00",
@@ -673,7 +751,13 @@
               "text": "גילאים: לא רלוונטי לילדים — ערב למבוגרים בלבד. בהריון: אפשר להצטרף ולשבת, בלי אלכוהול."
             }
           ],
-          "mapsQuery": "Casino Innsbruck Salurner Straße 15"
+          "mapsQuery": "Casino Innsbruck Salurner Straße 15",
+          "image": {
+            "file": "images/casino-innsbruck.jpg",
+            "credit": "böhringer friedrich",
+            "license": "CC BY-SA 2.5",
+            "commonsFile": "CasinoInnsbruck.JPG"
+          }
         }
       ],
       "returnLeg": {
@@ -765,7 +849,11 @@
               "text": "גילאים: מתאים לכולם, שביל קל ורוב הדרך שטוחה. בהריון: הליכה קלה, בסדר גמור."
             }
           ],
-          "mapsQuery": "Naturerlebnisweg Mitteregg Berwang"
+          "mapsQuery": "Naturerlebnisweg Mitteregg Berwang",
+          "parking": {
+            "lat": 47.381025,
+            "lng": 10.7289836
+          }
         }
       ],
       "returnLeg": {
@@ -825,7 +913,11 @@
               "text": "גילאים: מתאים לכולם למעט הגשר (ראו לעיל) — המעלית לא מדרגות, אבל לחורבות עצמן ולגשר צריך מנשאה לגיל 1-2."
             }
           ],
-          "mapsQuery": "Burgenwelt Ehrenberg Reutte"
+          "mapsQuery": "Burgenwelt Ehrenberg Reutte",
+          "parking": {
+            "lat": 47.4641747,
+            "lng": 10.7193955
+          }
         },
         {
           "start": "12:40",
@@ -854,7 +946,11 @@
               "text": "גילאים: לנשים בלבד, בלי ילדים. בהריון: בסדר גמור — הליכה רגועה באאוטלט."
             }
           ],
-          "mapsQuery": "FOC Füssen Outlet Center"
+          "mapsQuery": "FOC Füssen Outlet Center",
+          "parking": {
+            "lat": 47.5767012,
+            "lng": 10.6734539
+          }
         }
       ],
       "returnLeg": {
@@ -922,7 +1018,17 @@
               "text": "גילאים: מתאים לכולם — במיוחד ל-1 עד 5. בהריון: הליכה קלה בשטח ברובו שטוח, בסדר גמור."
             }
           ],
-          "mapsQuery": "Märchenwald Isartal Wolfratshausen"
+          "mapsQuery": "Märchenwald Isartal Wolfratshausen",
+          "parking": {
+            "lat": 47.9090188,
+            "lng": 11.4376151
+          },
+          "image": {
+            "file": "images/maerchenwald-isartal.jpg",
+            "credit": "Strubbl",
+            "license": "CC BY-SA 4.0",
+            "commonsFile": "Bahnhof der Miniaturbahn im Märchenwald Wolfratshausen 2025-10-12.jpg"
+          }
         }
       ],
       "returnLeg": {

@@ -124,7 +124,7 @@ const STORE_PREFIX = "tp:";
 
 // חותמת גרסה, מוצגת בלשונית "מידע". מעלים אותה בכל דחיפה — כשמישהו אומר
 // "אצלי זה לא עובד", זו הדרך לדעת אם הוא בכלל מריץ את הקוד הנוכחי.
-const APP_BUILD = "2026-09-19.1";
+const APP_BUILD = "2026-09-19.2";
 
 // ה-Service Worker מגיש את המעטפת מהמטמון ומעדכן ברקע; כשהוא מגלה שהקוד
 // השתנה, הדף הזה כבר רץ עם הישן — אז הוא שולח הודעה ומציעים רענון.
@@ -295,9 +295,9 @@ function chipsHTML(block) {
   if (block.price) chips.push(`<span class="chip">${escapeHTML(block.price)}</span>`);
   if (block.hours) chips.push(`<span class="chip">${ICON.clock} ${escapeHTML(block.hours)}</span>`);
   if (block.address) chips.push(`<a class="chip map" href="${mapLink(block.address)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>`);
-  if (block.address) chips.push(`<a class="chip waze" href="${wazeLink(block.address, block.coords)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>`);
+  if (block.address) chips.push(`<a class="chip waze" href="${wazeLink(block.address, block.parking || block.coords)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>`);
   if (block.mapsQuery) chips.push(`<a class="chip info" href="${placeLink(block)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
-  if (block.infoUrl) chips.push(`<a class="chip info" href="${escapeHTML(block.infoUrl)}" target="_blank" rel="noopener">${ICON.link} אתר רשמי</a>`);
+  else if (block.infoUrl) chips.push(`<a class="chip info" href="${escapeHTML(block.infoUrl)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
   if (!chips.length) return "";
   return `<div class="chips">${chips.join("")}</div>`;
 }
@@ -541,7 +541,7 @@ function legHTML(drive) {
   return `<div class="leg">${ICON.car}<span>${escapeHTML(drive.time)}${dist} ${escapeHTML(drive.from)}</span></div>`;
 }
 
-function imageHTML(image) {
+function imageHTML(image, item) {
   if (!image) return "";
   const credit = image.credit
     ? `<a class="stop-credit" href="${commonsFileUrl(image.commonsFile)}" target="_blank" rel="noopener">${ICON.camera} ${escapeHTML(image.credit)} · ${escapeHTML(image.license)}, ויקישיתוף</a>`
@@ -549,14 +549,18 @@ function imageHTML(image) {
   // תמונה שנבחרה בעורך ועוד לא פורסמה מוצגת ישירות מוויקישיתוף; אחרי
   // הפרסום היא כבר קובץ בתיקיית הטיול ונטענת מקומית, גם בלי קליטה.
   const src = image.pending && image.thumb ? image.thumb : tripAsset(image.file);
-  return `<img class="stop-img" src="${src}" alt="" loading="lazy" onerror="this.style.display='none'">${credit}`;
+  const img = `<img class="stop-img" src="${src}" alt="" loading="lazy" onerror="this.style.display='none'">`;
+  const linked = item && item.mapsQuery
+    ? `<a class="stop-img-link" href="${placeLink(item)}" target="_blank" rel="noopener">${img}</a>`
+    : img;
+  return `${linked}${credit}`;
 }
 
 // בלוק "תחנה" מלא — עם תמונה, כתובת, זמן נסיעה, תחזית וכל השאר.
 function stopCardHTML(day, block) {
   return `
     <div class="stop">
-      ${imageHTML(block.image)}
+      ${imageHTML(block.image, block)}
       <div class="stop-body">
         ${timeLabel(block) ? `<div class="stop-time">${timeLabel(block)}</div>` : ""}
         <h3>${podTitleHTML(block)}</h3>
@@ -780,7 +784,7 @@ function renderNow() {
     currentHTML = `
       <div class="now-current">
         <div class="kicker"><span class="pulse"></span>${isNow ? "עכשיו" : "בקרוב"}${timeLabel(b) ? " · " + timeLabel(b) : ""}</div>
-        ${imageHTML(b.image)}
+        ${imageHTML(b.image, b)}
         <h2>${podTitleHTML(b)}</h2>
         ${podPanelHTML(b)}
         ${weatherHTML(day, b)}
@@ -915,7 +919,7 @@ function extraCardHTML(item) {
       </summary>
       <div class="day-body">
         ${legHTML(item.drive)}
-        ${imageHTML(item.image)}
+        ${imageHTML(item.image, item)}
         <p>${escapeHTML(item.desc)}</p>
         ${chipsHTML(item)}
         ${tipsHTML(item)}
