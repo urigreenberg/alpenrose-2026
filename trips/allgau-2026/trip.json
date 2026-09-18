@@ -1,0 +1,709 @@
+{
+  "schemaVersion": 1,
+  "id": "allgau-2026",
+  "status": "planned",
+  "title": "אלגוי",
+  "subtitle": "18–25 בספטמבר 2026",
+  "icon": "route",
+  "start": "2026-09-18",
+  "end": "2026-09-25",
+  "base": {
+    "kind": "hotel",
+    "name": "Center Parcs Park Allgäu",
+    "address": "Center Parcs Park Allgäu, Allgäuallee 40, 88299 Leutkirch im Allgäu, Germany",
+    "coords": {
+      "lat": 47.7784,
+      "lng": 10.0633,
+      "elev": 744,
+      "display": "40, Allgäuallee, Unteröschhöfe"
+    }
+  },
+  "flightIn": null,
+  "flightOut": null,
+  "checklist": [
+    "להשלים צ'ק-אין מקוון לפארק, ולוודא מולם איך מקבלים גישה לקוטג' בהגעה לילית ביום שישי",
+    "תיק קטן לערב הראשון: בגדי שינה, כלי רחצה ומשהו לאכול — כדי לא לפרוק הכול בלילה",
+    "מצרכים לארוחת הבוקר הראשונה — להביא או לקנות בדרך. לא להסתמך על חנות פתוחה בהגעה",
+    "לבחור ולהזמין מסעדה בפארק לערבי שבת 19.9, שני 21.9 ושלישי 22.9",
+    "להזמין מראש סיור ב-Neuschwanstein ליום שלישי 22.9 בסביבות 11:00 — הפנים נגיש בסיור בלבד",
+    "לוודא את שעות LEGOLAND ל-24.9 בכרטיס או באתר, ולקנות כרטיסים מראש",
+    "לבדוק מזג אוויר ומצב שבילים לפני Eistobel ב-21.9 — בשבילים רטובים עדיף לוותר",
+    "לתאם מראש עם הפארק נוהל יציאה מוקדמת ב-25.9: החזרת אמצעי הגישה והעמסת הרכב ב-06:00",
+    "להוסיף לאפליקציה את פרטי הטיסה חזרה (שדה ושעה) כדי לתכנן את מרווח הביטחון ליציאה של 06:00",
+    "בגדי ים ומגבות — Aqua Mundo כמעט כל יום; לבדוק אם הפארק מספק מגבות או שמביאים"
+  ],
+  "tips": [
+    "זה לא מרוץ: רוב הימים משלבים יציאה אחת עם חזרה לפארק, מים ומנוחה. אם טוב לכם במקום אחד, אפשר לוותר על התחנה הבאה.",
+    "השעות הן הצעה נוחה להתארגנות, לא רשימת משימות. כל השעות הן שעות מקומיות.",
+    "זמני הנסיעה הם טווחי תכנון משוערים, לא זמני ניווט חיים — מוסיפים זמן להליכה מהקוטג' לרכב, חניה, שירותים ועומס. בודקים מסלול בערב שלפני.",
+    "הכניסה הרגילה ל-Aqua Mundo כלולה בשהייה; פעילויות מודרכות (רפטינג, פארק חבלים, Zip Line) עשויות להיות בתשלום נוסף ולפי זמינות.",
+    "Alpsee Bergwelt היא אתר הררי ליד Immenstadt — לא אגם Alpsee שליד הטירות ב-Schwangau. שני מקומות שונים באותו שם.",
+    "לפי הלוח הרשמי LEGOLAND סגור ב-21–23 בספטמבר. לא מעבירים את הביקור ליום אחר בלי לבדוק פתיחה ותנאי כרטיס.",
+    "שווייץ (למשל מפלי הריין) היא נסיעה ארוכה יותר משאר היעדים ולא נכללת בלוח הבסיסי."
+  ],
+  "podcasts": {
+    "centerparcs": {
+      "title": "האלגוי והפארק שנבנה על מחסן פצצות",
+      "file": "audio/centerparcs.m4a",
+      "minutes": 14,
+      "rev": 1,
+      "ready": true
+    },
+    "lindau": {
+      "title": "לינדאו — האי שהיה עיר, והאגם שאין לו גבולות",
+      "file": "audio/lindau.m4a",
+      "minutes": 10,
+      "rev": 1,
+      "ready": true
+    },
+    "eistobel": {
+      "title": "Eistobel — הערוץ שקרחון חפר בשבועות",
+      "file": "audio/eistobel.m4a",
+      "minutes": 22,
+      "rev": 1,
+      "ready": true
+    },
+    "neuschwanstein": {
+      "title": "נוישוונשטיין — הטירה של המלך שרצה לחיות בתוך אופרה",
+      "file": "audio/neuschwanstein.m4a",
+      "minutes": 23,
+      "rev": 1,
+      "ready": true
+    },
+    "alpsee": {
+      "title": "Alpsee Bergwelt ואימנשטאט — ההר, הפרות והגבינה",
+      "file": "audio/alpsee.m4a",
+      "minutes": 23,
+      "rev": 1,
+      "ready": true
+    }
+  },
+  "days": [
+    {
+      "date": "2026-09-18",
+      "title": "הגעה מאוחרת",
+      "place": "Center Parcs Park Allgäu",
+      "driveNote": "מגיעים בלילה — התארגנות ושינה בלבד",
+      "blocks": [
+        {
+          "approx": true,
+          "title": "הגעה בלילה",
+          "desc": "לא קובעים ארוחה במסעדה או פעילות. מוציאים מהרכב רק את התיק הקטן — בגדי שינה, כלי רחצה ומשהו לאכול — ואת השאר פורקים בבוקר.",
+          "address": "Center Parcs Park Allgäu, Allgäuallee 40, 88299 Leutkirch im Allgäu, Germany",
+          "coords": {
+            "lat": 47.7784,
+            "lng": 10.0633,
+            "elev": 744,
+            "display": "40, Allgäuallee, Unteröschhöfe"
+          },
+          "wxPlace": "Leutkirch im Allgäu, Germany",
+          "indoor": true,
+          "drive": {
+            "time": "לפי הטיסה",
+            "dist": "",
+            "from": "משדה התעופה"
+          },
+          "infoUrl": "https://www.centerparcs.de/de-de/deutschland/fp_AL_ferienpark-park-allgau",
+          "tips": [
+            {
+              "text": "לפני הנסיעה: צ'ק-אין מקוון, ולוודא מול הפארק איך מקבלים גישה לקוטג' בהגעה לילית.",
+              "warn": true
+            },
+            {
+              "text": "מצרכים לארוחת הבוקר הראשונה מביאים או קונים בדרך — לא מסתמכים על חנות פתוחה בהגעה."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-09-19",
+      "title": "יום רגוע בפארק",
+      "place": "Center Parcs — היכרות ו-Aqua Mundo",
+      "driveNote": "בלי נסיעות",
+      "blocks": [
+        {
+          "start": "09:30",
+          "end": "10:30",
+          "approx": true,
+          "title": "ארוחת בוקר איטית בבופה",
+          "desc": "בלי לחץ — היום הראשון האמיתי מתחיל לאט."
+        },
+        {
+          "start": "10:30",
+          "end": "12:30",
+          "approx": true,
+          "title": "סיבוב היכרות בפארק",
+          "desc": "Market Dome והאזור המרכזי, מתקני משחק וחוות הילדים לפי החשק. לא מזמינים פעילות לשעה מוקדמת.",
+          "coords": {
+            "lat": 47.7784,
+            "lng": 10.0633,
+            "elev": 744,
+            "display": "40, Allgäuallee, Unteröschhöfe"
+          },
+          "wxPlace": "Leutkirch im Allgäu, Germany",
+          "infoUrl": "https://www.centerparcs.de/de-de/deutschland/fp_AL_ferienpark-park-allgau",
+          "area": "centerparcs"
+        },
+        {
+          "start": "12:30",
+          "end": "13:30",
+          "approx": true,
+          "title": "צהריים קלים במרכז הפארק",
+          "desc": "פיצה, פסטה או כריך, לפי ההיצע באותו יום. אפשר גם לאכול בקוטג'."
+        },
+        {
+          "start": "14:00",
+          "end": "17:00",
+          "approx": true,
+          "title": "Aqua Mundo",
+          "desc": "עולם מים מקורה עם מגלשות, בריכת גלים, אזורי משחק במים ומסלול מים סוערים. בוחרים מתקנים לפי הגיל, הגובה ויכולת השחייה. הכניסה הרגילה כלולה בשהייה; פעילויות מודרכות עשויות להיות בתשלום נוסף.",
+          "coords": {
+            "lat": 47.7784,
+            "lng": 10.0633,
+            "elev": 744,
+            "display": "40, Allgäuallee, Unteröschhöfe"
+          },
+          "wxPlace": "Leutkirch im Allgäu, Germany",
+          "indoor": true,
+          "infoUrl": "https://www.centerparcs.de/de-de/deutschland/fp_AL_ferienpark-park-allgau"
+        },
+        {
+          "start": "17:00",
+          "end": "19:00",
+          "approx": true,
+          "title": "מקלחות ומנוחה",
+          "desc": "זמן להתאושש לפני הערב."
+        },
+        {
+          "start": "19:00",
+          "approx": true,
+          "title": "ארוחת ערב במסעדה בפארק",
+          "desc": "צריך לבחור מסעדה ולהזמין מראש.",
+          "tips": [
+            {
+              "text": "להזמין שולחן — במסעדות הפארק בסופי שבוע נגמרים המקומות.",
+              "warn": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-09-20",
+      "title": "לינדאו ואגם בודנזה",
+      "place": "Lindau (חצי יום) · אחה\"צ בפארק",
+      "driveNote": "כ-40–55 דקות לכל כיוון",
+      "blocks": [
+        {
+          "end": "09:30",
+          "approx": true,
+          "title": "ארוחת בוקר בקוטג'",
+          "desc": "יוצאים ב-09:30."
+        },
+        {
+          "start": "10:30",
+          "end": "12:15",
+          "approx": true,
+          "title": "לינדאו — האי, הנמל והמגדלור",
+          "desc": "טיול נינוח באי: העיר העתיקה, Maximilianstraße והנמל עם האריה הבווארי והמגדלור. ביום בהיר יש נוף יפה לאגם ולהרים. העלייה למגדלור היא תוספת, לפי פתיחה וכוח.",
+          "address": "Hafenplatz, 88131 Lindau (Bodensee), Germany",
+          "coords": {
+            "lat": 47.5445,
+            "lng": 9.6833,
+            "elev": 407,
+            "display": "Hafenplatz, Insel, Lindau (Bodensee)"
+          },
+          "wxPlace": "Lindau (Bodensee), Germany",
+          "drive": {
+            "time": "כ-40–55 דקות",
+            "dist": "כ-50 ק\"מ",
+            "from": "מהפארק"
+          },
+          "image": {
+            "file": "images/lindau.jpg",
+            "credit": "Flocci Nivis",
+            "license": "CC BY 4.0",
+            "commonsFile": "20221020 Leuchtturm Lindau 02.jpg"
+          },
+          "infoUrl": "https://www.lindau.de/",
+          "tips": [
+            {
+              "text": "חניה: לכוון ל-P4 Inselhalle (Zwanzigerstraße 10) ולבדוק זמינות ומחיר במקום. מהחניון כמה דקות הליכה לנמל."
+            }
+          ],
+          "area": "lindau"
+        },
+        {
+          "start": "12:15",
+          "end": "13:15",
+          "approx": true,
+          "title": "צהריים ב-Heimat Lindau",
+          "desc": "ב-Marktplatz 1 — מיקום מרכזי, מתאים להפסקה בלי להאריך את המסלול. בפרסום הנוכחי פתוח בראשון 09:00–18:00; בודקים שעות מטבח סמוך לביקור.",
+          "address": "Heimat Lindau, Marktplatz 1, 88131 Lindau (Bodensee), Germany",
+          "coords": {
+            "lat": 47.5476,
+            "lng": 9.6871,
+            "elev": 402,
+            "display": "1, Marktplatz, Insel"
+          },
+          "wxPlace": "Lindau (Bodensee), Germany",
+          "drive": {
+            "time": "כ-5 דקות הליכה",
+            "dist": "",
+            "from": "מהנמל"
+          },
+          "hours": "ראשון 09:00–18:00 (לוודא שעות מטבח)"
+        },
+        {
+          "start": "13:15",
+          "end": "14:00",
+          "approx": true,
+          "title": "גלידה וטיילת",
+          "desc": "14:00 יציאה, חזרה לפארק סביב 15:00. שיט באגם רק אם רוצים להאריך את היום ובהתאם ללוח ההפלגות — הוא לא חלק מחצי היום הבסיסי."
+        },
+        {
+          "start": "15:00",
+          "end": "18:00",
+          "approx": true,
+          "title": "Aqua Mundo",
+          "desc": "אחר הצהריים חופשי במים.",
+          "coords": {
+            "lat": 47.7784,
+            "lng": 10.0633,
+            "elev": 744,
+            "display": "40, Allgäuallee, Unteröschhöfe"
+          },
+          "wxPlace": "Leutkirch im Allgäu, Germany",
+          "indoor": true,
+          "address": "Center Parcs Park Allgäu, Allgäuallee 40, 88299 Leutkirch im Allgäu, Germany",
+          "drive": {
+            "time": "כ-40–55 דקות",
+            "dist": "כ-50 ק\"מ",
+            "from": "מלינדאו"
+          },
+          "infoUrl": "https://www.centerparcs.de/de-de/deutschland/fp_AL_ferienpark-park-allgau"
+        },
+        {
+          "start": "19:00",
+          "approx": true,
+          "title": "ארוחת ערב בבופה בפארק",
+          "desc": ""
+        }
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "title": "Eistobel",
+      "place": "ערוץ Eistobel (בוקר) · Aqua Mundo",
+      "driveNote": "כ-25–35 דקות לכל כיוון",
+      "dayNote": "חלופה לבוקר: High Ropes או Zip Line בפארק במקום Eistobel. בהמשך Aqua Mundo ורפטינג לפי זמינות.",
+      "blocks": [
+        {
+          "end": "09:00",
+          "approx": true,
+          "title": "ארוחת בוקר בבופה בפארק",
+          "desc": "יוצאים סביב 09:00. לדרך לוקחים מים וכריכים, כדי שלא צריך למהר בגלל רעב."
+        },
+        {
+          "start": "09:30",
+          "end": "12:00",
+          "approx": true,
+          "title": "ערוץ Eistobel",
+          "desc": "ערוץ מיוער עם מפלים, סלעים וקירות מצוק. מתחילים באזור ה-Infopavillon ליד Argentobelbrücke ומקדישים כ-2–2.5 שעות למסלול מותאם לילדים, כולל עצירות.",
+          "address": "Eistobel Infopavillon, Argentobelbrücke, 88167 Grünenbach, Germany",
+          "coords": {
+            "lat": 47.6416,
+            "lng": 10.0279,
+            "elev": 682,
+            "display": "Argentobelbrücke, St 1318, Grünenbach"
+          },
+          "wxPlace": "Grünenbach, Germany",
+          "drive": {
+            "time": "כ-25–35 דקות",
+            "dist": "כ-21 ק\"מ",
+            "from": "מהפארק"
+          },
+          "image": {
+            "file": "images/eistobel.jpg",
+            "credit": "1971markus",
+            "license": "CC BY-SA 4.0",
+            "commonsFile": "Eistobel (101).jpg"
+          },
+          "infoUrl": "https://de.wikipedia.org/wiki/Eistobel",
+          "tips": [
+            {
+              "text": "בכניסה בוחרים מסלול חזרה ברור ומאשרים את אורכו. המסלול המעגלי דרך Riedholz הוא כ-5.2 ק\"מ עם עליות — עם בן ה-6 ייתכן שעדיף קטע קצר וחזרה באותה דרך.",
+              "warn": true
+            },
+            {
+              "text": "המסלול החוצה את הערוץ אינו מעגלי — אין להניח ש-3.6 ק\"מ כוללים חזרה לרכב."
+            },
+            {
+              "text": "בשבילים רטובים עדיף לוותר. נעליים סגורות."
+            }
+          ],
+          "area": "eistobel"
+        },
+        {
+          "start": "12:00",
+          "end": "13:00",
+          "approx": true,
+          "title": "סיום, נסיעה חזרה וצהריים קלים",
+          "desc": "בקוטג' או במרכז הפארק."
+        },
+        {
+          "start": "14:30",
+          "end": "17:00",
+          "approx": true,
+          "title": "Aqua Mundo",
+          "desc": "לפי החשק.",
+          "coords": {
+            "lat": 47.7784,
+            "lng": 10.0633,
+            "elev": 744,
+            "display": "40, Allgäuallee, Unteröschhöfe"
+          },
+          "wxPlace": "Leutkirch im Allgäu, Germany",
+          "indoor": true,
+          "address": "Center Parcs Park Allgäu, Allgäuallee 40, 88299 Leutkirch im Allgäu, Germany",
+          "drive": {
+            "time": "כ-25–35 דקות",
+            "dist": "כ-21 ק\"מ",
+            "from": "מ-Eistobel"
+          },
+          "infoUrl": "https://www.centerparcs.de/de-de/deutschland/fp_AL_ferienpark-park-allgau"
+        },
+        {
+          "start": "19:00",
+          "approx": true,
+          "title": "ארוחת ערב במסעדה בפארק",
+          "desc": "צריך לבחור ולהזמין.",
+          "tips": [
+            {
+              "text": "להזמין שולחן מראש.",
+              "warn": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-09-22",
+      "title": "Neuschwanstein ו-Füssen",
+      "place": "Hohenschwangau · Füssen",
+      "driveNote": "כ-60–75 דקות לכל כיוון · יום של 7–8 שעות מחוץ לפארק",
+      "dayNote": "זה לא חצי יום קצר. אם מתעייפים, מקצרים את Füssen. לא מוסיפים טירה נוספת.",
+      "blocks": [
+        {
+          "end": "08:30",
+          "approx": true,
+          "title": "ארוחת בוקר בבופה",
+          "desc": "יוצאים ב-08:30."
+        },
+        {
+          "start": "09:30",
+          "end": "11:00",
+          "approx": true,
+          "title": "הגעה ל-Hohenschwangau ועלייה לטירה",
+          "desc": "מכוונים לחניה לפחות כ-90 דקות לפני הסיור. ההגעה לטירה עצמה כוללת עלייה והליכה; גם השאטל אינו מגיע עד הדלת, ותורים יכולים להאריך את הדרך.",
+          "address": "Ticketcenter Hohenschwangau, Alpseestraße 12, 87645 Schwangau, Germany",
+          "coords": {
+            "lat": 47.5554,
+            "lng": 10.7393,
+            "elev": 836,
+            "display": "Ticket-Center Hohenschwangau, 12, Alpseestraße"
+          },
+          "wxPlace": "Schwangau, Germany",
+          "drive": {
+            "time": "כ-60–75 דקות",
+            "dist": "כ-73 ק\"מ",
+            "from": "מהפארק"
+          },
+          "image": {
+            "file": "images/neuschwanstein.jpg",
+            "credit": "Hiroki Ogawa",
+            "license": "CC BY 3.0",
+            "commonsFile": "Schloss Neuschwanstein Germany - panoramio (8).jpg"
+          },
+          "infoUrl": "https://www.hohenschwangau.de/",
+          "tips": [
+            {
+              "text": "הפנים של הטירה נגיש בסיור מוזמן בלבד — להזמין מראש.",
+              "warn": true
+            }
+          ],
+          "area": "neuschwanstein"
+        },
+        {
+          "start": "11:00",
+          "end": "12:30",
+          "approx": true,
+          "title": "סיור ב-Neuschwanstein",
+          "desc": "טירתו המרשימה של לודוויג השני מעל הנוף האלפיני. תצפית Marienbrücke היא תוספת לפי פתיחה, מזג האוויר והתורים.",
+          "coords": {
+            "lat": 47.5585,
+            "lng": 10.75,
+            "elev": 897,
+            "display": "20, Neuschwansteinstraße, Hohenschwangau"
+          },
+          "wxPlace": "Schwangau, Germany",
+          "area": "neuschwanstein"
+        },
+        {
+          "start": "13:00",
+          "end": "14:00",
+          "approx": true,
+          "title": "צהריים ב-Gasthof Krone, Füssen",
+          "desc": "מסעדה בווארית בעיר העתיקה, עם עיצוב בסגנון ימי הביניים. מוודאים פתיחת צהריים. חלופה פשוטה: מאפייה או בית קפה במרכז.",
+          "address": "Gasthof Krone, Schrannengasse 17, 87629 Füssen, Germany",
+          "coords": {
+            "lat": 47.5686,
+            "lng": 10.7012,
+            "elev": 805,
+            "display": "Gasthof Krone, 17, Schrannengasse"
+          },
+          "wxPlace": "Füssen, Germany",
+          "drive": {
+            "time": "כ-10–15 דקות",
+            "dist": "כ-4 ק\"מ",
+            "from": "מהטירה"
+          },
+          "image": {
+            "file": "images/fuessen.jpg",
+            "credit": "qwesy qwesy",
+            "license": "CC BY 3.0",
+            "commonsFile": "Schrannengasse in Füssen - panoramio.jpg"
+          },
+          "infoUrl": "https://www.krone-fuessen.de/"
+        },
+        {
+          "start": "14:00",
+          "end": "15:00",
+          "approx": true,
+          "title": "העיר העתיקה של Füssen וגלידה",
+          "desc": "סיבוב קצר. חזרה לפארק סביב 16:00–16:30."
+        },
+        {
+          "start": "15:30",
+          "end": "19:00",
+          "approx": true,
+          "title": "Aqua Mundo",
+          "desc": "לפי החשק — אחרי יום ארוך.",
+          "coords": {
+            "lat": 47.7784,
+            "lng": 10.0633,
+            "elev": 744,
+            "display": "40, Allgäuallee, Unteröschhöfe"
+          },
+          "wxPlace": "Leutkirch im Allgäu, Germany",
+          "indoor": true,
+          "address": "Center Parcs Park Allgäu, Allgäuallee 40, 88299 Leutkirch im Allgäu, Germany",
+          "drive": {
+            "time": "כ-60–75 דקות",
+            "dist": "כ-69 ק\"מ",
+            "from": "מ-Füssen"
+          },
+          "infoUrl": "https://www.centerparcs.de/de-de/deutschland/fp_AL_ferienpark-park-allgau"
+        },
+        {
+          "start": "19:00",
+          "approx": true,
+          "title": "ארוחת ערב במסעדה בפארק",
+          "desc": "צריך להזמין.",
+          "tips": [
+            {
+              "text": "להזמין שולחן מראש.",
+              "warn": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "date": "2026-09-23",
+      "title": "יום פתוח",
+      "place": "אפשרות: Alpsee Bergwelt",
+      "driveNote": "כ-45–60 דקות לכל כיוון — אם יוצאים",
+      "dayNote": "היום נשאר פתוח וגמיש. Alpsee Bergwelt היא אפשרות בלבד — בודקים באותו בוקר מצב הפעלה, רוח וגשם, מגבלות גיל וגובה וליווי לילד הצעיר. לא קונים מראש חבילה שמקבעת את היום בלי לבדוק תנאי שינוי.",
+      "blocks": [
+        {
+          "end": "09:30",
+          "approx": true,
+          "title": "ארוחת בוקר בקוטג'",
+          "desc": "אם יוצאים — ב-09:30."
+        },
+        {
+          "start": "10:30",
+          "end": "13:00",
+          "approx": true,
+          "title": "Alpsee Bergwelt",
+          "desc": "אתר הררי עם רכבל כיסאות, מגלשת הרים Alpsee Coaster ואזור משחקים Abenteuer Alpe. יש גם פארק חבלים נפרד באזור. בוחרים מעט — לא צריך לרכוש את כל הפעילויות.",
+          "address": "Alpsee Bergwelt, Ratholz 24, 87509 Immenstadt im Allgäu, Germany",
+          "coords": {
+            "lat": 47.5623,
+            "lng": 10.1349,
+            "elev": 731,
+            "display": "Ratholz, Immenstadt im Allgäu, Landkreis Oberallgäu"
+          },
+          "wxPlace": "Immenstadt im Allgäu, Germany",
+          "drive": {
+            "time": "כ-45–60 דקות",
+            "dist": "כ-32 ק\"מ",
+            "from": "מהפארק"
+          },
+          "image": {
+            "file": "images/alpsee-coaster.jpg",
+            "credit": "qwesy qwesy",
+            "license": "CC BY 3.0",
+            "commonsFile": "Alpsee Coaster - Rodelbahn - panoramio.jpg"
+          },
+          "infoUrl": "https://www.alpsee-bergwelt.de/",
+          "tips": [
+            {
+              "text": "זה האתר ליד Immenstadt — לא אגם Alpsee שליד הטירות.",
+              "warn": true
+            },
+            {
+              "text": "המגלשה והרכבל תלויים במזג האוויר — לבדוק באותו בוקר."
+            }
+          ],
+          "area": "alpsee"
+        },
+        {
+          "start": "13:00",
+          "end": "14:00",
+          "approx": true,
+          "title": "צהריים ב-Berghütte Bärenfalle",
+          "desc": "ליד התחנה העליונה, עם מנות מקומיות כגון שפצלה גבינה.",
+          "coords": {
+            "lat": 47.5623,
+            "lng": 10.1349,
+            "elev": 731,
+            "display": "Ratholz, Immenstadt im Allgäu, Landkreis Oberallgäu"
+          },
+          "wxPlace": "Immenstadt im Allgäu, Germany"
+        },
+        {
+          "start": "14:00",
+          "end": "16:00",
+          "approx": true,
+          "title": "ירידה וחזרה לפארק",
+          "desc": "סביב 15:30–16:00, לפי תורים."
+        },
+        {
+          "start": "19:00",
+          "approx": true,
+          "title": "ארוחת ערב — Hirsch או בבית",
+          "desc": "ארוחת ערב אפשרית ב-Hirsch סביב 19:00; מותר להחליף בארוחה בקוטג'."
+        }
+      ],
+      "returnLeg": {
+        "time": "כ-45–60 דקות",
+        "dist": "כ-32 ק\"מ",
+        "from": "מ-Alpsee Bergwelt",
+        "label": "חזרה לפארק"
+      }
+    },
+    {
+      "date": "2026-09-24",
+      "title": "LEGOLAND",
+      "place": "Günzburg — יום מלא",
+      "driveNote": "כ-75–90 דקות לכל כיוון",
+      "blocks": [
+        {
+          "end": "08:15",
+          "approx": true,
+          "title": "ארוחת בוקר בבופה בפארק",
+          "desc": "יוצאים 08:15–08:30. מכוונים להגיע לפני הפתיחה."
+        },
+        {
+          "start": "10:00",
+          "end": "17:00",
+          "approx": true,
+          "title": "LEGOLAND Deutschland",
+          "desc": "היום המלא היחיד בלוח. בבוקר בוחרים יחד 3–4 מתקנים חשובים — אפשר להתחיל ב-MYTHICA, NINJAGO או X-treme לפי עניין ומגבלות גובה, ולשלב מתקנים מתאימים לבן ה-6. Miniland מציע שינוי קצב עם דגמי LEGO מפורטים. לא מנסים להספיק הכול.",
+          "address": "LEGOLAND Deutschland, Legoland-Allee 1, 89312 Günzburg, Germany",
+          "coords": {
+            "lat": 48.4246,
+            "lng": 10.3148,
+            "elev": 510,
+            "display": "1, Legoland-Allee, Deffingen"
+          },
+          "wxPlace": "Günzburg, Germany",
+          "drive": {
+            "time": "כ-75–90 דקות",
+            "dist": "כ-97 ק\"מ",
+            "from": "מהפארק"
+          },
+          "image": {
+            "file": "images/legoland.jpg",
+            "credit": "Gzen92",
+            "license": "CC BY-SA 4.0",
+            "commonsFile": "Miniland - Berlin (Legoland) (1).jpg"
+          },
+          "hours": "לוודא את השעות לתאריך בכרטיס או באתר. המתקנים נסגרים שעה לפני סגירת הפארק",
+          "infoUrl": "https://www.legoland.de/",
+          "tips": [
+            {
+              "text": "לפי הלוח הרשמי הפארק סגור ב-21–23 בספטמבר; 24.9 אינו יום סגירה מתוכנן. לא מעבירים את הביקור ליום אחר בלי לבדוק פתיחה ותנאי כרטיס.",
+              "warn": true
+            },
+            {
+              "text": "צהריים ב-12:00 או 13:30 בדוכן או מסעדת שירות עצמי סמוכים — בחירה לידכם תחסוך הליכה והמתנה."
+            },
+            {
+              "text": "אחר הצהריים ממשיכים לפי האנרגיה; אפשר לצאת סביב 17:00 או מוקדם יותר."
+            }
+          ]
+        },
+        {
+          "start": "18:30",
+          "approx": true,
+          "title": "ארוחת ערב בבופה בפארק",
+          "desc": "חזרה משוערת סביב 18:15–18:30 אם יוצאים ב-17:00."
+        }
+      ],
+      "returnLeg": {
+        "time": "כ-75–90 דקות",
+        "dist": "כ-97 ק\"מ",
+        "from": "מ-LEGOLAND",
+        "label": "חזרה לפארק"
+      }
+    },
+    {
+      "date": "2026-09-25",
+      "title": "יציאה מוקדמת",
+      "place": "מהפארק לשדה התעופה",
+      "driveNote": "יוצאים ב-06:00",
+      "blocks": [
+        {
+          "start": "05:15",
+          "end": "05:30",
+          "approx": true,
+          "title": "קימה",
+          "desc": "05:30 משהו קטן לאכול."
+        },
+        {
+          "start": "06:00",
+          "approx": true,
+          "title": "יציאה מהפארק",
+          "desc": "מתאמים מראש נוהל יציאה מוקדמת, החזרת אמצעי הגישה והעמסת הרכב. את מסלול הנסיעה לשדה, זמן החזרת הרכב ומרווח הביטחון מתאימים לשעת הטיסה ולשדה שמופיעים בהזמנה.",
+          "coords": {
+            "lat": 47.7784,
+            "lng": 10.0633,
+            "elev": 744,
+            "display": "40, Allgäuallee, Unteröschhöfe"
+          },
+          "wxPlace": "Leutkirch im Allgäu, Germany",
+          "tips": [
+            {
+              "text": "להכניס לאפליקציה את פרטי הטיסה (שדה ושעה) כדי שיהיה ברור כמה מרווח יש.",
+              "warn": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

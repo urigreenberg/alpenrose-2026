@@ -1,0 +1,877 @@
+{
+  "schemaVersion": 1,
+  "id": "black-forest-2026",
+  "status": "past",
+  "title": "היער השחור",
+  "subtitle": "17–24 באוגוסט 2026",
+  "icon": "tree",
+  "start": "2026-08-17",
+  "end": "2026-08-24",
+  "base": {
+    "kind": "hotel",
+    "name": "Hotel Schlehdorn",
+    "address": "Am Sommerberg 1, 79868 Feldberg (Schwarzwald)-Altglashütten, Germany",
+    "coords": {
+      "lat": 47.8555,
+      "lng": 8.1069,
+      "elev": 950
+    }
+  },
+  "flightIn": {
+    "city": "ציריך",
+    "date": "2026-08-17",
+    "time": "12:30",
+    "note": "נסיעה למלון: כשעה ורבע עד שעה וחצי"
+  },
+  "flightOut": {
+    "city": "ציריך",
+    "date": "2026-08-24",
+    "time": "22:00",
+    "note": "לוודא את השעה המדויקת מול הכרטיס בפועל"
+  },
+  "checklist": [
+    "לוודא את חלון הזמן של Badeparadies ליום ראשון 23.8 — לפי התוכנית מגיעים ב-16:00",
+    "להוריד את אפליקציית Europa-Park, לסמן מועדפים ולתכנן Virtual Line (VL) למתקנים המרכזיים",
+    "להזמין מראש כרטיס + חלון זמן למוזיאון לינדט (ביקוש גבוה מאוד)",
+    "להזמין מראש סדנת שוקולד בלינדט, אם עושים אותה ביום האחרון",
+    "להביא מגבות מהמלון לרולנטיקה, ל-Badeparadies ול-Keidel (או לשכור במקום)",
+    "בגדי ים זמינים גם ביום פרייבורג (20.8) — Keidel בסוף היום",
+    "לקחת נעליים סגורות / סנדלי מים לשביל החושים בגוטאך (בוץ, אבנים, נחלים)",
+    "לבדוק תחזית לפני מגלשת Hasenhorn ב-18.8 — היא לא פועלת בסופת רעמים או ברוח חזקה",
+    "לתכנן מראש את ארוחות יום ראשון — הרבה מסעדות בגרמניה סגורות בימי ראשון"
+  ],
+  "tips": [
+    "הרבה מסעדות בגרמניה סגורות בימי ראשון — ב-23.8 אתם ב-Badeparadies עד הערב, ויש שם אוכל, אז זה מכוסה.",
+    "מוזיאון ה-FIFA בציריך סגור בימי שני — ומכיוון שה-24.8 הוא יום שני, באותו יום זה לינדט או כלום.",
+    "אגם טיטיזי מופיע פעמיים בתוכנית כבלוק רשות — ב-20.8 בבוקר וב-23.8 אחרי מפלי הריין. עושים אותו ביום שבו מזג האוויר טוב יותר, לא בשניהם.",
+    "שוק הקתדרלה בפרייבורג נסגר סביב 13:00 ולא פועל בימי ראשון — הוא רלוונטי ב-20.8 רק אם מדלגים על האגם ומגיעים מוקדם.",
+    "במסלולים עם מעברי נחל (כמו בגוטאך) — לקחת נעלי מים או סנדלים.",
+    "זמני הנסיעה בכל האפליקציה הם הערכות שנבדקו מול Google Maps מראש — כדאי לפתוח את \"מסלול הנסיעה של היום\" בפועל לפני היציאה, אם יש קליטה, לזמן מדויק בזמן אמת."
+  ],
+  "podcasts": {
+    "feldberg": {
+      "title": "פלדברג ופאנדורנה",
+      "file": "audio/feldberg.m4a",
+      "minutes": 8,
+      "rev": 1
+    },
+    "todtnau": {
+      "title": "טודנאו — מגלשה, מפלים וגשר",
+      "file": "audio/todtnau.m4a",
+      "minutes": 11,
+      "rev": 1,
+      "ready": true
+    },
+    "vogelpark": {
+      "title": "פארק הציפורים והקופים",
+      "file": "audio/vogelpark.m4a",
+      "minutes": 10,
+      "rev": 1,
+      "ready": true
+    },
+    "europapark": {
+      "title": "Europa-Park",
+      "file": "audio/europapark.m4a",
+      "minutes": 15,
+      "rev": 1
+    },
+    "titisee": {
+      "title": "אגם טיטיזי",
+      "file": "audio/titisee.m4a",
+      "minutes": 15,
+      "rev": 1,
+      "ready": true
+    },
+    "freiburg": {
+      "title": "פרייבורג",
+      "file": "audio/freiburg.m4a",
+      "minutes": 25,
+      "rev": 1,
+      "ready": true
+    },
+    "rulantica": {
+      "title": "רולנטיקה",
+      "file": "audio/rulantica.m4a",
+      "minutes": 15,
+      "rev": 1
+    },
+    "triberg": {
+      "title": "טריברג ושעוני הקוקייה",
+      "file": "audio/triberg.m4a",
+      "minutes": 23,
+      "rev": 1,
+      "ready": true
+    },
+    "gutach": {
+      "title": "גוטאך — שביל החושים",
+      "file": "audio/gutach.m4a",
+      "minutes": 25,
+      "rev": 1,
+      "ready": true
+    },
+    "rheinfall": {
+      "title": "מפלי הריין",
+      "file": "audio/rheinfall.m4a",
+      "minutes": 25,
+      "rev": 1,
+      "ready": true
+    },
+    "badeparadies": {
+      "title": "Badeparadies",
+      "file": "audio/badeparadies.m4a",
+      "minutes": 11,
+      "rev": 1
+    },
+    "lindt": {
+      "title": "לינדט — עולם השוקולד",
+      "file": "audio/lindt.m4a",
+      "minutes": 14,
+      "rev": 1
+    }
+  },
+  "days": [
+    {
+      "date": "2026-08-17",
+      "title": "הגעה",
+      "place": "ציריך → Hotel Schlehdorn",
+      "driveNote": "נחיתה 12:30, נסיעה של כשעה ורבע עד שעה וחצי למלון",
+      "blocks": [
+        {
+          "start": "12:30",
+          "end": "14:00",
+          "approx": false,
+          "title": "נחיתה בציריך",
+          "desc": "נסיעה מהשדה למלון, כשעה ורבע עד שעה וחצי."
+        },
+        {
+          "start": "14:30",
+          "end": "18:00",
+          "approx": true,
+          "title": "Fundorena (\"פאנדורנה\")",
+          "area": "feldberg",
+          "desc": "מתחם טרמפולינות, חבלים וטיפוס בפלדברג. שימו לב: השם הרשמי הוא Fundorena (לא Pandorena כפי שכתוב לפעמים). או פשוט להתארגן ולנוח במלון אחרי יום נסיעה.",
+          "address": "Fundorena, Dr.-Pilet-Spur 11, 79868 Feldberg, Germany",
+          "coords": {
+            "lat": 47.8747,
+            "lng": 8.0233,
+            "elev": 1230
+          },
+          "wxPlace": "Feldberg (Schwarzwald), Germany",
+          "indoor": true,
+          "drive": {
+            "time": "כ-12 דקות",
+            "dist": "כ-8 ק\"מ",
+            "from": "מהמלון"
+          },
+          "infoUrl": "https://fundorena.de/",
+          "tips": [
+            {
+              "text": "יום ראשון של הטיול — אין שום בעיה לא לעשות כלום חוץ מלהתארגן."
+            }
+          ]
+        }
+      ],
+      "returnLeg": {
+        "time": "כ-12 דקות",
+        "dist": "כ-8 ק\"מ",
+        "from": "מ-Fundorena",
+        "label": "חזרה למלון"
+      }
+    },
+    {
+      "date": "2026-08-18",
+      "title": "טודנאו + פארק הציפורים",
+      "place": "טודנאו (בוקר) · שטיינן (אחה\"צ)",
+      "driveNote": "כ-28 דקות לטודנאו · משם כ-40 דקות בעמק הוויזנטל (B317) לשטיינן",
+      "blocks": [
+        {
+          "start": "09:00",
+          "end": "10:00",
+          "approx": false,
+          "title": "מגלשת הקיץ Hasenhorn",
+          "area": "todtnau",
+          "desc": "מגלשת קיץ באורך 2.9 ק\"מ — מהארוכות והמרשימות בגרמניה. עולים ברכבל הכיסא ויורדים במזחלת על מסילה. מגיעים בפתיחה בכוונה: בסופי שבוע ובחופשות נוצרים תורים ארוכים.",
+          "address": "Brandenbergstr. 3, 79674 Todtnau, Germany",
+          "coords": {
+            "lat": 47.83,
+            "lng": 7.939,
+            "elev": 660
+          },
+          "wxPlace": "Todtnau, Germany",
+          "drive": {
+            "time": "כ-28 דקות",
+            "dist": "כ-24 ק\"מ",
+            "from": "מהמלון"
+          },
+          "hours": "09:00–16:30 בקיץ",
+          "infoUrl": "https://www.hasenhorn-rodelbahn.de/en/",
+          "tips": [
+            {
+              "text": "נסיעה עצמאית רק מגיל 8 ומגובה 1.40 מ׳. עם מבוגר על אותה מזחלת — מגיל 3 ומגובה 95 ס\"מ, כך שהילד בן ה-5 רוכב צמוד ולא לבד.",
+              "warn": true
+            },
+            {
+              "text": "לא פועלת בסופת רעמים, ברוח חזקה או בכפור — שווה לבדוק את התחזית לפני שיוצאים."
+            }
+          ]
+        },
+        {
+          "start": "10:15",
+          "end": "11:30",
+          "approx": true,
+          "title": "מפלי טודנאו",
+          "area": "todtnau",
+          "desc": "הכניסה התחתונה (מומלצת עם ילדים קטנים) בכביש L126 — \"מסלול אדום\" נוח ומתון, כ-10 דק׳ למפל הראשי, הלוך-חזור קלאסי. יש גם כניסה עליונה, ליד טודנאוברג, עם ירידה תלולה יותר — העלייה בחזרה עלולה להיות מאתגרת לרגליים קטנות. טיפ לשני רכבים: להשאיר רכב אחד למטה, לנסוע עם כולם למעלה וללכת את כל המסלול בירידה בלבד.",
+          "address": "Parkplatz Todtnauer Wasserfall, L126, 79674 Todtnau-Aftersteg, Germany",
+          "coords": {
+            "lat": 47.8266,
+            "lng": 7.9469,
+            "elev": 700
+          },
+          "wxPlace": "Todtnau, Germany",
+          "drive": {
+            "time": "כ-6 דקות",
+            "dist": "כ-4 ק\"מ",
+            "from": "ממגלשת Hasenhorn"
+          },
+          "image": {
+            "file": "images/todtnau-falls.jpg",
+            "credit": "Freiburg1120",
+            "license": "CC BY-SA 3.0",
+            "commonsFile": "Todtnauer_Wasserfall.jpg"
+          },
+          "infoUrl": "https://goblackforest.co.il/מפלי-טודנאו/"
+        },
+        {
+          "start": "11:30",
+          "end": "12:45",
+          "approx": true,
+          "title": "הגשר התלוי Blackforestline",
+          "area": "todtnau",
+          "desc": "כניסה נפרדת משלו (אבל בפועל ממש ליד המפלים — כדקה נסיעה) — נוף פנורמי וחוויית אדרנלין.",
+          "address": "Außer Ort 38, 79674 Todtnau, Germany",
+          "coords": {
+            "lat": 47.8283,
+            "lng": 7.945,
+            "elev": 730
+          },
+          "wxPlace": "Todtnau, Germany",
+          "drive": {
+            "time": "כ-דקה",
+            "dist": "כ-80 מ׳ בלבד",
+            "from": "ממפלי טודנאו"
+          },
+          "image": {
+            "file": "images/blackforestline.jpg",
+            "credit": "Daniel Reust",
+            "license": "CC BY-SA 4.0",
+            "commonsFile": "Hängebrücke_\"Blackforestline\"_Todtnau.jpg"
+          },
+          "price": "כרטיס קומבו (גשר + מפל): כ-12€ מבוגר, כ-9€ ילד",
+          "hours": "8:00–20:30 בקיץ, כניסה אחרונה 19:00. קופה מאוישת/הנחות רק 10:00–16:00 — מעבר לזה רק מכונות, בלי הנחות.",
+          "infoUrl": "https://goblackforest.co.il/blackforestline/",
+          "tips": [
+            {
+              "text": "זו נקודת תצפית פנורמית — ביום מעונן נמוך רואים ממנה הרבה פחות. שווה להציץ בתחזית לפני שקונים את הקומבו."
+            }
+          ]
+        },
+        {
+          "start": "13:45",
+          "end": "17:00",
+          "approx": true,
+          "title": "פארק הציפורים והקופים בשטיינן",
+          "area": "vogelpark",
+          "desc": "פארק מעולה, לא גדול מדי — אחת ההפתעות החיוביות של היער השחור. מגיעים לסבב אחר הצהריים: מופע עופות דורסים ב-15:00, וקופים שמסתובבים חופשי עם האכלה ב-16:00. (יש גם סבב בוקר ב-11:00 וב-12:00, אבל היום מתחיל בטודנאו.)",
+          "address": "Hofener Str. 60, 79585 Steinen, Germany",
+          "coords": {
+            "lat": 47.6472,
+            "lng": 7.7386,
+            "elev": 330
+          },
+          "wxPlace": "Steinen, Baden-Württemberg, Germany",
+          "drive": {
+            "time": "כ-40 דקות",
+            "dist": "כ-35 ק\"מ",
+            "from": "מהגשר התלוי, בעמק הוויזנטל"
+          },
+          "image": {
+            "file": "images/vogelpark.jpg",
+            "credit": "Taxiarchos228 / Wladyslaw Sojka",
+            "license": "Free Art License 1.3",
+            "commonsFile": "Steinen_-_Vogelpark1.jpg"
+          },
+          "price": "מבוגר 20€, ילד (4–11) 10€",
+          "hours": "10:00–18:00 בחופשת הקיץ",
+          "infoUrl": "https://goblackforest.co.il/פארק-הציפורים-והקופים/",
+          "tips": [
+            {
+              "text": "המופעים בחוץ — בגשם חזק הם עלולים להתבטל. אם התחזית גרועה לאחה\"צ, שווה להקדים ולתפוס את סבב 11:00/12:00 במקום."
+            }
+          ]
+        }
+      ],
+      "returnLeg": {
+        "time": "כ-57 דקות",
+        "dist": "כ-49 ק\"מ",
+        "from": "מפארק הציפורים",
+        "label": "חזרה למלון"
+      }
+    },
+    {
+      "date": "2026-08-19",
+      "title": "Europa-Park",
+      "place": "Rust",
+      "driveNote": "כ-1:10–1:20 שעות נסיעה מהמלון",
+      "blocks": [
+        {
+          "start": "09:00",
+          "end": "18:00",
+          "approx": false,
+          "title": "יום מלא ב-Europa-Park",
+          "area": "europapark",
+          "desc": "יום רביעי נבחר בכוונה — יחד עם יום שישי, זה היום הכי פחות עמוס בפארק (סופ\"ש הכי צפוף). טיפ: להגיע בפתיחה.",
+          "address": "Europa-Park-Straße 2, 77977 Rust, Germany",
+          "coords": {
+            "lat": 48.266,
+            "lng": 7.722,
+            "elev": 160
+          },
+          "wxPlace": "Rust, Baden-Württemberg, Germany",
+          "drive": {
+            "time": "כ-1:20 שעות",
+            "dist": "כ-76 ק\"מ",
+            "from": "מהמלון"
+          },
+          "image": {
+            "file": "images/europapark.jpg",
+            "credit": "Gabriel Rinaldi",
+            "license": "CC BY-SA 4.0",
+            "commonsFile": "Haupteingang_(main_entrance)_Europa-Park_Rust.JPG"
+          },
+          "price": "כ-34–38€ ליום (הערכה 2026, תלוי בתאריך)",
+          "hours": "9:00–18:00 (לפחות) בקיץ",
+          "infoUrl": "https://www.europapark.de/en",
+          "tips": [
+            {
+              "text": "הכרטיס מקושר לתאריך ספציפי — קנייה בקופה (אם יש מקום) עולה 10€ יותר לאדם, וימי שיא נגמרים בכרטיסים.",
+              "warn": true
+            },
+            {
+              "text": "להוריד את האפליקציה מראש, לסמן מועדפים, ולהזמין Virtual Line (VL) למתקנים המרכזיים."
+            }
+          ]
+        },
+        {
+          "start": null,
+          "end": null,
+          "approx": true,
+          "title": "רכבות שחובה",
+          "desc": "Voltron · Blue Fire · Wodan · Silver Star"
+        },
+        {
+          "start": null,
+          "end": null,
+          "approx": true,
+          "title": "עוד שווה",
+          "desc": "Voletarium (סימולטור טיסה, ליד הכניסה), Cancan, Pegasus, Euro-Mir, Fjord (אבובים למשפחה), Pirates in Batavia (שיט), Arthur."
+        }
+      ],
+      "returnLeg": {
+        "time": "כ-1:10 שעות",
+        "dist": "כ-78 ק\"מ",
+        "from": "מ-Europa-Park",
+        "label": "חזרה למלון"
+      }
+    },
+    {
+      "date": "2026-08-20",
+      "title": "טיטיזה + פרייבורג",
+      "place": "אגם טיטיזי (רשות) · פרייבורג",
+      "driveNote": "האגם כ-12 דקות מהמלון · פרייבורג כ-45 דקות מהאגם",
+      "blocks": [
+        {
+          "start": "10:00",
+          "end": "12:00",
+          "approx": true,
+          "title": "אגם טיטיזי (רשות)",
+          "area": "titisee",
+          "desc": "האגם התיירותי המפורסם ביותר ביער השחור — שיט בסירות פדלים/חשמליות, טיילת, גלידה. הבלוק הזה אופציונלי, והוא מופיע גם ביום ראשון 23.8: עושים אותו ביום שבו מזג האוויר נראה טוב יותר, ואם שני הימים אפורים וקרים — אפשר פשוט לוותר.",
+          "address": "Seestraße, 79822 Titisee-Neustadt, Germany",
+          "coords": {
+            "lat": 47.9008,
+            "lng": 8.147,
+            "elev": 850
+          },
+          "wxPlace": "Titisee-Neustadt, Germany",
+          "drive": {
+            "time": "כ-12 דקות",
+            "dist": "כ-10 ק\"מ",
+            "from": "מהמלון"
+          },
+          "image": {
+            "file": "images/titisee.jpg",
+            "credit": "Christian Maier",
+            "license": "CC BY-SA 3.0",
+            "commonsFile": "Titisee-blick_von_hochfirst.jpg"
+          },
+          "infoUrl": "https://www.hochschwarzwald.de/en/attractions/promenade-seestrasse-at-lake-titisee-54ccf30e86",
+          "tips": [
+            {
+              "text": "יפה, אבל מלכודת תיירים — שעה־שעתיים מספיקות, לא יותר."
+            },
+            {
+              "text": "אם מוותרים על האגם ויוצאים ישר לפרייבורג, מגיעים בזמן לשוק הקתדרלה לפני שהוא נסגר סביב 13:00."
+            },
+            {
+              "text": "לוודא את שעות ההשכרה של סירות הפדלים לפני שמגיעים."
+            }
+          ]
+        },
+        {
+          "start": "13:30",
+          "end": "16:00",
+          "approx": true,
+          "title": "פרייבורג — העיר העתיקה",
+          "area": "freiburg",
+          "desc": "כיכר המונסטר, תעלות המים הקטנות שברחובות (Bächle), וקניות ב-Kaiser-Joseph-Straße (\"Ka-Jo\"). שוק הקתדרלה (\"מינסטרמארקט\") ב-Münsterplatz פועל כל בוקר חוץ מיום ראשון ונסגר סביב 13:00 — צד צפוני שוק איכרים (תוצרת מקומית, פירות יער, דבש, פרחים), צד דרומי תבלינים, כלי עץ, מזכרות ואוכל רחוב.",
+          "address": "Münsterplatz 1, 79098 Freiburg im Breisgau, Germany",
+          "coords": {
+            "lat": 47.9955,
+            "lng": 7.8522,
+            "elev": 280
+          },
+          "wxPlace": "Freiburg im Breisgau, Germany",
+          "drive": {
+            "time": "כ-45 דקות",
+            "dist": "כ-32 ק\"מ",
+            "from": "מאגם טיטיזי"
+          },
+          "image": {
+            "file": "images/freiburg.jpg",
+            "credit": "Sven Puth",
+            "license": "CC BY-SA 4.0",
+            "commonsFile": "Freiburg_-_Münsterplatz.jpg"
+          },
+          "infoUrl": "https://goblackforest.co.il/שוק-פרייבורג/",
+          "tips": [
+            {
+              "text": "בהגעה ב-13:30 השוק כבר סגור — הוא רלוונטי רק אם מדלגים על האגם ומגיעים לפני 13:00.",
+              "warn": true
+            }
+          ]
+        },
+        {
+          "start": "16:00",
+          "end": "19:00",
+          "approx": true,
+          "title": "Keidel Mineral-Thermalbad",
+          "area": "freiburg",
+          "desc": "מרחצאות מינרליים תרמיים בשכונת St. Georgen שבדרום פרייבורג. בריכות פנים וחוץ במים חמים, בריכת חוויה חיצונית עם תעלת זרם ומיטות בועות, ומגרש משחקים בחוץ. סיום טוב ליום עירוני — ובמיוחד אם יורד גשם.",
+          "address": "An den Heilquellen 4, 79111 Freiburg im Breisgau, Germany",
+          "coords": {
+            "lat": 47.9739,
+            "lng": 7.8203,
+            "elev": 240
+          },
+          "wxPlace": "Freiburg im Breisgau, Germany",
+          "indoor": true,
+          "drive": {
+            "time": "כ-12 דקות",
+            "dist": "כ-7 ק\"מ",
+            "from": "ממרכז פרייבורג"
+          },
+          "price": "ילדים 4–13: כ-9.50€ כרטיס יום",
+          "hours": "09:00–22:00 בכל יום · אזור הסאונה מ-10:00",
+          "infoUrl": "https://www.keideltherme.de/informationen/",
+          "tips": [
+            {
+              "text": "לקחת בגדי ים ומגבות מהמלון."
+            }
+          ]
+        }
+      ],
+      "returnLeg": {
+        "time": "כ-55 דקות",
+        "dist": "כ-42 ק\"מ",
+        "from": "מ-Keidel",
+        "label": "חזרה למלון"
+      }
+    },
+    {
+      "date": "2026-08-21",
+      "title": "רולנטיקה",
+      "place": "Rust",
+      "driveNote": "אותו אזור כמו Europa-Park",
+      "blocks": [
+        {
+          "start": "10:00",
+          "end": "18:00",
+          "approx": true,
+          "title": "פארק המים רולנטיקה",
+          "area": "rulantica",
+          "desc": "יום שישי נבחר בכוונה, כמו רביעי — אחד הימים הפחות עמוסים. כרטיס נפרד מ-Europa-Park.",
+          "address": "Roland-Mack-Ring 1, 77977 Rust, Germany",
+          "coords": {
+            "lat": 48.2597,
+            "lng": 7.73,
+            "elev": 160
+          },
+          "wxPlace": "Rust, Baden-Württemberg, Germany",
+          "indoor": true,
+          "drive": {
+            "time": "כ-1:22 שעות",
+            "dist": "כ-74 ק\"מ",
+            "from": "מהמלון"
+          },
+          "image": {
+            "file": "images/rulantica.jpg",
+            "credit": "Simone Graffi",
+            "license": "CC0 / נחלת הכלל",
+            "commonsFile": "Rulantica_EuropaPark.jpg"
+          },
+          "hours": "בד\"כ 09:30/10:00–22:00 (לבדוק באתר הרשמי לפי התאריך)",
+          "price": "יום: ילד כ-38–54€, מבוגר כ-41–54€ · \"Moonlight\" (19:00–22:00) הכי זול, ילד כ-28–34€ · מתחת לגיל 4 חינם · 0–3 חינם",
+          "infoUrl": "https://www.europapark.de/en/rulantica/info/plan-your-visit/opening-hours",
+          "tips": [
+            {
+              "text": "להזמין כרטיסים מראש — הפארק מתמלא כמעט כל יום.",
+              "warn": true
+            },
+            {
+              "text": "הלוקרים חינם דרך צמיד Rula-Band, שמשמש גם לתשלום בפארק."
+            },
+            {
+              "text": "החניה בתשלום — לשלם מראש באתר/אפליקציה."
+            },
+            {
+              "text": "אסור בקבוקי זכוכית או צידניות גדולות; מים, בקבוק רב-פעמי וחטיפים קלים מותר."
+            },
+            {
+              "text": "להביא מגבות מהמלון, או לשכור במקום."
+            },
+            {
+              "text": "טמפרטורת המים 30–32°C."
+            },
+            {
+              "text": "ילדים עד גיל 12 נכנסים חינם ביום ההולדת שלהם (עם דרכון)."
+            }
+          ]
+        }
+      ],
+      "returnLeg": {
+        "time": "כ-1:08 שעות",
+        "dist": "כ-76 ק\"מ",
+        "from": "מ-Rulantica",
+        "label": "חזרה למלון"
+      }
+    },
+    {
+      "date": "2026-08-22",
+      "title": "טריברג + גוטאך",
+      "place": "טריברג · גוטאך",
+      "driveNote": "כ-54 דקות נסיעה מהמלון",
+      "blocks": [
+        {
+          "start": "09:30",
+          "end": "12:00",
+          "approx": true,
+          "title": "טריברג",
+          "area": "triberg",
+          "desc": "מפלי טריברג — המפורסמים ביער השחור — פלוס שעוני קוקייה ענקיים ומרכז עיירה קלאסי.",
+          "address": "Hauptstraße 85, 78098 Triberg im Schwarzwald, Germany",
+          "coords": {
+            "lat": 48.1297,
+            "lng": 8.2306,
+            "elev": 700
+          },
+          "wxPlace": "Triberg im Schwarzwald, Germany",
+          "drive": {
+            "time": "כ-54 דקות",
+            "dist": "כ-55 ק\"מ",
+            "from": "מהמלון"
+          },
+          "image": {
+            "file": "images/triberg.jpg",
+            "credit": "Arminia",
+            "license": "CC BY-SA 3.0",
+            "commonsFile": "Triberger_Wasserfall2.JPG"
+          },
+          "price": "כניסה למפלים: מבוגר 7–8€, כרטיס משפחתי כ-20€, ילדים עד גיל 6 חינם (בד\"כ מזומן בלבד). אותו כרטיס מזכה גם בכניסה ל-Schwarzwaldmuseum ול-Triberg-Land.",
+          "hours": "הקופה מאוישת כ-9:00–19:00",
+          "infoUrl": "https://www.triberg.de/tourismus-freizeit/tourismus-freizeit/natur-erlebnis/deutschlands-hoechste-wasserfaelle",
+          "tips": [
+            {
+              "text": "מחוץ לשעות הקופה (בוקר מוקדם או ערב) הכניסה למפלים חופשית — וגם פחות עמוס."
+            }
+          ]
+        },
+        {
+          "start": "13:00",
+          "end": "15:30",
+          "approx": true,
+          "title": "גוטאך — שביל החושים",
+          "area": "gutach",
+          "desc": "מסלול מעגלי, בין שעה לשלוש שעות לפי קצב. הליכה על דשא, בוץ, אבנים וחול, מוצל ברובו, עם תחנות חוש (מישוש, ריח, ראייה). שווה גם עם ילדים גדולים יותר.",
+          "address": "Hauptstr. 103, 77793 Gutach im Schwarzwald, Germany",
+          "coords": {
+            "lat": 48.2461,
+            "lng": 8.1917,
+            "elev": 290
+          },
+          "wxPlace": "Gutach im Schwarzwald, Germany",
+          "drive": {
+            "time": "כ-25 דקות",
+            "dist": "כ-16 ק\"מ",
+            "from": "מטריברג"
+          },
+          "infoUrl": "https://www.parkmitallensinnen.de/",
+          "tips": [
+            {
+              "text": "קחו נעלי מים/סנדלים למי שלא נוח לו ללכת יחף על אבנים."
+            },
+            {
+              "text": "קחו מים — לא מסלול קצר."
+            },
+            {
+              "text": "מסעדה יוונית מומלצת, \"אלכסנדרוס\", 3 דקות נסיעה משם."
+            }
+          ]
+        },
+        {
+          "start": "15:30",
+          "end": "16:30",
+          "approx": true,
+          "title": "Sommerrodelbahn גוטאך (רשות)",
+          "area": "gutach",
+          "desc": "מגלשת קיץ נוספת, בד\"כ פחות עמוסה מזו שבטודנאו. כניסה חופשית, משלמים רק לפי נסיעה.",
+          "address": "Singersbach 1a, 77793 Gutach im Schwarzwald, Germany",
+          "coords": {
+            "lat": 48.24,
+            "lng": 8.185,
+            "elev": 320
+          },
+          "wxPlace": "Gutach im Schwarzwald, Germany",
+          "drive": {
+            "time": "כ-3 דקות",
+            "dist": "כ-1.6 ק\"מ",
+            "from": "משביל החושים"
+          },
+          "hours": "פתוח מ-10:00 (מ-9:00 בחופשת הקיץ)",
+          "infoUrl": "https://www.sommerrodelbahn-gutach.de/en/",
+          "tips": [
+            {
+              "text": "גיל מינימום לנסיעה לבד הוא 8 — הילד בן ה-5 יכול לנסוע רק כנוסע צמוד למבוגר על אותה מזחלת, לא לבד.",
+              "warn": true
+            }
+          ]
+        }
+      ],
+      "dayNote": "שקלו לקצר את היום — 3 עצירות וכשעה נסיעה בין הראשונה לאחרונה. אם הזמן לוחץ, שעה בשביל גוטאך מספיקה.",
+      "returnLeg": {
+        "time": "כ-1:15 שעות",
+        "dist": "כ-69 ק\"מ",
+        "from": "מ-Sommerrodelbahn",
+        "label": "חזרה למלון"
+      }
+    },
+    {
+      "date": "2026-08-23",
+      "title": "מפלי הריין + Badeparadies",
+      "place": "נוישאוזן אם ריינפאל · טיטיזה-נוישטט",
+      "driveNote": "כ-56 דקות למפלי הריין · כשעה חזרה לאזור טיטיזה",
+      "blocks": [
+        {
+          "start": "10:30",
+          "end": "12:30",
+          "approx": true,
+          "title": "מפלי הריין",
+          "area": "rheinfall",
+          "desc": "המפל הגדול ביותר באירופה — מרשים מאוד. החובה: השיט שמגיע לסלע במרכז המפל. יש פארק חבלים בקרבת מקום, כנראה לא מתאים לקטנים.",
+          "address": "Rheinfall, 8212 Neuhausen am Rheinfall, Switzerland",
+          "coords": {
+            "lat": 47.6779,
+            "lng": 8.6152,
+            "elev": 390
+          },
+          "wxPlace": "Neuhausen am Rheinfall, Switzerland",
+          "drive": {
+            "time": "כ-56 דקות",
+            "dist": "כ-56 ק\"מ",
+            "from": "מהמלון"
+          },
+          "image": {
+            "file": "images/rheinfall.jpg",
+            "credit": "CrazyD",
+            "license": "CC BY-SA 3.0",
+            "commonsFile": "Rheinfall_bei_Schaffhausen_02.JPG"
+          },
+          "infoUrl": "https://rheinfall.ch/en/",
+          "tips": [
+            {
+              "text": "השיט לסלע יכול להיות עוצמתי/מפחיד לילד בן 5 — שווה לבדוק מולו לפני שעולים. החניה ליד המפל בתשלום, כמה פרנקים שוויצריים לשעה."
+            },
+            {
+              "text": "לא להגיע מוקדם מדי — בשעות הבוקר המוקדמות האזור נוטה להיות מעונן וקריר, ומ-11:00 מתבהר ומתחמם."
+            }
+          ]
+        },
+        {
+          "start": "14:00",
+          "end": "15:30",
+          "approx": true,
+          "title": "אגם טיטיזי (רשות)",
+          "area": "titisee",
+          "desc": "האגם התיירותי המפורסם ביותר ביער השחור — שיט בסירות פדלים/חשמליות, טיילת, גלידה. הבלוק הזה אופציונלי, והוא מופיע גם ביום חמישי 20.8: עושים אותו ביום שבו מזג האוויר נראה טוב יותר. היתרון כאן — האגם שלוש דקות מ-Badeparadies, אז אפשר להחליט על המקום.",
+          "address": "Seestraße, 79822 Titisee-Neustadt, Germany",
+          "coords": {
+            "lat": 47.9008,
+            "lng": 8.147,
+            "elev": 850
+          },
+          "wxPlace": "Titisee-Neustadt, Germany",
+          "drive": {
+            "time": "כ-1 שעה",
+            "dist": "כ-70 ק\"מ",
+            "from": "ממפלי הריין, מעבר גבול חזרה לגרמניה"
+          },
+          "image": {
+            "file": "images/titisee.jpg",
+            "credit": "Christian Maier",
+            "license": "CC BY-SA 3.0",
+            "commonsFile": "Titisee-blick_von_hochfirst.jpg"
+          },
+          "infoUrl": "https://www.hochschwarzwald.de/en/attractions/promenade-seestrasse-at-lake-titisee-54ccf30e86",
+          "tips": [
+            {
+              "text": "יפה, אבל מלכודת תיירים — שעה־שעתיים מספיקות, לא יותר."
+            }
+          ]
+        },
+        {
+          "start": "16:00",
+          "end": "20:00",
+          "approx": true,
+          "title": "Badeparadies Schwarzwald",
+          "area": "badeparadies",
+          "desc": "פארק המים הטוב באזור. אזור Galaxy עם עשרות מגלשות, מתאים לילדים ולמתבגרים; יש גם ספא למבוגרים. פתוח עד 22:00, אז גם כניסה ב-16:00 נותנת יום מלא.",
+          "address": "Am Badeparadies 1, 79822 Titisee-Neustadt, Germany",
+          "coords": {
+            "lat": 47.9089,
+            "lng": 8.1637,
+            "elev": 860
+          },
+          "wxPlace": "Titisee-Neustadt, Germany",
+          "indoor": true,
+          "drive": {
+            "time": "כ-3 דקות",
+            "dist": "כ-1 ק\"מ",
+            "from": "מאגם טיטיזי"
+          },
+          "image": {
+            "file": "images/badeparadies.jpg",
+            "credit": "qwesy qwesy",
+            "license": "CC BY 3.0",
+            "commonsFile": "Galaxy_Schwarzwald_(Badeparadies_Schwarzwald_in_Titisee)_-_panoramio.jpg"
+          },
+          "price": "כ-22€ (4 שעות) / כ-30€ (יום) לנפש",
+          "hours": "9:00–22:00 בכל יום בחופשת הקיץ",
+          "infoUrl": "https://www.badeparadies-schwarzwald.de/en/",
+          "tips": [
+            {
+              "text": "הכרטיסים כבר קנויים ליום ראשון אחר הצהריים — לוודא את חלון הזמן המדויק מול ההזמנה, במיוחד אם הוא כרטיס 4 שעות.",
+              "warn": true
+            },
+            {
+              "text": "יום ראשון והרבה מסעדות סגורות — יש אוכל בתוך הפארק, וזה פותר את ארוחת הערב."
+            },
+            {
+              "text": "להביא מגבות מהמלון, או לשכור במקום."
+            }
+          ]
+        }
+      ],
+      "returnLeg": {
+        "time": "כ-11 דקות",
+        "dist": "כ-11 ק\"מ",
+        "from": "מ-Badeparadies",
+        "label": "חזרה למלון"
+      }
+    },
+    {
+      "date": "2026-08-24",
+      "title": "לינדט + טיסה הביתה",
+      "place": "קילכברג ← נתב\"ג ציריך",
+      "driveNote": "כ-1:50 שעות מהמלון לקילכברג, ועוד כ-31 דקות לנתב\"ג",
+      "blocks": [
+        {
+          "start": "11:30",
+          "end": "16:00",
+          "approx": true,
+          "title": "Lindt Home of Chocolate",
+          "area": "lindt",
+          "desc": "מזרקת השוקולד, החנות והקפה פתוחים לכולם, גם בלי כרטיס למוזיאון.",
+          "address": "Schokoladenplatz 1, 8802 Kilchberg, Switzerland",
+          "coords": {
+            "lat": 47.3231,
+            "lng": 8.5453,
+            "elev": 410
+          },
+          "wxPlace": "Kilchberg, Zürich, Switzerland",
+          "indoor": true,
+          "drive": {
+            "time": "כ-1:50 שעות",
+            "dist": "כ-145 ק\"מ",
+            "from": "מהמלון"
+          },
+          "image": {
+            "file": "images/lindt.jpg",
+            "credit": "Brian Shamblen",
+            "license": "CC BY 2.0",
+            "commonsFile": "Two_story_chocolate_fountain_in_the_lobby_of_the_Lindt_factory_in_Zurich,_Switzerland_(52167915483).jpg"
+          },
+          "tips": [
+            {
+              "text": "מוזיאון ה-FIFA סגור בימי שני, וה-24.8 הוא יום שני — אז היום זה לינדט, אין ברירה אחרת.",
+              "warn": true
+            },
+            {
+              "text": "ביקוש גבוה מאוד — להזמין כרטיס וחלון זמן מראש."
+            },
+            {
+              "text": "אם עושים גם סדנת שוקולד — גם אותה צריך להזמין מראש."
+            }
+          ]
+        },
+        {
+          "start": "17:00",
+          "end": "22:00",
+          "approx": true,
+          "title": "טיסה הביתה מציריך",
+          "desc": "נסיעה לנתב\"ג ציריך, ואז המראה ב-22:00. לוודא את השעה המדויקת מול הכרטיס בפועל, קרוב יותר לתאריך.",
+          "address": "Zürich Airport (ZRH), Flughafenstrasse, 8058 Zürich-Flughafen, Switzerland",
+          "coords": {
+            "lat": 47.4502,
+            "lng": 8.5618,
+            "elev": 430
+          },
+          "wxPlace": "Kloten (Zürich Airport), Switzerland",
+          "indoor": true,
+          "drive": {
+            "time": "כ-31 דקות",
+            "dist": "כ-19 ק\"מ",
+            "from": "מ-Lindt Home of Chocolate"
+          },
+          "image": {
+            "file": "images/zurich-airport.jpg",
+            "credit": "Designalltag",
+            "license": "CC BY-SA 4.0",
+            "commonsFile": "Flughafen_Zuerich.jpg"
+          },
+          "infoUrl": "https://www.flughafen-zuerich.ch/en/passengers"
+        }
+      ],
+      "dayNote": "מפלי הריין עברו ליום ראשון 23.8, אז היום הזה קליל ויש בו הרבה זמן פנוי לפני הטיסה. זמן הנסיעה מהמלון לקילכברג הוא הערכה — שווה לפתוח את \"מסלול הנסיעה של היום\" ולוודא בבוקר."
+    }
+  ]
+}

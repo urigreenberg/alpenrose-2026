@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<!-- הכותרת מוחלפת בזמן ריצה לשם הטיול הפעיל (setTripChrome ב-app.js) -->
+<title>הטיולים שלנו</title>
+
+<meta name="theme-color" content="#fafaf8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1210" media="(prefers-color-scheme: dark)">
+<meta name="description" content="תוכניות הטיולים המשפחתיים — מסלול, מזג אוויר וניווט, גם בלי קליטה">
+
+<!-- iOS "Add to Home Screen" — השם כאן נקבע בזמן ההתקנה ולא משתנה אחר כך,
+     ולכן הוא כללי ולא שם של טיול מסוים. -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="הטיולים שלנו">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+
+<link rel="icon" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar" id="topbar">
+  <span class="topbar-icon" id="topbarIcon"></span>
+  <div class="topbar-text">
+    <strong id="topbarTitle">הטיולים שלנו</strong>
+    <span id="topbarSub"></span>
+  </div>
+  <button class="topbar-switch" id="tripSwitch" aria-label="החלפת טיול" aria-haspopup="dialog"></button>
+</header>
+
+<main id="app">
+  <section id="view-now" class="view"></section>
+  <section id="view-itinerary" class="view"></section>
+  <section id="view-weather" class="view"></section>
+  <section id="view-info" class="view"></section>
+</main>
+
+<nav class="tabbar">
+  <button class="tab" data-view="now">
+    <span class="tab-icon" data-icon="clock"></span><span>עכשיו</span>
+  </button>
+  <button class="tab" data-view="itinerary">
+    <span class="tab-icon" data-icon="calendar"></span><span>מסלול</span>
+  </button>
+  <button class="tab" data-view="weather">
+    <span class="tab-icon" data-icon="cloud"></span><span>מזג אוויר</span>
+  </button>
+  <button class="tab" data-view="info">
+    <span class="tab-icon" data-icon="info"></span><span>מידע</span>
+  </button>
+</nav>
+
+<!-- גיליון בחירת הטיול. נשאר ריק עד הפתיחה הראשונה. -->
+<div class="sheet-backdrop" id="tripSheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="הטיולים שלנו" id="tripSheetBody"></div>
+</div>
+
+<!-- editor.js נטען ראשון ומגדיר פונקציות בלבד; app.js הוא זה שמריץ init() -->
+<script src="editor.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

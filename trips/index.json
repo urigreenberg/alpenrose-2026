@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "trips": [
+    {
+      "id": "black-forest-2026",
+      "title": "היער השחור",
+      "subtitle": "17–24 באוגוסט 2026",
+      "icon": "tree",
+      "start": "2026-08-17",
+      "end": "2026-08-24",
+      "status": "past"
+    },
+    {
+      "id": "allgau-2026",
+      "title": "אלגוי",
+      "subtitle": "18–25 בספטמבר 2026",
+      "icon": "route",
+      "start": "2026-09-18",
+      "end": "2026-09-25",
+      "status": "planned"
+    }
+  ]
+}
