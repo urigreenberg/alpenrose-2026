@@ -158,7 +158,7 @@
           "wxPlace": "Bichlbach, Austria",
           "hours": "10:00–18:00",
           "infoUrl": "http://www.streichelzoo.com/",
-          "image": { "file": "images/bichlbach.jpg", "credit": "Sciencia58", "license": "CC BY-SA 4.0", "commonsFile": "Streichelzoo - Ziege.jpg" },
+          "image": { "file": "images/bichlbach-goat.jpg", "credit": "Sciencia58", "license": "CC BY-SA 4.0", "commonsFile": "Streichelzoo - Ziege.jpg" },
           "drive": { "time": "כ-7 דקות", "dist": "", "from": "מאגם הייטרוואנג" }
         }
       ],
@@ -260,7 +260,7 @@
           "address": "Ebne 50, 6632 Ehrwald, Austria",
           "coords": { "lat": 47.4073844, "lng": 10.9284499, "elev": 1062 },
           "wxPlace": "Ehrwald, Austria",
-          "image": { "file": "images/ehrwald.jpg", "credit": "Axel Schlaefer", "license": "CC BY-SA 3.0", "commonsFile": "2012-06-02 Alpenwiese bei Ehrwald - panoramio.jpg" },
+          "image": { "file": "images/ehrwald-meadow.jpg", "credit": "Axel Schlaefer", "license": "CC BY-SA 3.0", "commonsFile": "2012-06-02 Alpenwiese bei Ehrwald - panoramio.jpg" },
           "infoUrl": "https://www.wetterstein-bahnen.at/en",
           "drive": { "time": "כ-10 דקות", "dist": "", "from": "מהמלון" },
           "tips": [
