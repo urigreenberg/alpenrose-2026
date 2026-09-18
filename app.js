@@ -114,7 +114,7 @@ const STORE_PREFIX = "tp:";
 
 // חותמת גרסה, מוצגת בלשונית "מידע". מעלים אותה בכל דחיפה — כשמישהו אומר
 // "אצלי זה לא עובד", זו הדרך לדעת אם הוא בכלל מריץ את הקוד הנוכחי.
-const APP_BUILD = "2026-09-18.5";
+const APP_BUILD = "2026-09-18.6";
 
 // ה-Service Worker מגיש את המעטפת מהמטמון ומעדכן ברקע; כשהוא מגלה שהקוד
 // השתנה, הדף הזה כבר רץ עם הישן — אז הוא שולח הודעה ומציעים רענון.
@@ -867,9 +867,14 @@ const BASE_LABELS = { hotel: "המלון", apartment: "הדירה", house: "הב
 function flightsSectionHTML() {
   const { flightIn, flightOut } = TRIP;
   if (!flightIn && !flightOut) return "";
-  const row = (f, label) => f
-    ? `<div class="info-row"><span class="k">${label} — ${hebWeekday(f.date)}, ${dayMonth(f.date)}</span><span class="v">${escapeHTML(f.city)}, ${escapeHTML(f.time)}</span></div>`
-    : "";
+  const row = (f, label) => {
+    if (!f) return "";
+    const nextDay = f.arrDate && f.arrDate !== f.date ? ` (${dayMonth(f.arrDate)})` : "";
+    return `
+      <div class="info-row"><span class="k">${label} — ${hebWeekday(f.date)}, ${dayMonth(f.date)}</span><span class="v">${escapeHTML(f.flightNo || "")}</span></div>
+      <div class="info-row"><span class="k">${escapeHTML(f.from || "")} ${escapeHTML(f.depTime || "")}</span><span class="v">${escapeHTML(f.to || "")} ${escapeHTML(f.arrTime || "")}${nextDay}</span></div>
+    `;
+  };
   const note = (flightOut && flightOut.note) || (flightIn && flightIn.note);
   return `
     <div class="info-section">
