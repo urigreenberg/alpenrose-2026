@@ -57,8 +57,18 @@ function mapLink(address) {
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(address);
 }
 
-function wazeLink(address) {
+function wazeLink(address, coords) {
+  // קואורדינטות מדויקות — חיפוש כתובת טקסטואלית ב-Waze נכשל לפעמים כשהמשתמש רחוק מהיעד
+  if (coords && coords.lat != null && coords.lng != null) {
+    return "https://waze.com/ul?ll=" + coords.lat + "%2C" + coords.lng + "&navigate=yes&zoom=17";
+  }
   return "https://waze.com/ul?q=" + encodeURIComponent(address) + "&navigate=yes";
+}
+
+// דף המקום בגוגל מפות (ביקורות, אתר, תמונות) — לפי שם המקום ולא רק כתובת
+function placeLink(item) {
+  const q = item.mapsQuery || (TRIP && item.address === TRIP.base.address ? TRIP.base.name + " Lermoos" : item.address);
+  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
 }
 
 // תחזית Google לאותו יישוב — כרטיס מזג האוויר של גוגל, לצד התחזית שבאפליקציה.
@@ -114,7 +124,7 @@ const STORE_PREFIX = "tp:";
 
 // חותמת גרסה, מוצגת בלשונית "מידע". מעלים אותה בכל דחיפה — כשמישהו אומר
 // "אצלי זה לא עובד", זו הדרך לדעת אם הוא בכלל מריץ את הקוד הנוכחי.
-const APP_BUILD = "2026-09-18.13";
+const APP_BUILD = "2026-09-19.1";
 
 // ה-Service Worker מגיש את המעטפת מהמטמון ומעדכן ברקע; כשהוא מגלה שהקוד
 // השתנה, הדף הזה כבר רץ עם הישן — אז הוא שולח הודעה ומציעים רענון.
@@ -285,8 +295,9 @@ function chipsHTML(block) {
   if (block.price) chips.push(`<span class="chip">${escapeHTML(block.price)}</span>`);
   if (block.hours) chips.push(`<span class="chip">${ICON.clock} ${escapeHTML(block.hours)}</span>`);
   if (block.address) chips.push(`<a class="chip map" href="${mapLink(block.address)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>`);
-  if (block.address) chips.push(`<a class="chip waze" href="${wazeLink(block.address)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>`);
-  if (block.infoUrl) chips.push(`<a class="chip info" href="${escapeHTML(block.infoUrl)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
+  if (block.address) chips.push(`<a class="chip waze" href="${wazeLink(block.address, block.coords)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>`);
+  if (block.mapsQuery) chips.push(`<a class="chip info" href="${placeLink(block)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
+  if (block.infoUrl) chips.push(`<a class="chip info" href="${escapeHTML(block.infoUrl)}" target="_blank" rel="noopener">${ICON.link} אתר רשמי</a>`);
   if (!chips.length) return "";
   return `<div class="chips">${chips.join("")}</div>`;
 }
@@ -695,7 +706,7 @@ function renderNow() {
         <span style="color:var(--text-muted);font-size:14px">${escapeHTML(TRIP.base.address)}</span>
         <div class="chips">
           <a class="chip map" href="${mapLink(TRIP.base.address)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>
-          <a class="chip waze" href="${wazeLink(TRIP.base.address)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
+          <a class="chip waze" href="${wazeLink(TRIP.base.address, TRIP.base.coords)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
         </div>
       </div>
       <h2 class="mini-list-title">לפני שנוסעים</h2>
@@ -821,7 +832,7 @@ function renderNow() {
     ${returnHTML}
     <div class="chips" style="margin-top:16px">
       <a class="chip map" href="${mapLink(TRIP.base.address)}" target="_blank" rel="noopener">${ICON.pin} ${escapeHTML(TRIP.base.name)}</a>
-      <a class="chip waze" href="${wazeLink(TRIP.base.address)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
+      <a class="chip waze" href="${wazeLink(TRIP.base.address, TRIP.base.coords)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
     </div>
   `;
 
@@ -934,7 +945,7 @@ function renderInfo() {
         <div class="info-row"><span class="k">כתובת</span><span class="v">${escapeHTML(TRIP.base.address)}</span></div>
         <div class="chips">
           <a class="chip map" href="${mapLink(TRIP.base.address)}" target="_blank" rel="noopener">${ICON.pin} פתיחה במפות</a>
-          <a class="chip waze" href="${wazeLink(TRIP.base.address)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
+          <a class="chip waze" href="${wazeLink(TRIP.base.address, TRIP.base.coords)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
         </div>
       </div>
     </div>
