@@ -634,7 +634,7 @@
       "title": "פסגת הצוגשפיצה",
       "place": "Tiroler Zugspitzbahn, Ehrwald",
       "driveNote": "יוצאים מהמלון בסביבות 08:40 (יוצא דופן מכוון — נראות טובה יותר בפסגה מוקדם בבוקר); כ-10 דק׳ נסיעה. הרכבל יוצא כל 20 דקות (08:40, 09:00, 09:20...) — מכוונים לרכבל 09:00.",
-      "dayNote": "היום הכי תלוי מזג אוויר בשבוע — מה שקובע הוא נראות בפסגה, לא רק שמש למטה. למרות שספטמבר, בפסגה (2,962 מ׳) קר גם ביום — ממוצע כ-3°C ביום ומתחת לאפס בלילה — אז מעיל חם, כפפות וכובע גם אם למטה נעים.",
+      "dayNote": "היום הכי תלוי מזג אוויר בשבוע — מה שקובע הוא נראות בפסגה, לא רק שמש למטה. למרות שספטמבר, בפסגה (2,962 מ׳) קר גם ביום — ממוצע כ-3°C ביום ומתחת לאפס בלילה — אז מעיל חם, כפפות וכובע גם אם למטה נעים. אם מסיימים מהר ורוצים עוד משהו — אפשר לנסוע ל-Bichlbach Sport & Leisure Park (כ-12 דקות מהמלון), ראו \"פעילויות נוספות אפשריות\".",
       "blocks": [
         {
           "start": "09:00",
@@ -824,7 +824,14 @@
             {
               "text": "גילאים: מתאים לכולם בעצימות מתאימה — הקטנים משחקים חופשי בצד. בהריון: להשתתף בעדינות או לצפות."
             }
-          ]
+          ],
+          "image": {
+            "file": "images/alpenrose-hotel.jpg",
+            "credit": "Pixelteufel",
+            "license": "CC BY 2.0",
+            "sourceUrl": "https://www.flickr.com/photos/99667320@N06/49478101357"
+          },
+          "mapsQuery": "Alpenrose Familux Resort Lermoos"
         },
         {
           "start": "10:30",
@@ -843,7 +850,14 @@
             {
               "text": "גילאים: מתאים לכולם עם קצת עזרה לקטנים. בהריון: בסדר גמור."
             }
-          ]
+          ],
+          "image": {
+            "file": "images/alpenrose-hotel.jpg",
+            "credit": "Pixelteufel",
+            "license": "CC BY 2.0",
+            "sourceUrl": "https://www.flickr.com/photos/99667320@N06/49478101357"
+          },
+          "mapsQuery": "Alpenrose Familux Resort Lermoos"
         },
         {
           "start": "16:15",
@@ -1017,7 +1031,14 @@
             }
           ],
           "start": "09:00",
-          "end": "10:45"
+          "end": "10:45",
+          "image": {
+            "file": "images/alpenrose-hotel.jpg",
+            "credit": "Pixelteufel",
+            "license": "CC BY 2.0",
+            "sourceUrl": "https://www.flickr.com/photos/99667320@N06/49478101357"
+          },
+          "mapsQuery": "Alpenrose Familux Resort Lermoos"
         },
         {
           "start": "12:15",
