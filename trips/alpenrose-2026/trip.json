@@ -119,7 +119,7 @@
       "title": "פארק המגלשות ביער, אהרוואלד (Wettersteinbahnen)",
       "desc": "רכבל ומסלול שש מגלשות ביער, מהלך בין מגלשה למגלשה — אחת מהן כמעט 36 מטר אורך. הוחלף כפעילות קבועה כי המגלשות עצמן מותרות רק מגיל 6 או מגובה 1.30 מ׳ — שווה לחזור לרעיון הזה בעוד כמה שנים, או אם מישהו מהילדים כבר מגיע לגובה. פעיל רק חמישי–ראשון בסוף ספטמבר, ותלוי מזג אוויר.",
       "address": "Ebne 50, 6632 Ehrwald, Austria",
-      "infoUrl": "https://www.wetterstein-bahnen.at/en",
+      "infoUrl": "https://www.wetterstein-bahnen.at/sommer/aktivitaeten/waldrutschen-park-ehrwald",
       "drive": {
         "time": "כ-10 דקות",
         "dist": "",
@@ -523,7 +523,7 @@
           },
           "wxPlace": "Lermoos, Austria",
           "mapsQuery": "Lusspark Lermoos",
-          "infoLink": "https://share.google/XIHhnZnaHsAcskx88",
+          "infoLink": "https://zugspitzarena.com/de/Info-Service/A-Z/pois/ZGS/c3be4854-4157-4fc9-bb66-f9f3448c32ba/spielplatz-im-lusspark",
           "drive": {
             "time": "כ-12 דקות",
             "dist": "",
@@ -565,7 +565,7 @@
             "elev": 1051
           },
           "wxPlace": "Imst, Austria",
-          "infoUrl": "https://www.imst.at/en/hoch-imst/alpine-coaster-hoch-imst.html",
+          "infoUrl": "https://www.imst.at/en/hoch-imst/family-paradise-hoch-imst.html",
           "image": {
             "file": "images/imst-familypark.jpg",
             "credit": "Haeferl",
