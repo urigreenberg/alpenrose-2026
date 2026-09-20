@@ -336,7 +336,7 @@ function edUndoLast() {
 }
 
 function edShowUndo(text, restore) {
-  ED.undo = { restore };
+  ED.undo = { text, restore };
   clearTimeout(ED.undoTimer);
   ED.undoTimer = setTimeout(() => { ED.undo = null; edRender(); }, 12000);
 }
@@ -458,7 +458,7 @@ function edBlockRowHTML(day, b, i) {
       <span class="ed-row-icons">
         ${b.image ? ICON.camera : ""}
         ${b.area && ED.trip.podcasts[b.area] ? ICON.headphones : ""}
-        <button class="ed-del" data-del-block="${day.date}:${i}" aria-label="מחיקת פעילות">${ICON.trash}</button>
+        <button class="ed-del" data-del-block="${day.date}:${i}" aria-label="הסרה מהיום" title="הסרה מהיום — הפעילות תעבור לאפשרויות נוספות">${ICON.trash}</button>
       </span>
     </div>
   `;
@@ -541,7 +541,7 @@ function edRender() {
       </div>
     </div>
 
-    ${ED.undo ? `<div class="ed-undo"><span>הפעילות נמחקה</span><button data-undo>ביטול</button></div>` : ""}
+    ${ED.undo ? `<div class="ed-undo"><span>${escapeHTML(ED.undo.text)}</span><button data-undo>ביטול</button></div>` : ""}
   `;
 }
 
@@ -679,7 +679,10 @@ function edFormHTML() {
       ${edEpisodeHTML(b)}
       `}
 
-      ${isNew ? "" : `<div class="ed-danger"><button data-form-delete>מחיקת ${isExtra ? "האפשרות" : "הפעילות"}</button></div>`}
+      ${isNew ? "" : `<div class="ed-danger">
+        <button data-form-delete>${isExtra ? "מחיקת האפשרות" : "הסרה מהתוכנית"}</button>
+        ${isExtra ? "" : `<p class="ed-hint" style="margin:8px 0 0">לא נמחקת — עוברת ל"אפשרויות נוספות", ואפשר להחזיר אותה ליום בהחלפה.</p>`}
+      </div>`}
     </div>
   `;
 }
@@ -1223,14 +1226,27 @@ function edSaveForm() {
   edRender();
 }
 
+/* הורדת פעילות מהמסלול היא לא מחיקה: היא ממשיכה לחיות ב"אפשרויות
+   נוספות", בלי השעות שהיו לה, ואפשר להחזיר אותה ליום בהחלפה. מה שיורד
+   מהיום כמעט תמיד מקום שכבר נבדק — כתובת, חניה, תמונה וטיפים — וחבל
+   לאבד אותו רק כי הוא לא נכנס ליום מסוים. לכן גם לא נכנס לסל: הסל הוא
+   למה שבאמת נמחק בפרסום. */
 function edDeleteBlock(date, index) {
   const day = ED.trip.days.find(d => d.date === date);
   const removed = day.blocks[index];
   if (!removed) return;
   day.blocks.splice(index, 1);
   edRecalcDay(day);
-  edTrashPush("block", { ...removed, _day: date });
-  edShowUndo("הפעילות נמחקה", () => {
+
+  const moved = edClone(removed);
+  delete moved.start; delete moved.end; delete moved.approx;
+  edRecalcExtra(moved);
+  ED.trip.extras.push(moved);
+
+  edShowUndo("הפעילות עברה לאפשרויות נוספות", () => {
+    // לפי זהות האובייקט ולא לפי אינדקס — ייתכן שהוסרה עוד פעילות בינתיים.
+    const i = ED.trip.extras.indexOf(moved);
+    if (i !== -1) ED.trip.extras.splice(i, 1);
     day.blocks.splice(index, 0, removed);
     edRecalcDay(day);
   });
@@ -1302,6 +1318,7 @@ function edPerformSwap(extraIndex, dayDate, blockIndex) {
 
   const toExtras = edClone(planned);
   delete toExtras.start; delete toExtras.end; delete toExtras.approx;
+  edRecalcExtra(toExtras);
 
   day.blocks.splice(blockIndex, 1, scheduled);
   edRecalcDay(day);
