@@ -590,11 +590,27 @@ function legHTML(drive) {
   return `<div class="leg">${ICON.car}<span>${escapeHTML(drive.time)}${dist} ${escapeHTML(drive.from)}</span></div>`;
 }
 
+/* שורת הקרדיט. שלושה מקרים: תמונה מוויקישיתוף (קרדיט + רישיון, קישור
+   לדף הקובץ), תמונה עם כתובת מקור מפורשת, ותמונה שנאספה מהרשת בלי שנשמר
+   ממנה מקור — שם אין למה לקשר, ולכן טקסט בלבד. שם האתר נגזר מהכתובת
+   עצמה ולא מקודד קשיח, כי קודם כל מקור שאינו ויקישיתוף הוצג כ-"Flickr". */
+function creditSourceName(url) {
+  try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return ""; }
+}
+
+function creditHTML(image) {
+  if (!image || !image.credit) return "";
+  const text = escapeHTML(image.credit) + (image.license ? " · " + escapeHTML(image.license) : "");
+  const href = image.sourceUrl || (image.commonsFile ? commonsFileUrl(image.commonsFile) : null);
+  if (!href) return `<span class="stop-credit">${ICON.camera} ${text}</span>`;
+  const site = image.commonsFile && !image.sourceUrl ? "ויקישיתוף" : creditSourceName(href);
+  return `<a class="stop-credit" href="${escapeHTML(href)}" target="_blank" rel="noopener">`
+    + `${ICON.camera} ${text}${site ? ", " + escapeHTML(site) : ""}</a>`;
+}
+
 function imageHTML(image, item) {
   if (!image) return "";
-  const credit = image.credit
-    ? `<a class="stop-credit" href="${image.sourceUrl ? escapeHTML(image.sourceUrl) : commonsFileUrl(image.commonsFile)}" target="_blank" rel="noopener">${ICON.camera} ${escapeHTML(image.credit)} · ${escapeHTML(image.license)}, ${image.sourceUrl ? "Flickr" : "ויקישיתוף"}</a>`
-    : "";
+  const credit = creditHTML(image);
   // תמונה שהועלתה מהמכשיר ועוד לא פורסמה יושבת ב-IndexedDB ולא ברשת —
   // אין לה כתובת קבועה לשים ב-src, אז מציגים ריק ומטמיעים blob URL אחרי
   // הרינדור (ר' hydratePendingImages). תמונה מוויקישיתוף/מקישור שעוד לא
@@ -1055,6 +1071,13 @@ function renderInfo() {
         ${GENERAL_TIPS.map(t => `<div class="tip">${ICON.bulb}<span>${escapeHTML(t)}</span></div>`).join("")}
       </div>
     </div>` : ""}
+
+    <div class="info-section">
+      <h2>תמונות</h2>
+      <div class="card">
+        <div class="tip">${ICON.camera}<span>רוב התמונות נאספו מהרשת לשימוש משפחתי פרטי, ולא תמיד ידוע מי צילם אותן. אם תמונה שלכם מופיעה כאן — אפשר לפתוח פנייה ב-<a class="plain" href="https://github.com/urigreenberg/alpenrose-2026/issues" target="_blank" rel="noopener">GitHub</a> ונסיר אותה או נוסיף קרדיט, לפי מה שתעדיפו.</span></div>
+      </div>
+    </div>
 
     ${extrasSectionHTML()}
   `;
