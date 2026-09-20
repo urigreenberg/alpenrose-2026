@@ -32,6 +32,9 @@
   <button class="topbar-switch" id="tripSwitch" aria-label="החלפת טיול" aria-haspopup="dialog"></button>
 </header>
 
+<!-- מופיע רק כשמה שמוצג הוא טיוטה מקומית ולא מה שפורסם (renderDraftBar ב-app.js) -->
+<div class="draft-bar" id="draftBar" hidden></div>
+
 <main id="app">
   <section id="view-now" class="view"></section>
   <section id="view-itinerary" class="view"></section>

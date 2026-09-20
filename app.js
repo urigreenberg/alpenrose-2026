@@ -18,6 +18,7 @@ let GENERAL_TIPS = [];  // "כדאי לדעת"
 let PODCASTS = {};      // פרקים לפי אזור
 let EXTRAS = [];         // פעילויות נוספות אפשריות, שלא נכנסו למסלול הקבוע
 let TRIP_INDEX = [];    // רשימת כל הטיולים, מ-trips/index.json
+let TRIP_DRAFT = null;   // meta של הטיוטה המקומית, כשהיא זו שמוצגת
 let TRIP_ID = null;     // מזהה הטיול הפעיל — גם שם התיקייה וגם מרחב השמות באחסון
 
 /* ============================================================
@@ -156,7 +157,7 @@ const STORE_PREFIX = "tp:";
 
 // חותמת גרסה, מוצגת בלשונית "מידע". מעלים אותה בכל דחיפה — כשמישהו אומר
 // "אצלי זה לא עובד", זו הדרך לדעת אם הוא בכלל מריץ את הקוד הנוכחי.
-const APP_BUILD = "2026-09-20.11";
+const APP_BUILD = "2026-09-20.12";
 
 // ה-Service Worker מגיש את המעטפת מהמטמון ומעדכן ברקע; כשהוא מגלה שהקוד
 // השתנה, הדף הזה כבר רץ עם הישן — אז הוא שולח הודעה ומציעים רענון.
@@ -243,6 +244,7 @@ async function loadTrip(id) {
   // עוד לפני שנפתח עליו Pull Request. טיול שנוצר כאן קיים רק כטיוטה.
   const draft = edReadDraft(id);
   const trip = draft ? draft.trip : await fetchJSON(`trips/${id}/trip.json`);
+  TRIP_DRAFT = draft ? (draft.meta || {}) : null;
   TRIP_ID = id;
   TRIP = {
     title: trip.title,
@@ -289,6 +291,28 @@ function setTripChrome(trip) {
   $("#topbarSub").textContent = trip.subtitle || "";
   $("#topbarIcon").innerHTML = ICON[trip.icon] || ICON.tree;
   document.title = trip.subtitle ? `${trip.title} · ${trip.subtitle}` : trip.title;
+  renderDraftBar();
+}
+
+/* טיוטה מקומית גוברת על מה שפורסם, וזה בכוונה — אבל בלי סימון היא נראית
+   בדיוק כמו האתר החי. כשהמפורסם מתקדם הלאה (קובץ ששונה שם, תמונה שקיבלה
+   שם חדש) הטיוטה ממשיכה להצביע על המצב הישן, והתוצאה היא תמונות שנעלמות
+   בלי שום הסבר. הפס הזה עונה על "למה אני לא רואה את מה שפרסמתי". */
+function renderDraftBar() {
+  const bar = $("#draftBar");
+  if (!bar) return;
+  if (!TRIP_DRAFT) { bar.hidden = true; bar.innerHTML = ""; return; }
+  const pr = TRIP_DRAFT.pr;
+  const text = pr
+    ? `טיוטה מקומית · כבר נשלחה ב-PR #${pr.number}`
+    : "אתם רואים טיוטה מקומית שלא פורסמה";
+  bar.innerHTML = `<span>${escapeHTML(text)}</span><button type="button" id="draftBarDiscard">השלכה</button>`;
+  bar.hidden = false;
+  $("#draftBarDiscard").addEventListener("click", () => {
+    if (!confirm("להשליך את הטיוטה המקומית ולחזור למה שפורסם?")) return;
+    edDiscardDraft(TRIP_ID);
+    location.reload();
+  });
 }
 
 /* ============================================================
