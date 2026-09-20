@@ -1016,6 +1016,8 @@ function extrasSectionHTML() {
 function renderInfo() {
   const view = $("#view-info");
   view.innerHTML = `
+    <p class="build-stamp">גרסה ${APP_BUILD} · טיול ${escapeHTML(TRIP_ID)}</p>
+
     <div class="info-section">
       <h2>${BASE_LABELS[TRIP.base.kind] || "מקום הלינה"}</h2>
       <div class="card">
@@ -1046,8 +1048,6 @@ function renderInfo() {
         <div class="tip">${ICON.bulb}<span>תחזית ליום 7–8 קדימה היא כיוון כללי, לא הבטחה — ככל שמתקרבים היא מתייצבת. שווה להסתכל שוב בכל בוקר.</span></div>
       </div>
     </div>
-
-    <p class="build-stamp">גרסה ${APP_BUILD} · טיול ${escapeHTML(TRIP_ID)}</p>
 
     ${GENERAL_TIPS.length ? `<div class="info-section">
       <h2>כדאי לדעת</h2>

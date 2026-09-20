@@ -516,7 +516,7 @@ function edRender() {
     <div class="ed-body">
       <div class="ed-banner ${ED.dirty ? "on" : ""}">
         <span>${ED.dirty ? "טיוטה שלא פורסמה" : "אין שינויים מקומיים"}</span>
-        <span class="ed-banner-time">${escapeHTML(edSavedLabel())}</span>
+        <span class="ed-banner-time">${escapeHTML(edSavedLabel())}${ED.dirty ? ` · <button class="ed-banner-discard" data-discard>השלכה</button>` : ""}</span>
       </div>
 
       <div class="ed-tools">
