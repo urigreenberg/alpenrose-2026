@@ -283,6 +283,14 @@ async function edCommonsPhotos(coords) {
   } catch { return []; }
 }
 
+/* התווית של הבסיס ברגלי הנסיעה. חייבת לצאת זהה למה שנכתב ביד בתוכנית
+   ("מהמלון"), אחרת כל שמירה בעורך מחליפה אותה ב-"מ-Alpenrose Familux Resort"
+   והטקסט זז בלי שאף אחד נגע בו. BASE_LABELS מגיע מ-app.js, שתמיד נטען איתנו. */
+function edBaseLabel(base) {
+  const kind = BASE_LABELS[base.kind];
+  return kind ? "מ" + kind : `מ${base.name ? "-" + base.name : "הבסיס"}`;
+}
+
 /* ---------- הערכת זמן נסיעה ----------
    מרחק אווירי כפול מקדם דרכים, עם מהירות שגדלה במרחק (עירוני קצר מול
    כביש מהיר). זו הערכה ומוצגת ככזאת — הכפתור "מסלול הנסיעה של היום"
@@ -291,6 +299,9 @@ function estimateDrive(from, to, fromLabel) {
   if (!from || !to) return null;
   const air = haversineKm(from, to);
   const road = air * 1.3;
+  // אותו מקום פיזי (פעילות שנייה באותו מלון, אותה תחנת רכבל): אין רגל נסיעה.
+  // בלי זה נוצר "כ-5 דקות, כ-0.0 ק״מ" שנראה כמו תקלה, כי זו תקלה.
+  if (road < 0.3) return null;
   const kmh = road < 15 ? 45 : road < 40 ? 60 : 75;
   const mins = Math.max(5, Math.round((road / kmh) * 60 / 5) * 5);
   const time = mins >= 60
@@ -299,25 +310,32 @@ function estimateDrive(from, to, fromLabel) {
   return { time, dist: `כ-${formatDistance(road)}`, from: fromLabel, auto: true };
 }
 
-// מחשב מחדש את כל רגלי הנסיעה של יום: מהבסיס לתחנה הראשונה, בין תחנות,
-// וחזרה. רגל שנכתבה ביד (בלי auto) לא נדרסת.
+/* מחשב מחדש את כל רגלי הנסיעה של יום: מהבסיס לתחנה הראשונה, בין תחנות,
+   וחזרה. רגל שנכתבה ביד (בלי auto) לא נדרסת.
+
+   יום ההגעה הוא היוצא מן הכלל: באותו יום לא יוצאים מהבסיס ולא חוזרים אליו
+   מטיול — מגיעים אליו. רגל אוטומטית מהמלון לשדה התעופה היא הכיוון ההפוך
+   ממה שבאמת קורה, אז ביום הזה לא מייצרים לא אותה ולא "חזרה לבסיס". */
 function edRecalcDay(day) {
   const base = ED.trip.base;
   if (!base.coords) return;
   const stops = day.blocks.filter(b => b.address && b.coords);
-  let prev = { coords: base.coords, label: `מ${base.name ? "-" + base.name : "הבסיס"}` };
+  const firstDay = day.date && ED.trip.start && day.date === ED.trip.start;
+  let prev = firstDay ? null : { coords: base.coords, label: edBaseLabel(base) };
   for (const b of stops) {
     if (!b.drive || b.drive.auto) {
-      const leg = estimateDrive(prev.coords, b.coords, prev.label);
+      const leg = prev ? estimateDrive(prev.coords, b.coords, prev.label) : null;
       if (leg) b.drive = leg;
+      else delete b.drive;
     }
     prev = { coords: b.coords, label: `מ-${b.title}` };
   }
-  if (stops.length && (!day.returnLeg || day.returnLeg.auto)) {
+  if (stops.length && !firstDay && (!day.returnLeg || day.returnLeg.auto)) {
     const back = estimateDrive(prev.coords, base.coords, prev.label);
     if (back) day.returnLeg = { ...back, label: "חזרה לבסיס" };
+    else if (day.returnLeg && day.returnLeg.auto) delete day.returnLeg;
   }
-  if (!stops.length) delete day.returnLeg;
+  if (!stops.length && day.returnLeg && day.returnLeg.auto) delete day.returnLeg;
 }
 
 /* ---------- סל מחיקות וביטול ---------- */
@@ -799,7 +817,7 @@ function edPrevStop() {
   const f = ED.form;
   if (f.kind === "extra") {
     const base = ED.trip.base;
-    return base.coords ? { coords: base.coords, label: `מ${base.name ? "-" + base.name : "הבסיס"}` } : null;
+    return base.coords ? { coords: base.coords, label: edBaseLabel(base) } : null;
   }
   const day = ED.trip.days.find(d => d.date === f.block._day);
   if (!day) return null;
@@ -807,7 +825,7 @@ function edPrevStop() {
   const last = stops[stops.length - 1];
   return last
     ? { coords: last.coords, label: `מ-${last.title}` }
-    : { coords: ED.trip.base.coords, label: `מ${ED.trip.base.name ? "-" + ED.trip.base.name : "הבסיס"}` };
+    : { coords: ED.trip.base.coords, label: edBaseLabel(ED.trip.base) };
 }
 
 // תמונה: מוויקישיתוף (לפי קרבה לנקודה, עם קרדיט ורישיון אוטומטיים),
@@ -1178,8 +1196,9 @@ function edRecalcExtra(item) {
   const base = ED.trip.base;
   if (!base.coords || !item.coords) return;
   if (!item.drive || item.drive.auto) {
-    const leg = estimateDrive(base.coords, item.coords, `מ${base.name ? "-" + base.name : "הבסיס"}`);
+    const leg = estimateDrive(base.coords, item.coords, edBaseLabel(base));
     if (leg) item.drive = leg;
+    else delete item.drive;
   }
 }
 
