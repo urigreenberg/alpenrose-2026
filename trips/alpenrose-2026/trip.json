@@ -83,10 +83,7 @@
         "lng": 10.5903281
       },
       "image": {
-        "file": "images/skyline-park.jpg",
-        "credit": "Anton Porsche",
-        "license": "CC BY-SA 4.0",
-        "commonsFile": "Skyline Park Ueberblick.jpg"
+        "file": "images/allg-u-skyline-park-mua71nb0.jpg"
       }
     },
     {
@@ -140,10 +137,7 @@
       "address": "Weiherburggasse 37, 6020 Innsbruck, Austria",
       "infoUrl": "https://alpenzoo.at/en/",
       "image": {
-        "file": "images/alpenzoo.jpg",
-        "credit": "Steffen Flor",
-        "license": "CC BY-SA 4.0",
-        "commonsFile": "Wolf Alpenzoo Innsbruck.jpg"
+        "file": "images/alpenzoo-innsbruck-mua72euv.jpg"
       },
       "drive": {
         "time": "כ-שעה",
@@ -188,6 +182,9 @@
       "parking": {
         "lat": 47.5034708,
         "lng": 10.2780826
+      },
+      "image": {
+        "file": "images/wonnemar-zvnthvpn-mua72xww.jpg"
       }
     },
     {
@@ -213,6 +210,9 @@
       "parking": {
         "lat": 47.5988967,
         "lng": 10.4135812
+      },
+      "image": {
+        "file": "images/allg-ulino-vvrtak-mua738xz.jpg"
       }
     },
     {
@@ -221,10 +221,7 @@
       "address": "Seeweg 2, 82491 Grainau, Germany",
       "infoUrl": "https://www.grainau.de/en/eibsee/",
       "image": {
-        "file": "images/eibsee.jpg",
-        "credit": "Armatus1995",
-        "license": "CC BY-SA 4.0",
-        "commonsFile": "Eibsee Grainau Zugspitze.jpg"
+        "file": "images/ayybzh-kbvkr-nprd-eibsee-mua73q40.jpg"
       },
       "drive": {
         "time": "כ-25–30 דקות",
@@ -301,6 +298,9 @@
       "parking": {
         "lat": 47.3743073,
         "lng": 10.8914824
+      },
+      "image": {
+        "file": "images/mslvl-kytz-mzchlt-bbbrvyr-sommerrodelbahn-biberwier-mua7471c.jpg"
       }
     },
     {
@@ -363,10 +363,7 @@
         "lng": 10.1365381
       },
       "image": {
-        "file": "images/alpsee-coaster.jpg",
-        "credit": "qwesy qwesy",
-        "license": "CC BY 3.0",
-        "commonsFile": "Alpsee Coaster - panoramio.jpg"
+        "file": "images/alpsee-bergwelt-aymmnshtadt-rkbt-hrym-chlkh-vnvf-mua752i7.jpg"
       }
     },
     {
@@ -382,10 +379,7 @@
       "mapsQuery": "Streichelzoo Bichlbach",
       "infoUrl": "http://www.streichelzoo.com/",
       "image": {
-        "file": "images/bichlbach-goat.jpg",
-        "credit": "Sciencia58",
-        "license": "CC BY-SA 4.0",
-        "commonsFile": "Streichelzoo - Ziege.jpg"
+        "file": "images/gn-chyvt-lytvf-vmshchkym-bbyrklbk-streichelzoo-bichlbach-mua75lru.jpg"
       },
       "drive": {
         "time": "כ-12 דקות",
@@ -445,9 +439,25 @@
           "parking": {
             "lat": 48.3543807,
             "lng": 11.7760634
+          },
+          "image": {
+            "file": "images/nchyth-aysvf-rkbym-vknyvt-b-rewe-mu9v4i3j.jpg"
+          },
+          "drive": {
+            "time": "כ-2:10 שעות",
+            "dist": "כ-163 ק\"מ",
+            "from": "מ-Alpenrose Familux Resort",
+            "auto": true
           }
         }
-      ]
+      ],
+      "returnLeg": {
+        "time": "כ-2:10 שעות",
+        "dist": "כ-163 ק\"מ",
+        "from": "מ-נחיתה, איסוף רכבים וקניות ב-REWE",
+        "auto": true,
+        "label": "חזרה לבסיס"
+      }
     },
     {
       "date": "2026-09-23",
@@ -517,7 +527,10 @@
             {
               "text": "יש מתקנים גם לקטנים."
             }
-          ]
+          ],
+          "image": {
+            "file": "images/mgrsh-hmshchkym-lusspark-blrmvs-mu9vd1v8.jpg"
+          }
         }
       ],
       "returnLeg": {
@@ -547,12 +560,6 @@
           },
           "wxPlace": "Imst, Austria",
           "infoUrl": "https://www.imst.at/en/hoch-imst/family-paradise-hoch-imst.html",
-          "image": {
-            "file": "images/imst-familypark.jpg",
-            "credit": "Haeferl",
-            "license": "CC BY-SA 3.0",
-            "commonsFile": "Imst - Hotel und Cafe-Rastaurant mit Vergnügungspark in Hochimst.jpg"
-          },
           "mapsQuery": "UAlm Hoch-Imst Imst",
           "parking": {
             "lat": 47.2410897,
@@ -562,6 +569,9 @@
             "time": "כ-45 דקות",
             "dist": "",
             "from": "מהמלון"
+          },
+          "image": {
+            "file": "images/gvndvlh-ualm-vmshchkym-btchnh-hamtzayt-hoch-imst-mu9w87j9.jpg"
           }
         },
         {
@@ -578,10 +588,7 @@
           "wxPlace": "Imst, Austria",
           "infoUrl": "https://www.imst.at/en/hoch-imst/alpine-coaster-hoch-imst.html",
           "image": {
-            "file": "images/imst-coaster.jpg",
-            "credit": "Haeferl",
-            "license": "CC BY-SA 3.0",
-            "commonsFile": "Imst - Alpine Coaster - 17.jpg"
+            "file": "images/yrydh-bmslvl-hhrym-halpyny-alpine-coaster-mu9wdccv.jpg"
           },
           "tips": [
             {
@@ -593,6 +600,12 @@
           "parking": {
             "lat": 47.2410897,
             "lng": 10.7238266
+          },
+          "drive": {
+            "time": "כ-5 דקות",
+            "dist": "כ-0.0 ק\"מ",
+            "from": "מ-גונדולה UAlm ומשחקים בתחנה האמצעית (Hoch-Imst)",
+            "auto": true
           }
         }
       ],
@@ -623,12 +636,6 @@
           },
           "wxPlace": "Ehrwald, Austria",
           "infoUrl": "https://www.zugspitze.at/en/",
-          "image": {
-            "file": "images/zugspitze-view.jpg",
-            "credit": "Tiia Monto",
-            "license": "CC BY-SA 3.0",
-            "commonsFile": "View from Zugspitze 13.jpg"
-          },
           "drive": {
             "time": "כ-10 דקות",
             "dist": "",
@@ -650,36 +657,9 @@
           "parking": {
             "lat": 47.427147,
             "lng": 10.9420411
-          }
-        },
-        {
-          "start": "10:45",
-          "end": "12:30",
-          "title": "מגרש משחקים בתחנת העמק (Tiroler Zugspitzbahn)",
-          "desc": "טרמפולינות, קארטים ומתקני משחק בתחנת העמק של הרכבל — הזמן העיקרי של היום, אחרי ירידה מהפסגה.",
-          "address": "Obermoos 1, 6632 Ehrwald, Austria",
-          "coords": {
-            "lat": 47.4265111,
-            "lng": 10.9428424,
-            "elev": 1222
           },
-          "wxPlace": "Ehrwald, Austria",
-          "infoUrl": "https://www.zugspitze.at/de/gipfel/besuch-am-gipfel/zurueck-an-der-talstation/",
           "image": {
-            "file": "images/zugspitzbahn-valley.jpg",
-            "credit": "David Short from Windsor, UK",
-            "license": "CC BY 2.0",
-            "commonsFile": "Zugspitzbahn (24650180995).jpg"
-          },
-          "tips": [
-            {
-              "text": "גילאים: הטרמפולינות/קארטים בעיקר מגיל 3 ומעלה; הקטנים יותר משחקים באזור הרגוע. בהריון: לצפות, לא להשתתף בטרמפולינות."
-            }
-          ],
-          "mapsQuery": "Tiroler Zugspitzbahn Talstation Ehrwald",
-          "parking": {
-            "lat": 47.427147,
-            "lng": 10.9420411
+            "file": "images/rkbl-lpsgh-mvzyavn-faszination-zugspitze-avptzyvnly-mu9wjh65.jpg"
           }
         }
       ],
@@ -710,10 +690,7 @@
           },
           "wxPlace": "Ehrwald, Austria",
           "image": {
-            "file": "images/ehrwalderalm.jpg",
-            "credit": "Tiia Monto",
-            "license": "CC BY-SA 3.0",
-            "commonsFile": "Ehrwalder Almbahn.jpg"
+            "file": "images/rkbl-vaz-didi-s-almsee-runde-mslvl-mshpchty-sbyb-hagm-mu9wpyfo.jpg"
           },
           "infoUrl": "https://www.almbahn.at/de/sommer/wandern-bergsteigen/didis-almsee-runde/",
           "drive": {
@@ -761,10 +738,7 @@
           ],
           "mapsQuery": "Casino Innsbruck Salurner Straße 15",
           "image": {
-            "file": "images/casino-innsbruck.jpg",
-            "credit": "böhringer friedrich",
-            "license": "CC BY-SA 2.5",
-            "commonsFile": "CasinoInnsbruck.JPG"
+            "file": "images/arb-pvkr-lbnym-bkzynv-aynsbrvk-casino-innsbruck-mu9wsjyu.jpg"
           }
         }
       ],
@@ -794,14 +768,17 @@
             "elev": 987
           },
           "wxPlace": "Lermoos, Austria",
-          "image": {
-            "file": "images/alpenrose-hotel.jpg",
-            "credit": "Pixelteufel",
-            "license": "CC BY 2.0",
-            "sourceUrl": "https://www.flickr.com/photos/99667320@N06/49478101357"
-          },
           "mapsQuery": "Alpenrose Familux Resort Lermoos",
-          "infoUrl": "https://www.hotelalpenrose.at/en/"
+          "infoUrl": "https://www.hotelalpenrose.at/en/",
+          "image": {
+            "file": "images/kdvrgl-mshpchty-mua6u93w.jpg"
+          },
+          "drive": {
+            "time": "כ-5 דקות",
+            "dist": "כ-0.0 ק\"מ",
+            "from": "מ-Alpenrose Familux Resort",
+            "auto": true
+          }
         },
         {
           "start": "10:30",
@@ -817,13 +794,16 @@
           "wxPlace": "Lermoos, Austria",
           "indoor": true,
           "image": {
-            "file": "images/alpenrose-hotel.jpg",
-            "credit": "Pixelteufel",
-            "license": "CC BY 2.0",
-            "sourceUrl": "https://www.flickr.com/photos/99667320@N06/49478101357"
+            "file": "images/hknt-kdvry-shvkvld-mua6umk2.jpg"
           },
           "mapsQuery": "Alpenrose Familux Resort Lermoos",
-          "infoUrl": "https://www.hotelalpenrose.at/en/"
+          "infoUrl": "https://www.hotelalpenrose.at/en/",
+          "drive": {
+            "time": "כ-5 דקות",
+            "dist": "כ-0.0 ק\"מ",
+            "from": "מ-כדורגל משפחתי",
+            "auto": true
+          }
         },
         {
           "start": "16:15",
@@ -838,10 +818,7 @@
           },
           "wxPlace": "Berwang, Austria",
           "image": {
-            "file": "images/mitteregg.jpg",
-            "credit": "David Short from Windsor, UK",
-            "license": "CC BY 2.0",
-            "commonsFile": "Back to Mitteregg (37867006432).jpg"
+            "file": "images/shbyl-chvvyh-ayntraktyby-am-mym-vkdvry-atz-naturerlebnisweg-mitteregg-mua6v4hb.jpg"
           },
           "infoUrl": "https://www.berwang.tirol/en/hiking/nature-adventure-trail-mitteregg",
           "drive": {
@@ -891,10 +868,7 @@
           },
           "wxPlace": "Reutte, Austria",
           "image": {
-            "file": "images/ehrenberg.jpg",
-            "credit": "Ricardalovesmonuments",
-            "license": "CC BY-SA 4.0",
-            "commonsFile": "Ehrenberger Klause Torbau v Süden (1).jpg"
+            "file": "images/avlm-htyrh-ahrnbrg-malyt-mgrsh-mshchkym-tyrh-vgshr-tlvy-avptzyvnly-burgenwelt-ehrenberg-mua6vmta.jpg"
           },
           "infoUrl": "https://www.ehrenberg.at/de/home.html",
           "tips": [
@@ -922,6 +896,12 @@
           "parking": {
             "lat": 47.4641747,
             "lng": 10.7193955
+          },
+          "drive": {
+            "time": "כ-20 דקות",
+            "dist": "כ-18 ק\"מ",
+            "from": "מ-Alpenrose Familux Resort",
+            "auto": true
           }
         },
         {
@@ -952,6 +932,9 @@
           "parking": {
             "lat": 47.5767012,
             "lng": 10.6734539
+          },
+          "image": {
+            "file": "images/achh-tz-knyvt-b-foc-f-ssen-outlet-center-lnshym-mua6w0u2.jpg"
           }
         }
       ],
@@ -988,7 +971,13 @@
             "sourceUrl": "https://www.flickr.com/photos/99667320@N06/49478101357"
           },
           "mapsQuery": "Alpenrose Familux Resort Lermoos",
-          "infoUrl": "https://www.hotelalpenrose.at/en/"
+          "infoUrl": "https://www.hotelalpenrose.at/en/",
+          "drive": {
+            "time": "כ-5 דקות",
+            "dist": "כ-0.0 ק\"מ",
+            "from": "מ-Alpenrose Familux Resort",
+            "auto": true
+          }
         },
         {
           "start": "12:15",
@@ -1026,10 +1015,7 @@
             "lng": 11.4376151
           },
           "image": {
-            "file": "images/maerchenwald-isartal.jpg",
-            "credit": "Strubbl",
-            "license": "CC BY-SA 4.0",
-            "commonsFile": "Bahnhof der Miniaturbahn im Märchenwald Wolfratshausen 2025-10-12.jpg"
+            "file": "images/m-rchenwald-isartal-park-agdvt-byar-mua6xdf1.jpg"
           }
         }
       ],
