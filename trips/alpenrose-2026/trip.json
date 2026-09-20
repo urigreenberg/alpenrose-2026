@@ -184,7 +184,7 @@
         "lng": 10.2780826
       },
       "image": {
-        "file": "images/wonnemar-zvnthvpn-mua72xww.png"
+        "file": "images/wonnemar-zvnthvpn-mua72xww.jpg"
       }
     },
     {
@@ -212,7 +212,7 @@
         "lng": 10.4135812
       },
       "image": {
-        "file": "images/allg-ulino-vvrtak-mua738xz.png"
+        "file": "images/allg-ulino-vvrtak-mua738xz.jpg"
       }
     },
     {
@@ -363,7 +363,7 @@
         "lng": 10.1365381
       },
       "image": {
-        "file": "images/alpsee-bergwelt-aymmnshtadt-rkbt-hrym-chlkh-vnvf-mua752i7.png"
+        "file": "images/alpsee-bergwelt-aymmnshtadt-rkbt-hrym-chlkh-vnvf-mua752i7.jpg"
       }
     },
     {
@@ -379,7 +379,7 @@
       "mapsQuery": "Streichelzoo Bichlbach",
       "infoUrl": "http://www.streichelzoo.com/",
       "image": {
-        "file": "images/gn-chyvt-lytvf-vmshchkym-bbyrklbk-streichelzoo-bichlbach-mua75lru.png"
+        "file": "images/gn-chyvt-lytvf-vmshchkym-bbyrklbk-streichelzoo-bichlbach-mua75lru.jpg"
       },
       "drive": {
         "time": "כ-12 דקות",
@@ -441,7 +441,7 @@
             "lng": 11.7760634
           },
           "image": {
-            "file": "images/nchyth-aysvf-rkbym-vknyvt-b-rewe-mu9v4i3j.png"
+            "file": "images/nchyth-aysvf-rkbym-vknyvt-b-rewe-mu9v4i3j.jpg"
           },
           "drive": {
             "time": "כ-2:10 שעות",
@@ -588,7 +588,7 @@
           "wxPlace": "Imst, Austria",
           "infoUrl": "https://www.imst.at/en/hoch-imst/alpine-coaster-hoch-imst.html",
           "image": {
-            "file": "images/yrydh-bmslvl-hhrym-halpyny-alpine-coaster-mu9wdccv.png"
+            "file": "images/yrydh-bmslvl-hhrym-halpyny-alpine-coaster-mu9wdccv.jpg"
           },
           "tips": [
             {
@@ -690,7 +690,7 @@
           },
           "wxPlace": "Ehrwald, Austria",
           "image": {
-            "file": "images/rkbl-vaz-didi-s-almsee-runde-mslvl-mshpchty-sbyb-hagm-mu9wpyfo.png"
+            "file": "images/rkbl-vaz-didi-s-almsee-runde-mslvl-mshpchty-sbyb-hagm-mu9wpyfo.jpg"
           },
           "infoUrl": "https://www.almbahn.at/de/sommer/wandern-bergsteigen/didis-almsee-runde/",
           "drive": {
@@ -771,7 +771,7 @@
           "mapsQuery": "Alpenrose Familux Resort Lermoos",
           "infoUrl": "https://www.hotelalpenrose.at/en/",
           "image": {
-            "file": "images/kdvrgl-mshpchty-mua6u93w.png"
+            "file": "images/kdvrgl-mshpchty-mua6u93w.jpg"
           },
           "drive": {
             "time": "כ-5 דקות",
@@ -794,7 +794,7 @@
           "wxPlace": "Lermoos, Austria",
           "indoor": true,
           "image": {
-            "file": "images/hknt-kdvry-shvkvld-mua6umk2.png"
+            "file": "images/hknt-kdvry-shvkvld-mua6umk2.jpg"
           },
           "mapsQuery": "Alpenrose Familux Resort Lermoos",
           "infoUrl": "https://www.hotelalpenrose.at/en/",
@@ -818,7 +818,7 @@
           },
           "wxPlace": "Berwang, Austria",
           "image": {
-            "file": "images/shbyl-chvvyh-ayntraktyby-am-mym-vkdvry-atz-naturerlebnisweg-mitteregg-mua6v4hb.png"
+            "file": "images/shbyl-chvvyh-ayntraktyby-am-mym-vkdvry-atz-naturerlebnisweg-mitteregg-mua6v4hb.jpg"
           },
           "infoUrl": "https://www.berwang.tirol/en/hiking/nature-adventure-trail-mitteregg",
           "drive": {
@@ -934,7 +934,7 @@
             "lng": 10.6734539
           },
           "image": {
-            "file": "images/achh-tz-knyvt-b-foc-f-ssen-outlet-center-lnshym-mua6w0u2.png"
+            "file": "images/achh-tz-knyvt-b-foc-f-ssen-outlet-center-lnshym-mua6w0u2.jpg"
           }
         }
       ],
@@ -1015,7 +1015,7 @@
             "lng": 11.4376151
           },
           "image": {
-            "file": "images/m-rchenwald-isartal-park-agdvt-byar-mua6xdf1.png"
+            "file": "images/m-rchenwald-isartal-park-agdvt-byar-mua6xdf1.jpg"
           }
         }
       ],
