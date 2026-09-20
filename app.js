@@ -66,15 +66,36 @@ function mapLink(item) {
   return q ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q) : null;
 }
 
-function wazeLink(item) {
+/* יעד הניווט ב-Waze — לא בהכרח אותו מקום כמו צ'יפ המפה, ובכוונה.
+   בנהיגה רוצים להגיע לחניון; חיפוש לפי שם מביא את מרכז המקום או את
+   הכניסה, ולפעמים אי אפשר להגיע לשם ברכב בכלל (אייבזה, אהרנברג).
+   אחרי שחונים, צ'יפ המפה הוא זה שמוביל למקום עצמו ברגל.
+   מחזיר גם parking, כדי שהתווית תוכל לומר לאן באמת שולחים. */
+function navTarget(item) {
+  const p = item && item.parking;
+  if (p && p.lat != null && p.lng != null) {
+    return { href: `https://waze.com/ul?ll=${p.lat}%2C${p.lng}&navigate=yes&zoom=17`, parking: true };
+  }
   const q = placeQuery(item);
-  if (q) return "https://waze.com/ul?q=" + encodeURIComponent(q) + "&navigate=yes";
-  // אין שם ואין כתובת — קואורדינטות כמוצא אחרון, כדי שעדיין יהיה קישור.
-  const c = item && (item.parking || item.coords);
+  if (q) return { href: "https://waze.com/ul?q=" + encodeURIComponent(q) + "&navigate=yes", parking: false };
+  const c = item && item.coords;
   if (c && c.lat != null && c.lng != null) {
-    return "https://waze.com/ul?ll=" + c.lat + "%2C" + c.lng + "&navigate=yes&zoom=17";
+    return { href: `https://waze.com/ul?ll=${c.lat}%2C${c.lng}&navigate=yes&zoom=17`, parking: false };
   }
   return null;
+}
+
+function wazeLink(item) {
+  const t = navTarget(item);
+  return t ? t.href : null;
+}
+
+// צ'יפ Waze אחד לכל האפליקציה: גם המסלול וגם כרטיסי הבסיס. התווית נגזרת
+// מהפריט ולא מועברת מבחוץ, כך שכל מקום שתתווסף לו חניה יסומן מעצמו.
+function wazeChipHTML(item) {
+  const t = navTarget(item);
+  if (!t) return "";
+  return `<a class="chip waze" href="${t.href}" target="_blank" rel="noopener">${ICON.waze} ${t.parking ? "Waze · חניה" : "Waze"}</a>`;
 }
 
 // חיפוש גוגל לפי שם המקום — פותח את כרטיס המקום (ביקורות, אתר, שעות, תמונות)
@@ -237,6 +258,7 @@ async function loadTrip(id) {
   GENERAL_TIPS = trip.tips || [];
   EXTRAS = trip.extras || [];
   PODCASTS = trip.podcasts || {};
+  migrateInfoLinks();
   markPodcastLeads();
 
   WX.cacheKey = tripKey("weather");
@@ -246,6 +268,19 @@ async function loadTrip(id) {
   storeSet(globalKey("active-trip"), id);
   setTripChrome(trip);
   return trip;
+}
+
+/* פעם היו שני שדות קישור: infoLink (כרטיס המקום בגוגל) ו-infoUrl (האתר
+   הרשמי), ו-infoLink גבר. עכשיו יש שדה אחד עם משמעות אחת. הקבצים שפורסמו
+   כבר הומרו, אבל טיוטה שנשמרה במכשיר לפני ההמרה עדיין נושאת את הישן —
+   בלי זה הקישור שלה היה נעלם בשקט. */
+function migrateInfoLinks() {
+  const items = [TRIP.base, ...DAYS.flatMap(d => d.blocks || []), ...EXTRAS];
+  for (const it of items) {
+    if (!it || !it.infoLink) continue;
+    if (!it.infoUrl) it.infoUrl = it.infoLink;
+    delete it.infoLink;
+  }
 }
 
 // כותרת הסרגל העליון וכותרת הדף — לפי הטיול שנטען, לא לפי index.html.
@@ -305,9 +340,12 @@ function chipsHTML(block) {
   const chips = [];
   if (block.price) chips.push(`<span class="chip">${escapeHTML(block.price)}</span>`);
   if (block.hours) chips.push(`<span class="chip">${ICON.clock} ${escapeHTML(block.hours)}</span>`);
-  if (block.address) chips.push(`<a class="chip map" href="${mapLink(block)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>`);
-  if (block.address) chips.push(`<a class="chip waze" href="${wazeLink(block)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>`);
-  const infoHref = block.infoLink || (block.mapsQuery ? searchLink(block) : block.infoUrl);
+  if (block.address || block.parking) chips.push(`<a class="chip map" href="${mapLink(block)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>`);
+  if (block.address || block.parking) chips.push(wazeChipHTML(block));
+  // האתר הרשמי של הפעילות קודם; חיפוש גוגל רק כשאין אתר, כדי שהצ'יפ לא
+  // ייעלם. קודם היה הפוך בפועל — כל מקום עם mapsQuery קיבל חיפוש גוגל,
+  // וה-infoUrl השמור פשוט לא נפתח אף פעם.
+  const infoHref = block.infoUrl || (block.mapsQuery ? searchLink(block) : null);
   if (infoHref) chips.push(`<a class="chip info" href="${escapeHTML(infoHref)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
   if (!chips.length) return "";
   return `<div class="chips">${chips.join("")}</div>`;
@@ -745,7 +783,7 @@ function renderNow() {
         <span style="color:var(--text-muted);font-size:14px">${escapeHTML(TRIP.base.address)}</span>
         <div class="chips">
           <a class="chip map" href="${mapLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>
-          <a class="chip waze" href="${wazeLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
+          ${wazeChipHTML(TRIP.base)}
         </div>
       </div>
       <h2 class="mini-list-title">לפני שנוסעים</h2>
@@ -871,7 +909,7 @@ function renderNow() {
     ${returnHTML}
     <div class="chips" style="margin-top:16px">
       <a class="chip map" href="${mapLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.pin} ${escapeHTML(TRIP.base.name)}</a>
-      <a class="chip waze" href="${wazeLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
+      ${wazeChipHTML(TRIP.base)}
     </div>
   `;
 
@@ -985,7 +1023,7 @@ function renderInfo() {
         <div class="info-row"><span class="k">כתובת</span><span class="v">${escapeHTML(TRIP.base.address)}</span></div>
         <div class="chips">
           <a class="chip map" href="${mapLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.pin} פתיחה במפות</a>
-          <a class="chip waze" href="${wazeLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
+          ${wazeChipHTML(TRIP.base)}
         </div>
       </div>
     </div>
