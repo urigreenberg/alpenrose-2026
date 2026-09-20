@@ -53,27 +53,33 @@ const ICON = {
   headphones: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M4 14h2.5a1 1 0 0 1 1 1v3.5a1 1 0 0 1-1 1H5.5A1.5 1.5 0 0 1 4 18Z"/><path d="M20 14h-2.5a1 1 0 0 0-1 1v3.5a1 1 0 0 0 1 1h1a1.5 1.5 0 0 0 1.5-1.5Z"/></svg>`
 };
 
-function mapLink(address) {
-  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(address);
+// שאילתת החיפוש של מקום: שם המקום (mapsQuery) קודם, ורק אם אין — הכתובת.
+// חיפוש לפי שם מזהה נכון יותר את המקום עצמו (כניסה, שם עסק) מאשר כתובת
+// גולמית, שלפעמים מצביעה על נקודה גנרית ברחוב.
+function placeQuery(item) {
+  return (item && (item.mapsQuery || item.address)) || null;
 }
 
-function wazeLink(address, coords) {
-  // קואורדינטות מדויקות — חיפוש כתובת טקסטואלית ב-Waze נכשל לפעמים כשהמשתמש רחוק מהיעד
-  if (coords && coords.lat != null && coords.lng != null) {
-    return "https://waze.com/ul?ll=" + coords.lat + "%2C" + coords.lng + "&navigate=yes&zoom=17";
+// דף המקום בגוגל מפות (ביקורות, אתר, שעות, תמונות) — לפי שם המקום קודם.
+function mapLink(item) {
+  const q = placeQuery(item);
+  return q ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q) : null;
+}
+
+function wazeLink(item) {
+  const q = placeQuery(item);
+  if (q) return "https://waze.com/ul?q=" + encodeURIComponent(q) + "&navigate=yes";
+  // אין שם ואין כתובת — קואורדינטות כמוצא אחרון, כדי שעדיין יהיה קישור.
+  const c = item && (item.parking || item.coords);
+  if (c && c.lat != null && c.lng != null) {
+    return "https://waze.com/ul?ll=" + c.lat + "%2C" + c.lng + "&navigate=yes&zoom=17";
   }
-  return "https://waze.com/ul?q=" + encodeURIComponent(address) + "&navigate=yes";
+  return null;
 }
 
 // חיפוש גוגל לפי שם המקום — פותח את כרטיס המקום (ביקורות, אתר, שעות, תמונות)
 function searchLink(item) {
   return "https://www.google.com/search?q=" + encodeURIComponent(item.mapsQuery);
-}
-
-// דף המקום בגוגל מפות (ביקורות, אתר, תמונות) — לפי שם המקום ולא רק כתובת
-function placeLink(item) {
-  const q = item.mapsQuery || (TRIP && item.address === TRIP.base.address ? TRIP.base.name + " Lermoos" : item.address);
-  return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
 }
 
 // תחזית Google לאותו יישוב — כרטיס מזג האוויר של גוגל, לצד התחזית שבאפליקציה.
@@ -222,7 +228,7 @@ async function loadTrip(id) {
     subtitle: trip.subtitle || "",
     start: trip.start,
     end: trip.end,
-    base: trip.base,
+    base: { ...trip.base, mapsQuery: trip.base.mapsQuery || trip.base.name },
     flightIn: trip.flightIn || null,
     flightOut: trip.flightOut || null
   };
@@ -299,8 +305,8 @@ function chipsHTML(block) {
   const chips = [];
   if (block.price) chips.push(`<span class="chip">${escapeHTML(block.price)}</span>`);
   if (block.hours) chips.push(`<span class="chip">${ICON.clock} ${escapeHTML(block.hours)}</span>`);
-  if (block.address) chips.push(`<a class="chip map" href="${mapLink(block.address)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>`);
-  if (block.address) chips.push(`<a class="chip waze" href="${wazeLink(block.address, block.parking || block.coords)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>`);
+  if (block.address) chips.push(`<a class="chip map" href="${mapLink(block)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>`);
+  if (block.address) chips.push(`<a class="chip waze" href="${wazeLink(block)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>`);
   const infoHref = block.infoLink || (block.mapsQuery ? searchLink(block) : block.infoUrl);
   if (infoHref) chips.push(`<a class="chip info" href="${escapeHTML(infoHref)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
   if (!chips.length) return "";
@@ -551,14 +557,31 @@ function imageHTML(image, item) {
   const credit = image.credit
     ? `<a class="stop-credit" href="${image.sourceUrl ? escapeHTML(image.sourceUrl) : commonsFileUrl(image.commonsFile)}" target="_blank" rel="noopener">${ICON.camera} ${escapeHTML(image.credit)} · ${escapeHTML(image.license)}, ${image.sourceUrl ? "Flickr" : "ויקישיתוף"}</a>`
     : "";
-  // תמונה שנבחרה בעורך ועוד לא פורסמה מוצגת ישירות מוויקישיתוף; אחרי
-  // הפרסום היא כבר קובץ בתיקיית הטיול ונטענת מקומית, גם בלי קליטה.
-  const src = image.pending && image.thumb ? image.thumb : tripAsset(image.file);
-  const img = `<img class="stop-img" src="${src}" alt="" loading="lazy" onerror="this.style.display='none'">`;
+  // תמונה שהועלתה מהמכשיר ועוד לא פורסמה יושבת ב-IndexedDB ולא ברשת —
+  // אין לה כתובת קבועה לשים ב-src, אז מציגים ריק ומטמיעים blob URL אחרי
+  // הרינדור (ר' hydratePendingImages). תמונה מוויקישיתוף/מקישור שעוד לא
+  // פורסמה כן נטענת ישירות מהכתובת המרוחקת שלה; אחרי הפרסום כל תמונה היא
+  // כבר קובץ בתיקיית הטיול ונטענת מקומית, גם בלי קליטה.
+  const pendingLocal = image.pending && image.localAsset;
+  const src = pendingLocal ? "" : (image.pending && image.thumb ? image.thumb : tripAsset(image.file));
+  const img = `<img class="stop-img" ${pendingLocal ? `data-pending-image="${escapeHTML(image.file)}"` : ""} src="${src}" alt="" loading="lazy" onerror="this.style.display='none'">`;
   const linked = item && item.mapsQuery
-    ? `<a class="stop-img-link" href="${placeLink(item)}" target="_blank" rel="noopener">${img}</a>`
+    ? `<a class="stop-img-link" href="${mapLink(item)}" target="_blank" rel="noopener">${img}</a>`
     : img;
   return `${linked}${credit}`;
+}
+
+// תמונה שהועלתה מהמכשיר (image.localAsset) מוצגת בלי src בבנייה הראשונית
+// של ה-HTML, כי משיכת ה-blob מ-IndexedDB היא אסינכרונית והרינדור עצמו
+// סינכרוני — הפונקציה הזאת רצה אחרי כל רינדור שיכול להציג תמונה כזאת,
+// וממלאת את ה-src בפועל.
+function hydratePendingImages(tripId, root = document) {
+  root.querySelectorAll("[data-pending-image]:not([data-hydrated])").forEach(img => {
+    img.dataset.hydrated = "1";
+    edAssetGet(tripId, img.dataset.pendingImage).then(blob => {
+      if (blob) img.src = URL.createObjectURL(blob);
+    }).catch(() => { /* נשאר ריק */ });
+  });
 }
 
 // בלוק "תחנה" מלא — עם תמונה, כתובת, זמן נסיעה, תחזית וכל השאר.
@@ -689,6 +712,7 @@ function renderItinerary() {
   });
 
   podMount();
+  hydratePendingImages(TRIP_ID);
 }
 
 /* ============================================================
@@ -714,8 +738,8 @@ function renderNow() {
         <strong>${escapeHTML(TRIP.base.name)}</strong><br>
         <span style="color:var(--text-muted);font-size:14px">${escapeHTML(TRIP.base.address)}</span>
         <div class="chips">
-          <a class="chip map" href="${mapLink(TRIP.base.address)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>
-          <a class="chip waze" href="${wazeLink(TRIP.base.address, TRIP.base.coords)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
+          <a class="chip map" href="${mapLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>
+          <a class="chip waze" href="${wazeLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
         </div>
       </div>
       <h2 class="mini-list-title">לפני שנוסעים</h2>
@@ -840,12 +864,13 @@ function renderNow() {
     ${restHTML ? `<h2 class="mini-list-title">המשך היום</h2><div class="card">${restHTML}</div>` : ""}
     ${returnHTML}
     <div class="chips" style="margin-top:16px">
-      <a class="chip map" href="${mapLink(TRIP.base.address)}" target="_blank" rel="noopener">${ICON.pin} ${escapeHTML(TRIP.base.name)}</a>
-      <a class="chip waze" href="${wazeLink(TRIP.base.address, TRIP.base.coords)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
+      <a class="chip map" href="${mapLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.pin} ${escapeHTML(TRIP.base.name)}</a>
+      <a class="chip waze" href="${wazeLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
     </div>
   `;
 
   podMount();               // מחזיר את הנגן לפאנל שהיה פתוח, בלי לקטוע השמעה
+  hydratePendingImages(TRIP_ID);
 }
 
 /* ============================================================
@@ -953,8 +978,8 @@ function renderInfo() {
         <div class="info-row"><span class="k">שם</span><span class="v">${escapeHTML(TRIP.base.name)}</span></div>
         <div class="info-row"><span class="k">כתובת</span><span class="v">${escapeHTML(TRIP.base.address)}</span></div>
         <div class="chips">
-          <a class="chip map" href="${mapLink(TRIP.base.address)}" target="_blank" rel="noopener">${ICON.pin} פתיחה במפות</a>
-          <a class="chip waze" href="${wazeLink(TRIP.base.address, TRIP.base.coords)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
+          <a class="chip map" href="${mapLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.pin} פתיחה במפות</a>
+          <a class="chip waze" href="${wazeLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.waze} Waze</a>
         </div>
       </div>
     </div>
@@ -990,6 +1015,7 @@ function renderInfo() {
     ${extrasSectionHTML()}
   `;
   bindChecklist();
+  hydratePendingImages(TRIP_ID);
 }
 
 /* ============================================================

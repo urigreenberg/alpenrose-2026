@@ -13,7 +13,8 @@ const ED = {
   trip: null,           // הטיול שבעריכה (עותק עמוק, לא מה שמוצג באפליקציה)
   meta: null,           // { savedAt, trash: [] }
   dirty: false,
-  form: null,           // טופס פעילות פתוח: { dayDate, index|null, draft, lookup }
+  form: null,           // טופס פעילות פתוח: { kind: "day"|"extra", dayDate, index|null, draft, lookup }
+  swap: null,           // { extraIndex } — בחירת פעילות מתוכננת להחלפה עם אפשרות נוספת
   undo: null            // פעולת ביטול אחרונה למחיקה, עם טיימר
 };
 
@@ -163,6 +164,7 @@ function edCreateTrip({ title, start, end, baseName, baseAddress, baseCoords, ki
     checklist: [],
     tips: [],
     podcasts: {},
+    extras: [],
     days: edDatesBetween(start, end).map(date => ({
       date,
       title: "",
@@ -415,6 +417,7 @@ async function edOpenTrip(id) {
     ED.meta = { savedAt: 0, trash: [] };
   }
   if (!ED.meta.trash) ED.meta.trash = [];
+  if (!ED.trip.extras) ED.trip.extras = [];
   ED.dirty = !!draft;
   ED.open = true;
   ED.form = null;
@@ -461,6 +464,22 @@ function edBlockRowHTML(day, b, i) {
   `;
 }
 
+function edExtraRowHTML(x, i) {
+  return `
+    <div class="ed-row" data-edit-extra="${i}">
+      <span class="ed-row-main">
+        <span class="ed-row-title">${escapeHTML(x.title || "ללא שם")}</span>
+        <span class="ed-row-sub">${escapeHTML(x.address || "בלי כתובת")}</span>
+      </span>
+      <span class="ed-row-icons">
+        ${x.image ? ICON.camera : ""}
+        <button class="ed-del" data-swap-extra="${i}" aria-label="החלפה עם פעילות מתוכננת" title="החלפה עם פעילות מתוכננת">${ICON.swap}</button>
+        <button class="ed-del" data-del-extra="${i}" aria-label="מחיקת אפשרות">${ICON.trash}</button>
+      </span>
+    </div>
+  `;
+}
+
 function edDayHTML(day, n) {
   return `
     <section class="ed-day">
@@ -481,6 +500,7 @@ function edRender() {
 
   if (ED.publish) { host.innerHTML = edPublishHTML(); return; }
   if (ED.newTrip) { host.innerHTML = edNewTripHTML(); return; }
+  if (ED.swap) { host.innerHTML = edSwapHTML(); return; }
   if (ED.form) { host.innerHTML = edFormHTML(); edAfterFormRender(); return; }
 
   const trash = ED.meta.trash.length;
@@ -507,6 +527,15 @@ function edRender() {
 
       ${ED.trip.days.map((d, i) => edDayHTML(d, i + 1)).join("")}
 
+      <section class="ed-day">
+        <header class="ed-day-head">
+          <span class="ed-day-n">אפשרויות נוספות</span>
+        </header>
+        <p class="ed-hint" style="margin-top:0">רעיונות שלא נכנסו למסלול הקבוע. אפשר לערוך אותם כאן, או להחליף אחד מהם עם פעילות מתוכננת.</p>
+        ${ED.trip.extras.length ? ED.trip.extras.map((x, i) => edExtraRowHTML(x, i)).join("") : `<p class="ed-empty">אין עדיין אפשרויות נוספות.</p>`}
+        <button class="ed-add" data-add-extra>${ICON.plus} אפשרות נוספת</button>
+      </section>
+
       <div class="ed-danger">
         <button data-discard>השלכת כל השינויים המקומיים</button>
       </div>
@@ -526,7 +555,17 @@ function edOpenForm(dayDate, index) {
   const day = ED.trip.days.find(d => d.date === dayDate);
   const block = index == null ? edEmptyBlock(dayDate) : edClone(day.blocks[index]);
   block._day = dayDate;
-  ED.form = { dayDate, index, block, results: null, busy: false, photos: null, wiki: null, wikiDismissed: false, query: "" };
+  ED.form = { kind: "day", dayDate, index, block, results: null, busy: false, photos: null, wiki: null, wikiDismissed: false, query: "", photoUrlDraft: "" };
+  edRender();
+}
+
+function edEmptyExtra() {
+  return { title: "", desc: "", address: "", coords: null };
+}
+
+function edOpenExtraForm(index) {
+  const block = index == null ? edEmptyExtra() : edClone(ED.trip.extras[index]);
+  ED.form = { kind: "extra", dayDate: null, index, block, results: null, busy: false, photos: null, wiki: null, wikiDismissed: false, query: "", photoUrlDraft: "" };
   edRender();
 }
 
@@ -556,16 +595,18 @@ function edFormHTML() {
   const f = ED.form;
   const b = f.block;
   const isNew = f.index == null;
-  const siblings = b.area ? edAreaSiblings(b.area, f.dayDate, f.index) : [];
+  const isExtra = f.kind === "extra";
+  const siblings = !isExtra && b.area ? edAreaSiblings(b.area, f.dayDate, f.index) : [];
 
   return `
     <header class="ed-top">
       <button class="ed-back" data-form-cancel>${ICON.chevron} ביטול</button>
-      <strong>${isNew ? "פעילות חדשה" : "עריכת פעילות"}</strong>
+      <strong>${isNew ? (isExtra ? "אפשרות נוספת חדשה" : "פעילות חדשה") : (isExtra ? "עריכת אפשרות נוספת" : "עריכת פעילות")}</strong>
       <button class="ed-publish" data-form-save>שמירה</button>
     </header>
 
     <div class="ed-body">
+      ${isExtra ? "" : `
       <div class="ed-field-row">
         <label class="ed-field ed-flex2">
           <span>יום</span>
@@ -581,6 +622,7 @@ function edFormHTML() {
         </label>
       </div>
       <p class="ed-hint">שינוי היום כאן מעביר את הפעילות — זמני הנסיעה יחושבו מחדש בשני הימים.</p>
+      `}
 
       <label class="ed-field">
         <span>חיפוש מקום</span>
@@ -619,14 +661,16 @@ function edFormHTML() {
         <input data-field="infoUrl" value="${escapeHTML(b.infoUrl || "")}" placeholder="https://">
       </label>
 
+      ${isExtra ? "" : `
       <label class="ed-field">
         <span>פרק פודקאסט</span>
         <select data-field="area">${edAreaOptionsHTML(b.area)}</select>
       </label>
       ${siblings.length ? `<div class="ed-warn">${ICON.warn} הפרק משותף גם ל: ${escapeHTML(siblings.join(", "))} — החלפה תשנה אותו גם עבורן.</div>` : ""}
       ${edEpisodeHTML(b)}
+      `}
 
-      ${isNew ? "" : `<div class="ed-danger"><button data-form-delete>מחיקת הפעילות</button></div>`}
+      ${isNew ? "" : `<div class="ed-danger"><button data-form-delete>מחיקת ${isExtra ? "האפשרות" : "הפעילות"}</button></div>`}
     </div>
   `;
 }
@@ -675,8 +719,13 @@ function edDerivedHTML(b) {
 }
 
 // התחנה שלפני הפעילות ביום שנבחר — בסיס ההערכה של זמן הנסיעה.
+// לאפשרות נוספת (לא משויכת ליום) הבסיס עצמו הוא נקודת המוצא היחידה.
 function edPrevStop() {
   const f = ED.form;
+  if (f.kind === "extra") {
+    const base = ED.trip.base;
+    return base.coords ? { coords: base.coords, label: `מ${base.name ? "-" + base.name : "הבסיס"}` } : null;
+  }
   const day = ED.trip.days.find(d => d.date === f.block._day);
   if (!day) return null;
   const stops = day.blocks.filter((b, i) => b.coords && i !== f.index);
@@ -686,28 +735,51 @@ function edPrevStop() {
     : { coords: ED.trip.base.coords, label: `מ${ED.trip.base.name ? "-" + ED.trip.base.name : "הבסיס"}` };
 }
 
+// תמונה: מוויקישיתוף (לפי קרבה לנקודה, עם קרדיט ורישיון אוטומטיים),
+// העלאה ישירה מהמכשיר, או קישור ישיר לתמונה — שלוש דרכים לאותו שדה image.
+// תמונה שמגיעה מהעלאה/קישור מוצגת בלי המתנה לפרסום (thumb/localAsset),
+// בדיוק כמו תמונת ויקישיתוף שנבחרה.
 function edPhotoHTML(b) {
   const f = ED.form;
-  if (b.image) {
-    return `
-      <div class="ed-field"><span>תמונה</span></div>
-      <div class="ed-photo-current">
-        <img src="${escapeHTML(b.image.thumb || tripAsset(b.image.file))}" alt="">
-        <div>
-          <p class="ed-hint">${escapeHTML(b.image.credit)} · ${escapeHTML(b.image.license)}</p>
-          <button class="ed-link" data-photo-clear>הסרה</button>
-          <button class="ed-link" data-photo-pick>החלפה</button>
-        </div>
-      </div>`;
-  }
-  if (f.photos && f.photos.length) {
-    return `
-      <div class="ed-field"><span>תמונה מוויקישיתוף</span></div>
-      <div class="ed-photos">${f.photos.map((p, i) =>
-        `<button class="ed-photo" data-photo="${i}"><img src="${escapeHTML(p.thumb)}" alt="" loading="lazy"></button>`).join("")}</div>`;
-  }
-  if (f.photos) return `<p class="ed-hint">לא נמצאו תמונות חופשיות סביב הנקודה הזאת.</p>`;
-  return b.coords ? `<button class="ed-add" data-photo-pick>${ICON.camera} חיפוש תמונה</button>` : "";
+  const manual = b.image && !b.image.commonsFile;
+
+  const current = b.image ? `
+    <div class="ed-photo-current">
+      <img ${b.image.pending && b.image.localAsset
+        ? `data-pending-image="${escapeHTML(b.image.file)}" src=""`
+        : `src="${escapeHTML(b.image.thumb || tripAsset(b.image.file))}"`} alt="">
+      <div>
+        ${b.image.credit ? `<p class="ed-hint">${escapeHTML(b.image.credit)}${b.image.license ? " · " + escapeHTML(b.image.license) : ""}</p>` : ""}
+        <button class="ed-link" data-photo-clear>הסרה</button>
+      </div>
+    </div>` : "";
+
+  const commonsGrid = f.photos
+    ? (f.photos.length
+        ? `<div class="ed-photos">${f.photos.map((p, i) =>
+            `<button class="ed-photo" data-photo="${i}"><img src="${escapeHTML(p.thumb)}" alt="" loading="lazy"></button>`).join("")}</div>`
+        : `<p class="ed-hint">לא נמצאו תמונות חופשיות סביב הנקודה הזאת.</p>`)
+    : "";
+
+  return `
+    <div class="ed-field"><span>תמונה</span></div>
+    ${current}
+    ${manual ? `<label class="ed-field"><span>קרדיט (אופציונלי)</span><input data-image-credit value="${escapeHTML(b.image.credit || "")}" placeholder="שם הצלם, או השאירו ריק"></label>` : ""}
+
+    <div class="ed-field-row">
+      <label class="ed-add" for="ed-photo-upload">${ICON.upload} ${b.image ? "החלפה מהמכשיר" : "העלאה מהמכשיר"}</label>
+      ${b.coords ? `<button class="ed-add" data-photo-pick>${ICON.camera} חיפוש בוויקישיתוף</button>` : ""}
+    </div>
+    <input id="ed-photo-upload" type="file" accept="image/*" data-photo-upload hidden>
+
+    <div class="ed-field-row">
+      <label class="ed-field ed-flex2"><span>או קישור ישיר לתמונה</span><input data-photo-url value="${escapeHTML(f.photoUrlDraft || "")}" placeholder="https://…" dir="ltr"></label>
+      <button class="ed-add" data-photo-url-use>שימוש בקישור</button>
+    </div>
+    <p class="ed-hint">קישור עובד רק אם האתר המקורי מרשה הורדה חוצה-מקורות — אם הפרסום נכשל על התמונה הזו, כדאי להוריד אותה ולהעלות מהמכשיר במקום.</p>
+
+    ${commonsGrid}
+  `;
 }
 
 /* ניהול הפרק של האזור. הפרק שייך לאזור ולא לפעילות, ולכן ההעלאה כאן
@@ -737,6 +809,7 @@ function edEpisodeHTML(b) {
 function edAfterFormRender() {
   const el = $("[data-lookup]", edHost());
   if (el && ED.form.focusLookup) { el.focus(); ED.form.focusLookup = false; }
+  hydratePendingImages(ED.trip.id, edHost());
 }
 
 /* ---------- אירועים ---------- */
@@ -754,6 +827,15 @@ function edOnInput(e) {
   if (e.target.matches("[data-new-area]")) { ED.form.newArea = e.target.value; return; }
   if (e.target.matches("[data-audio]") && e.target.files[0]) {
     edAttachEpisode(ED.form.block.area, e.target.files[0]);
+    return;
+  }
+  if (e.target.matches("[data-photo-url]")) { ED.form.photoUrlDraft = e.target.value; return; }
+  if (e.target.matches("[data-photo-upload]") && e.target.files[0]) {
+    edAttachPhoto(e.target.files[0]);
+    return;
+  }
+  if (e.target.matches("[data-image-credit]")) {
+    if (ED.form.block.image) ED.form.block.image.credit = e.target.value;
     return;
   }
 
@@ -836,10 +918,35 @@ async function edOnClick(e) {
     return;
   }
 
+  if (hit("[data-add-extra]")) { edOpenExtraForm(null); return; }
+
+  const swapExtra = hit("[data-swap-extra]");
+  if (swapExtra) { edOpenSwap(Number(swapExtra.dataset.swapExtra)); return; }
+
+  const delExtra = hit("[data-del-extra]");
+  if (delExtra) { edDeleteExtra(Number(delExtra.dataset.delExtra)); return; }
+
+  const editExtra = hit("[data-edit-extra]");
+  if (editExtra && !hit("[data-del-extra]") && !hit("[data-swap-extra]")) {
+    edOpenExtraForm(Number(editExtra.dataset.editExtra));
+    return;
+  }
+
+  if (hit("[data-swap-cancel]")) { edCloseSwap(); return; }
+  const swapPick = hit("[data-swap-pick]");
+  if (swapPick) {
+    const [date, bi] = swapPick.dataset.swapPick.split(":");
+    edPerformSwap(ED.swap.extraIndex, date, Number(bi));
+    ED.swap = null;
+    edRender();
+    return;
+  }
+
   if (hit("[data-form-cancel]")) { edCancelForm(); return; }
   if (hit("[data-form-save]")) { edSaveForm(); return; }
   if (hit("[data-form-delete]")) {
-    edDeleteBlock(ED.form.dayDate, ED.form.index);
+    if (ED.form.kind === "extra") edDeleteExtra(ED.form.index);
+    else edDeleteBlock(ED.form.dayDate, ED.form.index);
     ED.form = null;
     edRender();
     return;
@@ -873,6 +980,22 @@ async function edOnClick(e) {
 
   if (hit("[data-photo-pick]")) { await edLoadPhotos(); return; }
   if (hit("[data-photo-clear]")) { delete ED.form.block.image; edRender(); return; }
+
+  if (hit("[data-photo-url-use]")) {
+    const url = (ED.form.photoUrlDraft || "").trim();
+    if (!url) { alert("צריך להזין קישור לתמונה."); return; }
+    ED.form.block.image = {
+      file: `images/${edSlug(ED.form.block.title || "photo")}-${Date.now().toString(36)}.${edGuessImageExt(url)}`,
+      thumb: url,
+      credit: "",
+      license: "",
+      pending: true
+    };
+    ED.form.photos = null;
+    ED.form.photoUrlDraft = "";
+    edRender();
+    return;
+  }
 
   const photo = hit("[data-photo]");
   if (photo) {
@@ -955,16 +1078,38 @@ function edCancelForm() {
 
 /* ---------- שמירה ומחיקה של פעילות ---------- */
 
+// מחשב מחדש את רגל הנסיעה מהבסיס לאפשרות נוספת (אין לה רצף תחנות כמו ביום).
+function edRecalcExtra(item) {
+  const base = ED.trip.base;
+  if (!base.coords || !item.coords) return;
+  if (!item.drive || item.drive.auto) {
+    const leg = estimateDrive(base.coords, item.coords, `מ${base.name ? "-" + base.name : "הבסיס"}`);
+    if (leg) item.drive = leg;
+  }
+}
+
 function edSaveForm() {
   const f = ED.form;
   const b = edClone(f.block);
-  const targetDate = b._day;
-  delete b._day;
 
   if (!b.title.trim()) { alert("צריך שם לפעילות."); return; }
   for (const k of ["price", "hours", "infoUrl", "area", "address", "desc"]) {
     if (b[k] === "") delete b[k];
   }
+
+  if (f.kind === "extra") {
+    delete b._day; delete b.start; delete b.end; delete b.approx;
+    edRecalcExtra(b);
+    if (f.index != null) ED.trip.extras.splice(f.index, 1, b);
+    else ED.trip.extras.push(b);
+    ED.form = null;
+    edSaveDraft();
+    edRender();
+    return;
+  }
+
+  const targetDate = b._day;
+  delete b._day;
   if (!b.end) delete b.end;
   if (!b.start) delete b.start;
 
@@ -997,6 +1142,77 @@ function edDeleteBlock(date, index) {
   });
   edSaveDraft();
   edRender();
+}
+
+function edDeleteExtra(index) {
+  const removed = ED.trip.extras[index];
+  if (!removed) return;
+  ED.trip.extras.splice(index, 1);
+  edTrashPush("extra", removed);
+  edShowUndo("האפשרות נמחקה", () => {
+    ED.trip.extras.splice(index, 0, removed);
+  });
+  edSaveDraft();
+  edRender();
+}
+
+/* ---------- החלפת אפשרות נוספת עם פעילות מתוכננת ----------
+   החלפה הדדית: האפשרות הנוספת יורשת את השעה של הפעילות שהוחלפה, והפעילות
+   שהוחלפה עוברת בעצמה ל"אפשרויות נוספות" — כלום לא הולך לאיבוד, ואפשר
+   להחליף שוב בחזרה מאוחר יותר. */
+
+function edOpenSwap(extraIndex) {
+  ED.swap = { extraIndex };
+  edRender();
+}
+
+function edCloseSwap() {
+  ED.swap = null;
+  edRender();
+}
+
+function edSwapHTML() {
+  const extra = ED.trip.extras[ED.swap.extraIndex];
+  const rows = ED.trip.days.flatMap((d, di) => d.blocks.map((b, bi) => ({ d, b, bi })))
+    .map(({ d, b, bi }) => `
+      <button class="ed-row" data-swap-pick="${d.date}:${bi}">
+        <span class="ed-row-main">
+          <span class="ed-row-title">${escapeHTML(b.title || "ללא שם")}</span>
+          <span class="ed-row-sub">${escapeHTML(edDayLabel(d.date))}${timeLabel(b) ? " · " + escapeHTML(timeLabel(b)) : ""}</span>
+        </span>
+      </button>
+    `).join("");
+
+  return `
+    <header class="ed-top">
+      <button class="ed-back" data-swap-cancel>${ICON.chevron} ביטול</button>
+      <strong>החלפה עם "${escapeHTML(extra.title)}"</strong>
+    </header>
+    <div class="ed-body">
+      <p class="ed-hint" style="margin-top:0">בחרו פעילות מתוכננת שתוחלף. הפעילות שתיבחר תעבור בעצמה ל"אפשרויות נוספות", עם אותה שעה שהייתה לה.</p>
+      ${rows || `<p class="ed-empty">אין עדיין פעילויות מתוכננות להחלפה.</p>`}
+    </div>
+  `;
+}
+
+function edPerformSwap(extraIndex, dayDate, blockIndex) {
+  const day = ED.trip.days.find(d => d.date === dayDate);
+  const planned = day.blocks[blockIndex];
+  const extra = ED.trip.extras[extraIndex];
+  if (!day || !planned || !extra) return;
+
+  const scheduled = edClone(extra);
+  scheduled.start = planned.start;
+  scheduled.end = planned.end;
+  if (planned.approx) scheduled.approx = true; else delete scheduled.approx;
+
+  const toExtras = edClone(planned);
+  delete toExtras.start; delete toExtras.end; delete toExtras.approx;
+
+  day.blocks.splice(blockIndex, 1, scheduled);
+  edRecalcDay(day);
+  ED.trip.extras.splice(extraIndex, 1, toExtras);
+  edSaveDraft();
 }
 
 /* ---------- טיול חדש ---------- */
@@ -1216,24 +1432,41 @@ async function edBlobToBase64(blob) {
 
 /* אילו קבצים הפרסום צריך לכתוב: קובץ הטיול, רשומת האינדקס אם היא
    השתנתה, כל תמונה שנבחרה ועוד לא הועלתה, וכל פרק שממתין. */
+// תמונה ממתינה מגיעה משלושה מקורות: חיפוש בוויקישיתוף (thumb הוא URL מרוחק
+// עם commonsFile וקרדיט/רישיון), קישור ישיר (thumb הוא ה-URL שהוזן, בלי
+// קרדיט), או העלאה מהמכשיר (localAsset — הקובץ יושב ב-IndexedDB ולא ברשת).
+async function edProcessPendingImages(items, dir, files, onStep, tripId) {
+  for (const item of items) {
+    if (!item.image || !item.image.pending) continue;
+    let blob;
+    if (item.image.localAsset) {
+      onStep(`מכין תמונה: ${item.title}`);
+      blob = await edAssetGet(tripId, item.image.file);
+      if (!blob) throw new Error("קובץ התמונה לא נמצא במכשיר: " + item.title);
+    } else {
+      onStep(`מוריד תמונה: ${item.image.commonsFile || item.title}`);
+      const res = await fetch(item.image.thumb);
+      if (!res.ok) throw new Error("לא הצלחנו להוריד את התמונה עבור " + item.title);
+      blob = await res.blob();
+    }
+    files.push({ path: `${dir}/${item.image.file}`, base64: await edBlobToBase64(blob), size: blob.size });
+    // מה שנשמר בקובץ הטיול הוא רק המבנה שהאפליקציה מרנדרת.
+    const kept = { file: item.image.file };
+    if (item.image.credit) kept.credit = item.image.credit;
+    if (item.image.license) kept.license = item.image.license;
+    if (item.image.commonsFile) kept.commonsFile = item.image.commonsFile;
+    if (item.image.sourceUrl) kept.sourceUrl = item.image.sourceUrl;
+    item.image = kept;
+  }
+}
+
 async function edCollectFiles(onStep) {
   const trip = edClone(ED.trip);
   const files = [];
   const dir = `trips/${trip.id}`;
 
-  for (const day of trip.days) {
-    for (const b of day.blocks) {
-      if (b.image && b.image.pending) {
-        onStep(`מוריד תמונה: ${b.image.commonsFile}`);
-        const res = await fetch(b.image.thumb);
-        if (!res.ok) throw new Error("לא הצלחנו להוריד את התמונה " + b.image.commonsFile);
-        const blob = await res.blob();
-        files.push({ path: `${dir}/${b.image.file}`, base64: await edBlobToBase64(blob), size: blob.size });
-        // מה שנשמר בקובץ הטיול הוא רק המבנה שהאפליקציה מרנדרת.
-        b.image = { file: b.image.file, credit: b.image.credit, license: b.image.license, commonsFile: b.image.commonsFile };
-      }
-    }
-  }
+  for (const day of trip.days) await edProcessPendingImages(day.blocks, dir, files, onStep, trip.id);
+  await edProcessPendingImages(trip.extras || [], dir, files, onStep, trip.id);
 
   for (const [area, pod] of Object.entries(trip.podcasts || {})) {
     if (!pod.pending) continue;
@@ -1464,6 +1697,27 @@ async function edAttachEpisode(area, file) {
   ED.trip.podcasts[area] = pod;
   await edAssetPut(ED.trip.id, pod.file, file);
   edSaveDraft();
+  edRender();
+}
+
+/* ---------- העלאת תמונה ידנית ----------
+   כמו קובץ פרק, תמונה שהועלתה מהמכשיר צריכה לשרוד רענון דף עד הפרסום —
+   נשמרת ב-IndexedDB (edAssetPut) ולא ב-thumb/blob URL, כי blob URL לא
+   שורד רענון. ה-image מסומן localAsset כדי שהרינדור ידע למשוך אותה
+   מחדש מה-IndexedDB בכל הצגה (ר' hydratePendingImages ב-app.js), ולא
+   כדי שהוא ייכתב ישירות ל-src בזמן בנייה. */
+
+function edGuessImageExt(url) {
+  const m = /\.(jpe?g|png|webp|gif)(?:[?#]|$)/i.exec(url);
+  return m ? m[1].toLowerCase().replace("jpeg", "jpg") : "jpg";
+}
+
+async function edAttachPhoto(file) {
+  const b = ED.form.block;
+  const ext = (/\.([a-z0-9]+)$/i.exec(file.name) || [, "jpg"])[1].toLowerCase();
+  const path = `images/${edSlug(b.title || "photo")}-${Date.now().toString(36)}.${ext}`;
+  await edAssetPut(ED.trip.id, path, file);
+  b.image = { file: path, credit: "", license: "", pending: true, localAsset: true };
   edRender();
 }
 

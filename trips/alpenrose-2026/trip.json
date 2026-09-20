@@ -10,6 +10,7 @@
   "base": {
     "kind": "hotel",
     "name": "Alpenrose Familux Resort",
+    "mapsQuery": "Alpenrose Familux Resort Lermoos",
     "address": "Danielstraße 3, 6631 Lermoos, Austria",
     "coords": {
       "lat": 47.402991,
