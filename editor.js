@@ -746,7 +746,7 @@ function edPhotoHTML(b) {
   const current = b.image ? `
     <div class="ed-photo-current">
       <img ${b.image.pending && b.image.localAsset
-        ? `data-pending-image="${escapeHTML(b.image.file)}" src=""`
+        ? `data-pending-image="${escapeHTML(b.image.file)}"`
         : `src="${escapeHTML(b.image.thumb || tripAsset(b.image.file))}"`} alt="">
       <div>
         ${b.image.credit ? `<p class="ed-hint">${escapeHTML(b.image.credit)}${b.image.license ? " · " + escapeHTML(b.image.license) : ""}</p>` : ""}

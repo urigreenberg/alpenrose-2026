@@ -563,8 +563,12 @@ function imageHTML(image, item) {
   // פורסמה כן נטענת ישירות מהכתובת המרוחקת שלה; אחרי הפרסום כל תמונה היא
   // כבר קובץ בתיקיית הטיול ונטענת מקומית, גם בלי קליטה.
   const pendingLocal = image.pending && image.localAsset;
-  const src = pendingLocal ? "" : (image.pending && image.thumb ? image.thumb : tripAsset(image.file));
-  const img = `<img class="stop-img" ${pendingLocal ? `data-pending-image="${escapeHTML(image.file)}"` : ""} src="${src}" alt="" loading="lazy" onerror="this.style.display='none'">`;
+  // בלי src בכלל, לא src="" — src ריק גורם לדפדפן לנסות לטעון את הדף עצמו
+  // כתמונה, שנכשל ומפעיל onerror מיד, עוד לפני שההטמעה האסינכרונית מה-
+  // IndexedDB הספיקה להריץ; זה היה מסתיר את התמונה לצמיתות (ר' hydratePendingImages).
+  const img = pendingLocal
+    ? `<img class="stop-img" data-pending-image="${escapeHTML(image.file)}" alt="" loading="lazy">`
+    : `<img class="stop-img" src="${image.pending && image.thumb ? image.thumb : tripAsset(image.file)}" alt="" loading="lazy" onerror="this.style.display='none'">`;
   const linked = item && item.mapsQuery
     ? `<a class="stop-img-link" href="${mapLink(item)}" target="_blank" rel="noopener">${img}</a>`
     : img;
@@ -578,9 +582,11 @@ function imageHTML(image, item) {
 function hydratePendingImages(tripId, root = document) {
   root.querySelectorAll("[data-pending-image]:not([data-hydrated])").forEach(img => {
     img.dataset.hydrated = "1";
+    img.addEventListener("error", () => { img.style.display = "none"; });
     edAssetGet(tripId, img.dataset.pendingImage).then(blob => {
       if (blob) img.src = URL.createObjectURL(blob);
-    }).catch(() => { /* נשאר ריק */ });
+      else img.style.display = "none";
+    }).catch(() => { img.style.display = "none"; });
   });
 }
 
