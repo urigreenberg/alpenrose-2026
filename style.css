@@ -1250,3 +1250,52 @@ body.lightbox-open { overflow: hidden; }
   direction: ltr;
   word-break: break-word;
 }
+
+/* ---- מתג המסלול (מקורי מול חלופי) ---- */
+.plan-switch {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 10px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+}
+.plan-switch button {
+  flex: 1;
+  padding: 8px 6px;
+  border: 0;
+  border-radius: calc(var(--radius-md) - 4px);
+  background: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.plan-switch button.is-on {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,.10));
+}
+.plan-summary {
+  margin: -4px 0 12px;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+/* ב"עכשיו" אין מתג, אז צריך משהו שיגיד איזו תוכנית רצה */
+.plan-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.plan-badge .icon { flex: none; }
