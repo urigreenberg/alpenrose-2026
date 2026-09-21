@@ -1137,7 +1137,6 @@ label.ed-add { cursor: pointer; }
   background: none; border: 0; font-family: inherit; font-size: 13px; font-weight: 700;
   color: var(--accent-contrast); cursor: pointer;
 }
-.stop-img-link { display: block; }
 
 /* השלכת טיוטה מתוך הבאנר העליון — אותה פעולה שיושבת גם למטה ב-ed-danger,
    אבל נגישה בלי לגלול מתחת לכל הימים והאפשרויות הנוספות. */
@@ -1177,3 +1176,66 @@ label.ed-add { cursor: pointer; }
   cursor: pointer;
   flex-shrink: 0;
 }
+
+/* ---- תמונה במסך מלא ----
+   בכרטיס התמונה חתוכה (cover) כדי שכל הכרטיסים יהיו באותו גובה; כאן
+   contain, כדי לראות את כולה. */
+.stop-img { cursor: zoom-in; }
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 16px calc(24px + env(safe-area-inset-bottom));
+  background: rgba(0, 0, 0, .92);
+}
+.lightbox[hidden] { display: none; }
+.lightbox-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  cursor: default;
+}
+.lightbox-credit {
+  margin: 0;
+  max-width: 100%;
+  color: rgba(255, 255, 255, .72);
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.4;
+}
+.lightbox-close {
+  position: absolute;
+  top: calc(10px + env(safe-area-inset-top));
+  inset-inline-end: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  cursor: pointer;
+}
+/* בזמן שהתמונה פתוחה הדף מאחוריה לא נגלל */
+body.lightbox-open { overflow: hidden; }
+
+/* הערת הניווט — מופיעה רק כשוויז שולח לחניה ולא למקום עצמו */
+.park-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 8px 0 0;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+.park-note .icon { flex: none; margin-top: 2px; }

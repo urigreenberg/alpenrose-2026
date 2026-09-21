@@ -573,7 +573,7 @@ function edOpenForm(dayDate, index) {
   const day = ED.trip.days.find(d => d.date === dayDate);
   const block = index == null ? edEmptyBlock(dayDate) : edClone(day.blocks[index]);
   block._day = dayDate;
-  ED.form = { kind: "day", dayDate, index, block, results: null, busy: false, photos: null, wiki: null, wikiDismissed: false, query: "", photoUrlDraft: "", parkingDraft: edParkingText(block.parking), parkingErr: null };
+  ED.form = { kind: "day", dayDate, index, block, results: null, busy: false, photos: null, wiki: null, wikiDismissed: false, query: "", photoUrlDraft: "" };
   edRender();
 }
 
@@ -583,7 +583,7 @@ function edEmptyExtra() {
 
 function edOpenExtraForm(index) {
   const block = index == null ? edEmptyExtra() : edClone(ED.trip.extras[index]);
-  ED.form = { kind: "extra", dayDate: null, index, block, results: null, busy: false, photos: null, wiki: null, wikiDismissed: false, query: "", photoUrlDraft: "", parkingDraft: edParkingText(block.parking), parkingErr: null };
+  ED.form = { kind: "extra", dayDate: null, index, block, results: null, busy: false, photos: null, wiki: null, wikiDismissed: false, query: "", photoUrlDraft: "" };
   edRender();
 }
 
@@ -741,73 +741,36 @@ function edDerivedHTML(b) {
   return `
     <div class="ed-derived">
       <span class="ed-tag ok">${ICON.cloud} תחזית פעילה</span>
-      ${b.address ? `<span class="ed-tag ok">${ICON.pin} Maps${b.parking ? " · Waze לחניה" : " · Waze"}</span>` : ""}
+      ${b.address ? `<span class="ed-tag ok">${ICON.pin} Maps${b.parkingQuery ? " · Waze לחניה" : " · Waze"}</span>` : ""}
       ${leg ? `<span class="ed-tag est">${ICON.car} ${escapeHTML(leg.time)} · הערכה</span>` : ""}
       <span class="ed-tag plain">${b.coords.lat.toFixed(3)}, ${b.coords.lng.toFixed(3)}${b.coords.elev != null ? ` · ${b.coords.elev} מ׳` : ""}</span>
     </div>
   `;
 }
 
-/* ---------- נקודת חניה ----------
-   Waze מנווט לכאן במקום למקום עצמו. הקלט מקבל גם קואורדינטות גולמיות וגם
-   כתובת URL מלאה של גוגל מפות, כי זה הזרימה הטבעית: מוצאים את החניון
-   במפות, מעתיקים קישור, מדביקים.
+/* ---------- יעד הניווט בוויז ----------
+   פעם זו הייתה קואורדינטה של חניון, ומנתח שידע לשלוף אותה מקישור של גוגל
+   מפות. זה ירד: קואורדינטה שגויה נכשלת בשקט (נקודת החניה של אייבזה ישבה
+   1.4 ק"מ מהחניה האמיתית), בעוד ששם אפשר לאמת מול האתר של המקום.
 
-   סדר הפענוח חשוב: ב-URL של גוגל, !3d!4d הם הסיכה עצמה ואילו @ הוא רק
-   מרכז התצוגה — לרוב קרובים, אבל לא תמיד אותו דבר, ולכן הסיכה קודמת. */
-
-const ED_PARK_FAR_KM = 1.5;
-
-function edParkingText(p) {
-  return p && p.lat != null ? `${p.lat},${p.lng}` : "";
-}
-
-function edParseParking(text) {
-  const s = (text || "").trim();
-  if (!s) return null;
-  // קישור מקוצר לא ניתן לפענוח בדפדפן (חסימת CORS על ההפניה) — מסמנים
-  // ומסבירים, במקום להחזיר null ולהיראות כמו טקסט לא תקין.
-  if (/(maps\.app\.goo\.gl|goo\.gl\/maps)/i.test(s)) return { short: true };
-
-  const num = "(-?\\d+\\.\\d+)";
-  const patterns = [
-    new RegExp(`^\\s*${num}\\s*,\\s*${num}\\s*$`),      // "47.40,10.88" גולמי
-    new RegExp(`!3d${num}!4d${num}`),                    // הסיכה בפועל
-    new RegExp(`@${num},${num}`),                        // מרכז התצוגה
-    new RegExp(`[?&](?:q|ll|center|daddr)=${num},${num}`)
-  ];
-  for (const re of patterns) {
-    const m = re.exec(s);
-    if (!m) continue;
-    const lat = Number(m[1]), lng = Number(m[2]);
-    if (Math.abs(lat) > 90 || Math.abs(lng) > 180) continue;
-    return { lat: Math.round(lat * 1e6) / 1e6, lng: Math.round(lng * 1e6) / 1e6 };
-  }
-  return null;
-}
+   היום זה שם, ורק כשיעד הנהיגה אינו המקום עצמו. השם חייב לכלול יישוב,
+   כי הטיול יושב על גבול אוסטריה-גרמניה ושמות חוזרים על עצמם משני הצדדים. */
 
 function edParkingHTML(b) {
-  const f = ED.form;
-  const draft = f.parkingDraft != null ? f.parkingDraft : edParkingText(b.parking);
-  const far = b.parking && b.coords && haversineKm(b.coords, b.parking) > ED_PARK_FAR_KM;
   return `
     <label class="ed-field">
-      <span>נקודת חניה (Waze)</span>
-      <input data-field-parking value="${escapeHTML(draft)}" dir="ltr" placeholder="47.4032,10.8846 או קישור מגוגל מפות">
+      <span>יעד ניווט לחניה (Waze)</span>
+      <input data-field="parkingQuery" value="${escapeHTML(b.parkingQuery || "")}" dir="ltr"
+             placeholder="Parkplatz P1 Burgenwelt Ehrenberg, Reutte">
     </label>
-    ${f.parkingErr === "short"
-      ? `<div class="ed-warn">${ICON.warn} קישור מקוצר (maps.app.goo.gl) לא ניתן לפענוח מהדפדפן. פתחו אותו במפות והעתיקו את הכתובת המלאה מסרגל הכתובות, או הדביקו קואורדינטות.</div>`
-      : f.parkingErr === "bad"
-        ? `<div class="ed-warn">${ICON.warn} לא זיהינו קואורדינטות בטקסט הזה.</div>`
-        : ""}
-    ${b.parking ? `
-      <div class="ed-derived">
-        <span class="ed-tag ok">${ICON.car} ${b.parking.lat.toFixed(4)}, ${b.parking.lng.toFixed(4)}</span>
-        ${b.coords ? `<span class="ed-tag ${far ? "est" : "plain"}">${formatDistance(haversineKm(b.coords, b.parking))} מהמקום</span>` : ""}
-        <button class="ed-link" data-parking-clear>הסרה</button>
-      </div>
-      ${far ? `<div class="ed-warn">${ICON.warn} החניה רחוקה מהמקום עצמו — לבדוק שזה באמת החניון הנכון ולא נקודה אקראית.</div>` : ""}
-    ` : `<p class="ed-hint">בלי נקודת חניה, Waze ינווט לפי שם המקום.</p>`}
+    ${b.parkingQuery ? `
+      <label class="ed-field">
+        <span>מה לכתוב בכרטיס על החניה</span>
+        <textarea data-field="parkingNote" rows="3"
+                  placeholder="לאן הניווט לוקח ולמה, מחיר או חינם, ואיך ממשיכים משם למקום">${escapeHTML(b.parkingNote || "")}</textarea>
+      </label>
+      ${b.parkingNote ? "" : `<div class="ed-warn">${ICON.warn} יש יעד חניה בלי הסבר. הצ'יפ יגיד "חניה" ואף אחד לא ידע לאן הוא שולח.</div>`}
+    ` : `<p class="ed-hint">ריק = Waze ינווט לשם המקום עצמו. למלא רק כשצריך לחנות במקום אחר — תחנת עמק של רכבל, חניון נפרד, מקום שאין אליו גישה ברכב.</p>`}
   `;
 }
 
@@ -922,18 +885,6 @@ function edOnInput(e) {
     edAttachEpisode(ED.form.block.area, e.target.files[0]);
     return;
   }
-  if (e.target.matches("[data-field-parking]")) {
-    const f = ED.form;
-    f.parkingDraft = e.target.value;
-    const parsed = edParseParking(e.target.value);
-    if (!e.target.value.trim()) { delete f.block.parking; f.parkingErr = null; }
-    else if (parsed && parsed.short) f.parkingErr = "short";
-    else if (parsed) { f.block.parking = parsed; f.parkingErr = null; }
-    else f.parkingErr = "bad";
-    // רינדור רק בסיום ההקלדה, אחרת הסמן קופץ באמצע הדבקת קואורדינטות.
-    if (e.type === "change") edRender();
-    return;
-  }
   if (e.target.matches("[data-photo-url]")) { ED.form.photoUrlDraft = e.target.value; return; }
   if (e.target.matches("[data-photo-upload]") && e.target.files[0]) {
     edAttachPhoto(e.target.files[0]);
@@ -967,6 +918,9 @@ function edOnInput(e) {
   if (field && ED.form) {
     // נשמר באובייקט הטופס בלבד; לטיול עצמו זה נכנס רק ב"שמירה".
     ED.form.block[field.dataset.field] = e.target.value;
+    // שדה הערת החניה מופיע רק כשיש יעד חניה — מרנדרים בסיום ההקלדה בלבד,
+    // אחרת הסמן קופץ באמצע ההקלדה.
+    if (/^parking(Query|Note)$/.test(field.dataset.field) && e.type === "change") edRender();
     return;
   }
 }
@@ -1079,14 +1033,6 @@ async function edOnClick(e) {
     ED.trip.podcasts[area] = ED.trip.podcasts[area] || { title: ED.form.block.title || area, file: `audio/${area}.m4a`, rev: 1 };
     ED.form.block.area = area;
     edSaveDraft({ snapshot: false });
-    edRender();
-    return;
-  }
-
-  if (hit("[data-parking-clear]")) {
-    delete ED.form.block.parking;
-    ED.form.parkingDraft = "";
-    ED.form.parkingErr = null;
     edRender();
     return;
   }
@@ -1207,11 +1153,19 @@ function edSaveForm() {
   const b = edClone(f.block);
 
   if (!b.title.trim()) { alert("צריך שם לפעילות."); return; }
-  for (const k of ["price", "hours", "infoUrl", "area", "address", "desc", "mapsQuery"]) {
+  if (b.parkingQuery && b.parkingQuery.trim() && !(b.parkingNote || "").trim()) {
+    alert("יש יעד חניה בלי הסבר.\n\nהצ'יפ יגיד \"חניה\" ואף אחד לא ידע לאן הניווט שולח — " +
+          "כתבו לאן הוא מוביל, כמה עולה, ואיך ממשיכים משם למקום.");
+    return;
+  }
+  for (const k of ["price", "hours", "infoUrl", "area", "address", "desc", "mapsQuery",
+                   "parkingQuery", "parkingNote"]) {
     if (b[k] === "") delete b[k];
   }
-  if (b.parking && (b.parking.lat == null || b.parking.lng == null)) delete b.parking;
-  delete b.infoLink;   // שדה ישן — היום יש רק infoUrl
+  // הערה בלי יעד חניה היא הערה על משהו שלא קיים
+  if (!b.parkingQuery) delete b.parkingNote;
+  delete b.infoLink;   // שדות ישנים — היום יש infoUrl ו-parkingQuery
+  delete b.parking;
 
   if (f.kind === "extra") {
     delete b._day; delete b.start; delete b.end; delete b.approx;
