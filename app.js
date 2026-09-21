@@ -169,7 +169,7 @@ const STORE_PREFIX = "tp:";
 
 // חותמת גרסה, מוצגת בלשונית "מידע". מעלים אותה בכל דחיפה — כשמישהו אומר
 // "אצלי זה לא עובד", זו הדרך לדעת אם הוא בכלל מריץ את הקוד הנוכחי.
-const APP_BUILD = "2026-09-21.6";
+const APP_BUILD = "2026-09-21.7";
 
 // ה-Service Worker מגיש את המעטפת מהמטמון ומעדכן ברקע; כשהוא מגלה שהקוד
 // השתנה, הדף הזה כבר רץ עם הישן — אז הוא שולח הודעה ומציעים רענון.
@@ -337,7 +337,8 @@ function planSwitchHTML() {
 function planBadgeHTML() {
   const alt = altPlan();
   if (!alt || PLAN_ID !== "alt") return "";
-  return `<div class="plan-badge">${ICON.swap} מוצג המסלול החלופי · ${escapeHTML(alt.label)}</div>`;
+  // התווית עצמה כבר אומרת שזו החלופה — חזרה עליה כאן רק מכפילה מילים
+  return `<div class="plan-badge">${ICON.swap} מוצג: ${escapeHTML(alt.label)}</div>`;
 }
 
 function bindPlanSwitch() {
