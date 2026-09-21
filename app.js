@@ -1213,11 +1213,17 @@ function wxPointKey(c) {
 }
 
 // כל הנקודות שצריך להן תחזית — תחנות הטיול (בלי כפילויות).
+/* הנקודות שנשלחות ל-Open-Meteo: רק פעילויות שבאמת יכולות להציג תחזית.
+   שני הצרכנים של הנתונים — blockWeather ו-dayRainWindows — דורשים שעת
+   התחלה, אז פעילות בלי שעה מוסיפה נקודה שאיש לא קורא. וזה לא רק בזבוז:
+   כרטיס אופציונלי בלי שעה ובלי elev שלח elevation עם ערך ריק בסוף הרשימה,
+   ו-Open-Meteo החזיר HTTP 400 — כלומר התחזית של כל הטיול נפלה בגלל נקודה
+   שלא הייתה בשימוש מלכתחילה. */
 function wxPoints() {
   const map = new Map();
   for (const day of DAYS) {
     for (const b of day.blocks) {
-      if (!b.coords) continue;
+      if (!b.coords || !b.start) continue;
       const key = wxPointKey(b.coords);
       if (!map.has(key)) map.set(key, { key, ...b.coords });
     }
@@ -1279,15 +1285,23 @@ async function wxFetch({ force = false } = {}) {
      אז עדיף לנסות ולהיכשל מאשר לוותר מראש על סמך דגל שאי אפשר לסמוך עליו. */
 
   const points = wxPoints();
+  if (!points.length) { WX.status = WX.store ? "ok" : "error"; WX.error = "no forecast points"; wxNotify(); return; }
+
   const params = new URLSearchParams({
     latitude: points.map(p => p.lat).join(","),
     longitude: points.map(p => p.lng).join(","),
-    elevation: points.map(p => p.elev).join(","),
     hourly: "temperature_2m,apparent_temperature,precipitation_probability,precipitation,weather_code,wind_speed_10m",
     timezone: "Europe/Berlin",
     start_date: range.start,
     end_date: range.end
   });
+  /* elevation משפר את הדיוק בהרים, אבל ב-API הרשימה חייבת להיות באותו אורך
+     כמו הקואורדינטות. נקודה אחת בלי גובה הופכת אותה לערך ריק ומפילה את כל
+     הבקשה ב-400 — אז או שכולן או שאף אחת, ואז Open-Meteo משתמש במודל
+     הגבהים שלו. עדיף תחזית קצת פחות מדויקת מאשר שום תחזית. */
+  if (points.every(p => p.elev != null)) {
+    params.set("elevation", points.map(p => p.elev).join(","));
+  }
 
   WX.status = "loading";
   wxNotify();
