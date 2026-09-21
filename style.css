@@ -1239,3 +1239,14 @@ body.lightbox-open { overflow: hidden; }
   line-height: 1.45;
 }
 .park-note .icon { flex: none; margin-top: 2px; }
+
+/* סיבת הכישלון בטעינת התחזית — קטן ומאופק, אבל קיים: בלעדיו אי אפשר
+   לאבחן מרחוק למה אין תחזית. */
+.wx-err {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--text-faint);
+  direction: ltr;
+  word-break: break-word;
+}

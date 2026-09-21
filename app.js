@@ -167,7 +167,7 @@ const STORE_PREFIX = "tp:";
 
 // חותמת גרסה, מוצגת בלשונית "מידע". מעלים אותה בכל דחיפה — כשמישהו אומר
 // "אצלי זה לא עובד", זו הדרך לדעת אם הוא בכלל מריץ את הקוד הנוכחי.
-const APP_BUILD = "2026-09-21.3";
+const APP_BUILD = "2026-09-21.4";
 
 // ה-Service Worker מגיש את המעטפת מהמטמון ומעדכן ברקע; כשהוא מגלה שהקוד
 // השתנה, הדף הזה כבר רץ עם הישן — אז הוא שולח הודעה ומציעים רענון.
@@ -1267,11 +1267,16 @@ async function wxFetch({ force = false } = {}) {
   if (!range) { WX.status = "out-of-range"; wxNotify(); return; }
   if (WX.status === "loading") return;
   if (!force && !wxIsStale()) return;
-  if (!navigator.onLine) {
-    // אין רשת — נשארים עם מה שיש בקאש, בלי להציג שגיאה מיותרת.
-    if (!WX.store) { WX.status = "error"; wxNotify(); }
-    return;
-  }
+
+  /* אין כאן בדיקת navigator.onLine בכוונה. באפליקציה שהותקנה למסך הבית
+     באייפון הדגל הזה מדווח false גם כשיש חיבור מצוין, במיוחד בשניות
+     הראשונות אחרי הפתיחה — וזה בדיוק מה שקרה: בספארי התחזית עבדה, ומהמסך
+     הבית התקבל "לא הצלחנו להביא תחזית" בלי שאף בקשה נשלחה. גרוע מזה, גם
+     כפתור "רענון" וגם האירוע online נחסמו באותו תנאי, אז המצב לא היה
+     מתאושש לבד.
+
+     fetch כושל תוך מילישניות כשבאמת אין רשת, ואז ה-catch למטה מטפל בזה —
+     אז עדיף לנסות ולהיכשל מאשר לוותר מראש על סמך דגל שאי אפשר לסמוך עליו. */
 
   const points = wxPoints();
   const params = new URLSearchParams({
@@ -1288,7 +1293,16 @@ async function wxFetch({ force = false } = {}) {
   wxNotify();
 
   try {
-    const res = await fetch(`${WX.api}?${params}`, { cache: "no-store" });
+    const url = `${WX.api}?${params}`;
+    // cache: "no-store" הוא הנכון — לא רוצים תחזית מיושנת מהמטמון. אבל בחלק
+    // מגרסאות iOS הוא נכשל דווקא באפליקציה שהותקנה למסך הבית, אז אם הבקשה
+    // מתה ברמת הרשת מנסים שוב פעם אחת בלי האופציה הזאת.
+    let res;
+    try {
+      res = await fetch(url, { cache: "no-store" });
+    } catch (e) {
+      res = await fetch(url);
+    }
     if (!res.ok) throw new Error("HTTP " + res.status);
     const json = await res.json();
     const results = Array.isArray(json) ? json : [json];
@@ -1540,7 +1554,10 @@ function renderWeather() {
   const body = (WX.status === "out-of-range" && !WX.store)
     ? `<div class="empty-note">התחזית מכסה כ-${WX.horizonDays} ימים קדימה — היא תיפתח בעוד ${wxDaysUntilForecast()} ימים ותתמלא כאן.</div>`
     : (!WX.store && WX.status === "error")
-      ? `<div class="empty-note">לא הצלחנו לטעון תחזית — בדקו חיבור לאינטרנט ונסו "רענון".</div>`
+      // הסיבה מוצגת בקטן בכוונה: בלעדיה "לא הצלחנו" הוא מבוי סתום, ואי אפשר
+      // לדעת מרחוק אם זו רשת, שגיאת שרת או משהו אחר.
+      ? `<div class="empty-note">לא הצלחנו לטעון תחזית — בדקו חיבור לאינטרנט ונסו "רענון".${
+          WX.error ? `<br><span class="wx-err">${escapeHTML(WX.error)}</span>` : ""}</div>`
       : (!WX.store)
         ? `<div class="empty-note">טוען תחזית…</div>`
         : DAYS.map(weatherDayCardHTML).join("");
@@ -1822,6 +1839,9 @@ async function init() {
     if (document.visibilityState === "visible" && wxIsStale()) wxFetch();
   });
   window.addEventListener("online", () => wxFetch({ force: true }));
+  // iOS מקפיא אפליקציה שהותקנה למסך הבית ומשחזר אותה מה-bfcache, ואז
+  // visibilitychange לא תמיד נורה. pageshow כן.
+  window.addEventListener("pageshow", () => { if (wxIsStale()) wxFetch(); });
 }
 
 init();
