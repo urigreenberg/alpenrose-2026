@@ -19,6 +19,8 @@ let PODCASTS = {};      // פרקים לפי אזור
 let EXTRAS = [];         // פעילויות נוספות אפשריות, שלא נכנסו למסלול הקבוע
 let TRIP_INDEX = [];    // רשימת כל הטיולים, מ-trips/index.json
 let TRIP_DRAFT = null;   // meta של הטיוטה המקומית, כשהיא זו שמוצגת
+let TRIP_RAW = null;     // הטיול כפי שנטען, כולל התוכנית החלופית
+let PLAN_ID = "base";    // "base" = התוכנית המקורית, "alt" = החלופה
 let TRIP_ID = null;     // מזהה הטיול הפעיל — גם שם התיקייה וגם מרחב השמות באחסון
 
 /* ============================================================
@@ -265,7 +267,10 @@ async function loadTrip(id) {
     flightIn: trip.flightIn || null,
     flightOut: trip.flightOut || null
   };
-  DAYS = trip.days || [];
+  TRIP_RAW = trip;
+  // הבחירה נשמרת פר-טיול. אם אין תוכנית חלופית בקובץ, תמיד המקורית.
+  PLAN_ID = (trip.altPlan && storeGet(tripKey("plan")) === "alt") ? "alt" : "base";
+  DAYS = planDays();
   CHECKLIST = trip.checklist || [];
   GENERAL_TIPS = trip.tips || [];
   EXTRAS = trip.extras || [];
@@ -273,7 +278,9 @@ async function loadTrip(id) {
   migrateInfoLinks();
   markPodcastLeads();
 
-  WX.cacheKey = tripKey("weather");
+  // מפתח המטמון כולל את התוכנית: לכל תוכנית סט נקודות אחר, ומטמון של אחת
+  // מוגש לשנייה היה נראה כמו "אין תחזית" בלי שום הסבר.
+  WX.cacheKey = wxCacheKey();
   WX.store = null;
   WX.status = "idle";
 
@@ -282,12 +289,71 @@ async function loadTrip(id) {
   return trip;
 }
 
+/* ---------- תוכנית מקורית מול תוכנית חלופית ----------
+   אותן פעילויות בסדר אחר, לפי התחזית. זה מתג אמיתי ולא עמוד השוואה: DAYS
+   הוא המקור של המסלול, של "עכשיו" ושל נקודות התחזית, אז ברגע שבוחרים חלופה
+   כל האפליקציה עוברת איתה. אחרת "עכשיו" היה מראה את הפעילות של התוכנית
+   השנייה — בדיוק ברגע שסומכים עליו. */
+
+function planDays() {
+  if (PLAN_ID === "alt" && TRIP_RAW && TRIP_RAW.altPlan) return TRIP_RAW.altPlan.days || [];
+  return (TRIP_RAW && TRIP_RAW.days) || [];
+}
+
+function altPlan() { return TRIP_RAW && TRIP_RAW.altPlan ? TRIP_RAW.altPlan : null; }
+
+function wxCacheKey() { return tripKey(PLAN_ID === "alt" ? "weather:alt" : "weather"); }
+
+function setPlan(id) {
+  const next = (id === "alt" && altPlan()) ? "alt" : "base";
+  if (next === PLAN_ID) return;
+  PLAN_ID = next;
+  storeSet(tripKey("plan"), PLAN_ID);
+  DAYS = planDays();
+  markPodcastLeads();
+  // סט הנקודות השתנה, אז גם המטמון וגם מה שבזיכרון שייכים לתוכנית הקודמת.
+  WX.cacheKey = wxCacheKey();
+  WX.store = wxLoadCache();
+  WX.status = WX.store ? "ok" : "idle";
+  renderNow(); renderItinerary(); renderInfo(); renderWeather();
+  wxFetch({ force: true });
+}
+
+// מתג התוכניות, בראש לשונית "מסלול". מופיע רק כשיש באמת חלופה בקובץ.
+function planSwitchHTML() {
+  const alt = altPlan();
+  if (!alt) return "";
+  const on = PLAN_ID === "alt";
+  return `
+    <div class="plan-switch" role="group" aria-label="בחירת מסלול">
+      <button type="button" data-plan="base" class="${on ? "" : "is-on"}" aria-pressed="${!on}">התוכנית המקורית</button>
+      <button type="button" data-plan="alt" class="${on ? "is-on" : ""}" aria-pressed="${on}">${escapeHTML(alt.label)}</button>
+    </div>
+    ${on && alt.summary ? `<p class="plan-summary">${escapeHTML(alt.summary)}</p>` : ""}
+  `;
+}
+
+// סימון ב"עכשיו": אם רצה החלופה, שיהיה ברור בלי להיכנס ל"מסלול".
+function planBadgeHTML() {
+  const alt = altPlan();
+  if (!alt || PLAN_ID !== "alt") return "";
+  return `<div class="plan-badge">${ICON.swap} מוצג המסלול החלופי · ${escapeHTML(alt.label)}</div>`;
+}
+
+function bindPlanSwitch() {
+  $$("[data-plan]").forEach(btn => {
+    btn.addEventListener("click", () => setPlan(btn.dataset.plan));
+  });
+}
+
 /* פעם היו שני שדות קישור: infoLink (כרטיס המקום בגוגל) ו-infoUrl (האתר
    הרשמי), ו-infoLink גבר. עכשיו יש שדה אחד עם משמעות אחת. הקבצים שפורסמו
    כבר הומרו, אבל טיוטה שנשמרה במכשיר לפני ההמרה עדיין נושאת את הישן —
    בלי זה הקישור שלה היה נעלם בשקט. */
 function migrateInfoLinks() {
-  const items = [TRIP.base, ...DAYS.flatMap(d => d.blocks || []), ...EXTRAS];
+  const altDays = (TRIP_RAW && TRIP_RAW.altPlan && TRIP_RAW.altPlan.days) || [];
+  const allDays = [...((TRIP_RAW && TRIP_RAW.days) || []), ...altDays];
+  const items = [TRIP.base, ...allDays.flatMap(d => d.blocks || []), ...EXTRAS];
   for (const it of items) {
     if (!it) continue;
     if (it.infoLink) {
@@ -813,7 +879,9 @@ function renderItinerary() {
       <h2 class="mini-list-title" style="margin:0">המסלול המלא</h2>
       <button class="edit-btn" data-edit-current>${ICON.pencil} עריכה</button>
     </div>
+    ${planSwitchHTML()}
     ${html}`;
+  bindPlanSwitch();
 
   // שמירת מצב פתוח/סגור, כדי לשחזר אותו אחרי רינדור מחדש (למשל כשהתחזית מתעדכנת).
   $$("details.day").forEach(el => {
@@ -836,11 +904,13 @@ function renderNow() {
   const nowMinutes = now.getHours() * 60 + now.getMinutes();
 
   const view = $("#view-now");
+  const badge = planBadgeHTML();
 
   if (todayStr < TRIP.start) {
     const daysToGo = Math.ceil((new Date(TRIP.start + "T00:00:00") - new Date(todayStr + "T00:00:00")) / 86400000);
     const daysLabel = daysToGo === 1 ? "יום אחד" : daysToGo === 2 ? "יומיים" : `${daysToGo} ימים`;
     view.innerHTML = `
+      ${badge}
       <div class="countdown">
         <div class="num">${daysToGo}</div>
         <div class="label">${daysLabel} עד ${escapeHTML(TRIP.title)}</div>
@@ -877,7 +947,7 @@ function renderNow() {
   const dayIndex = DAYS.findIndex(d => d.date === todayStr);
   const day = DAYS[dayIndex];
   if (!day) {
-    view.innerHTML = `<div class="empty-note">לא נמצאה תוכנית להיום — בדקו בלשונית "מסלול".</div>`;
+    view.innerHTML = badge + `<div class="empty-note">לא נמצאה תוכנית להיום — בדקו בלשונית "מסלול".</div>`;
     return;
   }
 
@@ -970,6 +1040,7 @@ function renderNow() {
     : "";
 
   view.innerHTML = `
+    ${badge}
     ${heroHTML}
     ${currentHTML}
     ${restHTML ? `<h2 class="mini-list-title">המשך היום</h2><div class="card">${restHTML}</div>` : ""}
