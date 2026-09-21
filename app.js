@@ -337,7 +337,8 @@ function planSwitchHTML() {
 function planBadgeHTML() {
   const alt = altPlan();
   if (!alt || PLAN_ID !== "alt") return "";
-  return `<div class="plan-badge">${ICON.swap} מוצג המסלול החלופי · ${escapeHTML(alt.label)}</div>`;
+  // התווית עצמה כבר אומרת שזו החלופה — חזרה עליה כאן רק מכפילה מילים
+  return `<div class="plan-badge">${ICON.swap} מוצג: ${escapeHTML(alt.label)}</div>`;
 }
 
 function bindPlanSwitch() {
