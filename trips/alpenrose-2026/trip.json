@@ -77,10 +77,6 @@
         "lat": 48.043024,
         "lng": 10.5916919
       },
-      "parking": {
-        "lat": 48.0435821,
-        "lng": 10.5903281
-      },
       "image": {
         "file": "images/allg-u-skyline-park-mua71nb0.jpg",
         "credit": "נאספה מהרשת · לא נשמר המקור"
@@ -100,10 +96,6 @@
       "coords": {
         "lat": 47.8116719,
         "lng": 10.9193191
-      },
-      "parking": {
-        "lat": 47.8116964,
-        "lng": 10.9180494
       }
     },
     {
@@ -125,10 +117,6 @@
       "coords": {
         "lat": 47.4073844,
         "lng": 10.9284499
-      },
-      "parking": {
-        "lat": 47.4069409,
-        "lng": 10.928472
       }
     },
     {
@@ -148,16 +136,15 @@
       "tips": [
         {
           "text": "יש קטעים תלולים בגן החיות — עדיף להיצמד לשביל הנגיש."
+        },
+        {
+          "text": "החניה בגן בתשלום ויש בה מעט מאוד מקומות. חלופה: להחנות במרכז אינסברוק ולעלות ברכבל Hungerburgbahn — קיים כרטיס משולב של חניה, רכבל וכניסה."
         }
       ],
       "mapsQuery": "Alpenzoo Innsbruck",
       "coords": {
         "lat": 47.2817268,
         "lng": 11.3975706
-      },
-      "parking": {
-        "lat": 47.2810983,
-        "lng": 11.3992293
       }
     },
     {
@@ -179,10 +166,6 @@
       "coords": {
         "lat": 47.502264,
         "lng": 10.279404
-      },
-      "parking": {
-        "lat": 47.5034708,
-        "lng": 10.2780826
       },
       "image": {
         "file": "images/wonnemar-zvnthvpn-mua72xww.jpg",
@@ -208,10 +191,6 @@
       "coords": {
         "lat": 47.5986352,
         "lng": 10.4114452
-      },
-      "parking": {
-        "lat": 47.5988967,
-        "lng": 10.4135812
       },
       "image": {
         "file": "images/allg-ulino-vvrtak-mua738xz.jpg",
@@ -242,10 +221,8 @@
         "lat": 47.4582467,
         "lng": 10.9708444
       },
-      "parking": {
-        "lat": 47.4579449,
-        "lng": 10.98996
-      }
+      "parkingQuery": "Parkplatz Eibsee, Grainau",
+      "parkingNote": "הניווט מוביל ל-Parkplatz Eibsee ולא לאגם עצמו. בתשלום, 20 € ל-4 שעות (11 € הנחה לנוסעי הרכבל), פתוח 05:00–22:00, ומשם כ-100 מ׳ הליכה לאגם. כשהחניון מתמלא סוגרים את הכניסה — כדאי מוקדם."
     },
     {
       "title": "פנורמבד לרמוס (בריכה) (Panoramabad Lermoos)",
@@ -270,10 +247,6 @@
       "coords": {
         "lat": 47.4070363,
         "lng": 10.8746142
-      },
-      "parking": {
-        "lat": 47.4060949,
-        "lng": 10.874309
       }
     },
     {
@@ -298,10 +271,6 @@
       "coords": {
         "lat": 47.3737426,
         "lng": 10.8914345
-      },
-      "parking": {
-        "lat": 47.3743073,
-        "lng": 10.8914824
       },
       "image": {
         "file": "images/mslvl-kytz-mzchlt-bbbrvyr-sommerrodelbahn-biberwier-mua7471c.jpg",
@@ -332,10 +301,6 @@
         "lat": 47.5578108,
         "lng": 10.6928012
       },
-      "parking": {
-        "lat": 47.5580308,
-        "lng": 10.6934239
-      },
       "image": {
         "file": "images/ziegelwies.jpg",
         "credit": "Llez",
@@ -362,10 +327,6 @@
       "coords": {
         "lat": 47.5606205,
         "lng": 10.1386342
-      },
-      "parking": {
-        "lat": 47.5604412,
-        "lng": 10.1365381
       },
       "image": {
         "file": "images/alpsee-bergwelt-aymmnshtadt-rkbt-hrym-chlkh-vnvf-mua752i7.jpg",
@@ -448,10 +409,6 @@
         }
       ],
       "mapsQuery": "Tiroler Zugspitzbahn Ehrwald Talstation",
-      "parking": {
-        "lat": 47.427147,
-        "lng": 10.9420411
-      },
       "image": {
         "file": "images/rkbl-lpsgh-mvzyavn-faszination-zugspitze-avptzyvnly-mu9wjh65.jpg",
         "credit": "נאספה מהרשת · לא נשמר המקור"
@@ -484,10 +441,6 @@
             }
           ],
           "mapsQuery": "REWE Terminalstraße Mitte 18 Flughafen München",
-          "parking": {
-            "lat": 48.3543807,
-            "lng": 11.7760634
-          },
           "image": {
             "file": "images/nchyth-aysvf-rkbym-vknyvt-b-rewe-mu9v4i3j.jpg",
             "credit": "נאספה מהרשת · לא נשמר המקור"
@@ -535,13 +488,12 @@
           "tips": [
             {
               "text": "בהריון: להיזהר בעלייה ובירידה מהסירה."
+            },
+            {
+              "text": "החניה בכניסה לקמפינג, ליד המזח: 6 € ליום, אפשר גם בכרטיס אשראי."
             }
           ],
-          "mapsQuery": "Fischer am See Heiterwang",
-          "parking": {
-            "lat": 47.4546316,
-            "lng": 10.7584835
-          }
+          "mapsQuery": "Fischer am See Heiterwang"
         },
         {
           "start": "11:30",
@@ -604,10 +556,6 @@
           "wxPlace": "Imst, Austria",
           "infoUrl": "https://www.imst.at/en/hoch-imst/family-paradise-hoch-imst.html",
           "mapsQuery": "UAlm Hoch-Imst Imst",
-          "parking": {
-            "lat": 47.2410897,
-            "lng": 10.7238266
-          },
           "drive": {
             "time": "כ-45 דקות",
             "dist": "",
@@ -616,7 +564,9 @@
           "image": {
             "file": "images/gvndvlh-ualm-vmshchkym-btchnh-hamtzayt-hoch-imst-mu9w87j9.jpg",
             "credit": "נאספה מהרשת · לא נשמר המקור"
-          }
+          },
+          "parkingQuery": "Imster Bergbahnen Talstation, Imst",
+          "parkingNote": "הניווט מוביל לתחנת העמק של Imster Bergbahnen, ולא ל-UAlm שבאמצע ההר — לשם עולים בגונדולה. החניה בתחנת העמק חינם."
         },
         {
           "start": "11:45",
@@ -642,10 +592,8 @@
             }
           ],
           "mapsQuery": "Alpine Coaster Hoch Imst",
-          "parking": {
-            "lat": 47.2410897,
-            "lng": 10.7238266
-          }
+          "parkingQuery": "Imster Bergbahnen Talstation, Imst",
+          "parkingNote": "אותה חניה של הגונדולה — תחנת העמק, חינם. המסלול מתחיל למעלה, יורדים אליה בסוף."
         }
       ],
       "returnLeg": {
@@ -688,10 +636,6 @@
             }
           ],
           "mapsQuery": "Märchenwald Isartal Wolfratshausen",
-          "parking": {
-            "lat": 47.9090188,
-            "lng": 11.4376151
-          },
           "image": {
             "file": "images/m-rchenwald-isartal-park-agdvt-byar-mua6xdf1.jpg",
             "credit": "נאספה מהרשת · לא נשמר המקור"
@@ -739,13 +683,12 @@
           "tips": [
             {
               "text": "המסלול מוגדר רשמית כנגיש לעגלות. בהריון: הליכה קלה ומישורית ברובה."
+            },
+            {
+              "text": "החניה בתחנת העמק חינם לנוסעי הרכבל."
             }
           ],
-          "mapsQuery": "Ehrwalder Almbahn Talstation Ehrwald",
-          "parking": {
-            "lat": 47.3883183,
-            "lng": 10.9384442
-          }
+          "mapsQuery": "Ehrwalder Almbahn Talstation Ehrwald"
         },
         {
           "start": "19:00",
@@ -865,10 +808,8 @@
             }
           ],
           "mapsQuery": "Naturerlebnisweg Mitteregg Berwang",
-          "parking": {
-            "lat": 47.381025,
-            "lng": 10.7289836
-          }
+          "parkingQuery": "Jausenstation Wechner, Mitteregg, Berwang",
+          "parkingNote": "הניווט מוביל ל-Jausenstation Wechner, שממנה מתחיל השביל. החניה חינם אבל קטנה מאוד — כדאי להגיע מוקדם; הזמנת שולחן במסעדה שומרת גם מקום חניה."
         }
       ],
       "returnLeg": {
@@ -924,16 +865,14 @@
             }
           ],
           "mapsQuery": "Burgenwelt Ehrenberg Reutte",
-          "parking": {
-            "lat": 47.4641747,
-            "lng": 10.7193955
-          },
           "drive": {
             "time": "כ-20 דקות",
             "dist": "כ-18 ק\"מ",
             "from": "מהמלון",
             "auto": true
-          }
+          },
+          "parkingQuery": "Parkplatz P1 Burgenwelt Ehrenberg, Reutte",
+          "parkingNote": "הניווט מוביל ל-Parkplatz P1 — זו החניה שהאתר הרשמי מבקש להקליד בניווט. בתשלום, למטה ב-Klause מתחת לגשר התלוי; משם המעלית המשופעת למעלה."
         },
         {
           "start": "12:40",
@@ -960,10 +899,6 @@
             }
           ],
           "mapsQuery": "FOC Füssen Outlet Center",
-          "parking": {
-            "lat": 47.5767012,
-            "lng": 10.6734539
-          },
           "image": {
             "file": "images/achh-tz-knyvt-b-foc-f-ssen-outlet-center-lnshym-mua6w0u2.jpg",
             "credit": "נאספה מהרשת · לא נשמר המקור"

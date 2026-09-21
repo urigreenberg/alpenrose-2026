@@ -57,6 +57,14 @@
   </button>
 </nav>
 
+<!-- תמונה במסך מלא. בכרטיס התמונה חתוכה כדי לשמור על גובה אחיד,
+     וכאן רואים אותה שלמה (ר' openLightbox ב-app.js). -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="תמונה" hidden>
+  <button class="lightbox-close" id="lightboxClose" type="button" aria-label="סגירה"></button>
+  <img class="lightbox-img" id="lightboxImg" alt="">
+  <p class="lightbox-credit" id="lightboxCredit"></p>
+</div>
+
 <!-- גיליון בחירת הטיול. נשאר ריק עד הפתיחה הראשונה. -->
 <div class="sheet-backdrop" id="tripSheet" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-label="הטיולים שלנו" id="tripSheetBody"></div>

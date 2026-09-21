@@ -44,6 +44,8 @@ const ICON = {
   refresh: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11A8 8 0 0 0 6.3 6.3L4 8.6"/><path d="M4 4v4.6h4.6"/><path d="M4 13a8 8 0 0 0 13.7 4.7L20 15.4"/><path d="M20 20v-4.6h-4.6"/></svg>`,
   drop: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z"/></svg>`,
   waze: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 4 10 7-10 7 2.5-7L9 4Z" stroke-linejoin="round"/></svg>`,
+  search: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>`,
+  close: `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>`,
   plus: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>`,
   trash: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9.5 7V5.5a1.5 1.5 0 0 1 1.5-1.5h2a1.5 1.5 0 0 1 1.5 1.5V7"/><path d="M6.5 7l.8 12a2 2 0 0 0 2 1.9h5.4a2 2 0 0 0 2-1.9L17.5 7"/></svg>`,
   upload: `<svg class="icon icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V9"/><path d="m8 13 4-4 4 4"/><path d="M5 4h14"/></svg>`,
@@ -68,21 +70,26 @@ function mapLink(item) {
 }
 
 /* יעד הניווט ב-Waze — לא בהכרח אותו מקום כמו צ'יפ המפה, ובכוונה.
-   בנהיגה רוצים להגיע לחניון; חיפוש לפי שם מביא את מרכז המקום או את
-   הכניסה, ולפעמים אי אפשר להגיע לשם ברכב בכלל (אייבזה, אהרנברג).
-   אחרי שחונים, צ'יפ המפה הוא זה שמוביל למקום עצמו ברגל.
-   מחזיר גם parking, כדי שהתווית תוכל לומר לאן באמת שולחים. */
+   בנהיגה רוצים להגיע לחניון; אחרי שחונים, צ'יפ המפה הוא זה שמוביל למקום
+   עצמו ברגל.
+
+   הכול לפי שם, אף פעם לא לפי קואורדינטה. קואורדינטה נכונה אמנם חד-משמעית,
+   אבל קואורדינטה שגויה נכשלת בשקט ובביטחון מלא — נקודת החניה של אייבזה
+   ישבה 1.4 ק"מ מהחניה האמיתית ואף אחד לא ידע. שם אפשר לאמת מול האתר הרשמי
+   של המקום, ולכן parkingQuery הוא תמיד שם מלא + יישוב ולא שם גנרי: הטיול
+   יושב על גבול אוסטריה-גרמניה, ו-"Märchenwald" לבדו הוא שני מקומות שונים
+   בטיול הזה.
+
+   parkingQuery נכתב ידנית ב-trip.json רק כשיעד הנהיגה אינו המקום עצמו,
+   ואז חובה גם parkingNote שמסביר לאן שולחים ולמה (ר' parkingNoteHTML).
+   מחזיר parking, כדי שהתווית תוכל לומר לאן באמת שולחים. */
 function navTarget(item) {
-  const p = item && item.parking;
-  if (p && p.lat != null && p.lng != null) {
-    return { href: `https://waze.com/ul?ll=${p.lat}%2C${p.lng}&navigate=yes&zoom=17`, parking: true };
+  const park = item && item.parkingQuery;
+  if (park) {
+    return { href: "https://waze.com/ul?q=" + encodeURIComponent(park) + "&navigate=yes", parking: true };
   }
   const q = placeQuery(item);
   if (q) return { href: "https://waze.com/ul?q=" + encodeURIComponent(q) + "&navigate=yes", parking: false };
-  const c = item && item.coords;
-  if (c && c.lat != null && c.lng != null) {
-    return { href: `https://waze.com/ul?ll=${c.lat}%2C${c.lng}&navigate=yes&zoom=17`, parking: false };
-  }
   return null;
 }
 
@@ -99,9 +106,12 @@ function wazeChipHTML(item) {
   return `<a class="chip waze" href="${t.href}" target="_blank" rel="noopener">${ICON.waze} ${t.parking ? "Waze · חניה" : "Waze"}</a>`;
 }
 
-// חיפוש גוגל לפי שם המקום — פותח את כרטיס המקום (ביקורות, אתר, שעות, תמונות)
+// חיפוש גוגל לפי שם המקום — ביקורות, אתר, שעות ותמונות במקום אחד.
+// דרך placeQuery ולא דרך mapsQuery ישירות: מקום בלי mapsQuery היה מייצר
+// כאן קישור לחיפוש המילה "undefined".
 function searchLink(item) {
-  return "https://www.google.com/search?q=" + encodeURIComponent(item.mapsQuery);
+  const q = placeQuery(item);
+  return q ? "https://www.google.com/search?q=" + encodeURIComponent(q) : null;
 }
 
 // תחזית Google לאותו יישוב — כרטיס מזג האוויר של גוגל, לצד התחזית שבאפליקציה.
@@ -279,9 +289,16 @@ async function loadTrip(id) {
 function migrateInfoLinks() {
   const items = [TRIP.base, ...DAYS.flatMap(d => d.blocks || []), ...EXTRAS];
   for (const it of items) {
-    if (!it || !it.infoLink) continue;
-    if (!it.infoUrl) it.infoUrl = it.infoLink;
-    delete it.infoLink;
+    if (!it) continue;
+    if (it.infoLink) {
+      if (!it.infoUrl) it.infoUrl = it.infoLink;
+      delete it.infoLink;
+    }
+    // parking היה קואורדינטה של חניון, וזה בוטל לטובת parkingQuery לפי שם
+    // (ר' navTarget). אי אפשר להמיר קואורדינטה לשם, אז פשוט מוחקים —
+    // הניווט נופל לשם המקום, שזו ממילא ההתנהגות הרצויה. בלי זה טיוטה
+    // שנשמרה במכשיר לפני השינוי הייתה ממשיכה לשלוח לקואורדינטה הישנה.
+    delete it.parking;
   }
 }
 
@@ -360,19 +377,29 @@ function timeLabel(block) {
   return "";
 }
 
+/* כשוויז לא שולח למקום עצמו אלא לחניה, הכרטיס אומר את זה במפורש — לאן
+   הניווט לוקח, כמה עולה, ואיך ממשיכים משם. בלי זה צ'יפ שכתוב עליו "חניה"
+   הוא הבטחה בלי כיסוי, ואי אפשר לדעת מהמכונית אם הניווט טועה או צודק. */
+function parkingNoteHTML(block) {
+  if (!block.parkingQuery || !block.parkingNote) return "";
+  return `<p class="park-note">${ICON.car} ${escapeHTML(block.parkingNote)}</p>`;
+}
+
 function chipsHTML(block) {
   const chips = [];
+  const hasPlace = !!placeQuery(block);
   if (block.price) chips.push(`<span class="chip">${escapeHTML(block.price)}</span>`);
   if (block.hours) chips.push(`<span class="chip">${ICON.clock} ${escapeHTML(block.hours)}</span>`);
-  if (block.address || block.parking) chips.push(`<a class="chip map" href="${mapLink(block)}" target="_blank" rel="noopener">${ICON.pin} מפה</a>`);
-  if (block.address || block.parking) chips.push(wazeChipHTML(block));
+  if (hasPlace) chips.push(`<a class="chip map" href="${escapeHTML(mapLink(block))}" target="_blank" rel="noopener">${ICON.pin} מפה</a>`);
+  if (hasPlace) chips.push(wazeChipHTML(block));
+  const gHref = searchLink(block);
+  if (gHref) chips.push(`<a class="chip search" href="${escapeHTML(gHref)}" target="_blank" rel="noopener">${ICON.search} גוגל</a>`);
   // האתר הרשמי של הפעילות קודם; חיפוש גוגל רק כשאין אתר, כדי שהצ'יפ לא
   // ייעלם. קודם היה הפוך בפועל — כל מקום עם mapsQuery קיבל חיפוש גוגל,
   // וה-infoUrl השמור פשוט לא נפתח אף פעם.
-  const infoHref = block.infoUrl || (block.mapsQuery ? searchLink(block) : null);
-  if (infoHref) chips.push(`<a class="chip info" href="${escapeHTML(infoHref)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
-  if (!chips.length) return "";
-  return `<div class="chips">${chips.join("")}</div>`;
+  if (block.infoUrl) chips.push(`<a class="chip info" href="${escapeHTML(block.infoUrl)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
+  if (!chips.length) return parkingNoteHTML(block);
+  return `<div class="chips">${chips.join("")}</div>${parkingNoteHTML(block)}`;
 }
 
 /* ============================================================
@@ -647,10 +674,10 @@ function imageHTML(image, item) {
   const img = pendingLocal
     ? `<img class="stop-img" data-pending-image="${escapeHTML(image.file)}" alt="" loading="lazy">`
     : `<img class="stop-img" src="${image.pending && image.thumb ? image.thumb : tripAsset(image.file)}" alt="" loading="lazy" onerror="this.style.display='none'">`;
-  const linked = item && item.mapsQuery
-    ? `<a class="stop-img-link" href="${mapLink(item)}" target="_blank" rel="noopener">${img}</a>`
-    : img;
-  return `${linked}${credit}`;
+  // התמונה בכרטיס חתוכה (object-fit: cover ב-170px), אז לחיצה עליה פותחת
+  // אותה מלאה — ר' openLightbox. פעם הלחיצה פתחה את גוגל מפות, אבל הצ'יפ
+  // "מפה" יושב מיד מתחת ועושה בדיוק את זה.
+  return `${img}${credit}`;
 }
 
 // תמונה שהועלתה מהמכשיר (image.localAsset) מוצגת בלי src בבנייה הראשונית
@@ -1066,6 +1093,7 @@ function renderInfo() {
         <div class="chips">
           <a class="chip map" href="${mapLink(TRIP.base)}" target="_blank" rel="noopener">${ICON.pin} פתיחה במפות</a>
           ${wazeChipHTML(TRIP.base)}
+          <a class="chip search" href="${escapeHTML(searchLink(TRIP.base))}" target="_blank" rel="noopener">${ICON.search} גוגל</a>
         </div>
       </div>
     </div>
@@ -1676,10 +1704,54 @@ function bindTripSheet() {
   });
 }
 
+/* ============================================================
+   תמונה במסך מלא
+   בכרטיס התמונה חתוכה (object-fit: cover) כדי שכל הכרטיסים יהיו באותו
+   גובה; כאן רואים אותה שלמה. האזנה אחת מואצלת על document ולא מאזין לכל
+   תמונה, כי התמונות נבנות מחדש בכל רינדור בארבעה מסלולים שונים (כרטיס
+   תחנה, "עכשיו", אפשרויות נוספות, כרטיס הבסיס).
+   ============================================================ */
+
+function openLightbox(img) {
+  // קוראים את ה-src ברגע הלחיצה ולא ברגע הרינדור: תמונה שהועלתה מהמכשיר
+  // ועוד לא פורסמה מקבלת src אסינכרונית מ-IndexedDB (hydratePendingImages),
+  // והיא הייתה נפתחת ריקה.
+  if (!img.currentSrc && !img.src) return;
+  const credit = img.nextElementSibling;
+  const box = $("#lightbox");
+  $("#lightboxImg").src = img.currentSrc || img.src;
+  $("#lightboxCredit").textContent =
+    credit && credit.classList.contains("stop-credit") ? credit.textContent.trim() : "";
+  box.hidden = false;
+  document.body.classList.add("lightbox-open");
+}
+
+function closeLightbox() {
+  const box = $("#lightbox");
+  if (!box || box.hidden) return;
+  box.hidden = true;
+  $("#lightboxImg").removeAttribute("src");
+  document.body.classList.remove("lightbox-open");
+}
+
+function bindLightbox() {
+  document.addEventListener("click", e => {
+    const img = e.target.closest(".stop-img");
+    if (img) { openLightbox(img); return; }
+  });
+  // לחיצה על הרקע סוגרת, לחיצה על התמונה עצמה לא — אחרת אי אפשר להתבונן בה.
+  $("#lightbox").addEventListener("click", e => {
+    if (e.target.id !== "lightboxImg") closeLightbox();
+  });
+  $("#lightboxClose").innerHTML = ICON.close;
+  document.addEventListener("keydown", e => { if (e.key === "Escape") closeLightbox(); });
+}
+
 async function init() {
   $$(".tab-icon").forEach(el => { el.innerHTML = ICON[el.dataset.icon]; });
   migrateLegacyStorage();
   bindTripSheet();
+  bindLightbox();
 
   try {
     const index = await fetchJSON("trips/index.json").catch(() => ({ trips: [] }));
