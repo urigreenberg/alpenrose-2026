@@ -169,7 +169,7 @@ const STORE_PREFIX = "tp:";
 
 // חותמת גרסה, מוצגת בלשונית "מידע". מעלים אותה בכל דחיפה — כשמישהו אומר
 // "אצלי זה לא עובד", זו הדרך לדעת אם הוא בכלל מריץ את הקוד הנוכחי.
-const APP_BUILD = "2026-09-21.9";
+const APP_BUILD = "2026-09-22.1";
 
 // ה-Service Worker מגיש את המעטפת מהמטמון ומעדכן ברקע; כשהוא מגלה שהקוד
 // השתנה, הדף הזה כבר רץ עם הישן — אז הוא שולח הודעה ומציעים רענון.
@@ -1092,26 +1092,60 @@ const BASE_LABELS = { hotel: "המלון", apartment: "הדירה", house: "הב
 
 // טיסות מוצגות רק אם הן קיימות בקובץ הטיול: לטיול בארץ אין נחיתה והמראה,
 // והקוד הישן קרס על TRIP.flightIn.date כשהשדה חסר.
+/* קישור למצב הטיסה לפי מספר הטיסה. דרך חיפוש גוגל, שמציג כרטיס סטטוס חי —
+   ולא דרך אתר מעקב ספציפי, שאת מבנה הכתובת שלו אי אפשר לאמת מכאן. שדה
+   statusUrl בקובץ הטיול גובר, למי שרוצה לקשר להזמנה או לצ'ק-אין. */
+function flightStatusLink(f) {
+  if (f.statusUrl) return f.statusUrl;
+  if (!f.flightNo) return null;
+  return "https://www.google.com/search?q=" + encodeURIComponent(f.flightNo + " flight status");
+}
+
+/* כרטיס טיסה אחד, כציר זמן אנכי: שעה, מקום, ובאמצע משך הטיסה.
+   duration מגיע מהנתונים ולא מחושב כאן בכוונה — חיסור פשוט של השעות היה נותן
+   3:05 לטיסת ההלוך במקום 4:05, כי המוצא והיעד באזורי זמן שונים, והקובץ לא
+   מחזיק אזורי זמן. */
+function flightCardHTML(f, label) {
+  if (!f) return "";
+  const nextDay = f.arrDate && f.arrDate !== f.date
+    ? ` <span class="flight-nextday">(${dayMonth(f.arrDate)})</span>` : "";
+  const status = flightStatusLink(f);
+  const stop = (time, place, extra = "") => `
+    <div class="flight-stop">
+      <span class="flight-time">${escapeHTML(time || "")}${extra}</span>
+      <span class="flight-place">${escapeHTML(place || "")}</span>
+    </div>`;
+  return `
+    <div class="card flight-card">
+      <div class="flight-head">
+        <div class="flight-id">
+          <span class="flight-label">${escapeHTML(label)}</span>
+          ${f.flightNo ? `<span class="flight-no">${escapeHTML(f.flightNo)}</span>` : ""}
+          <span class="flight-date">${hebWeekday(f.date)}, ${dayMonth(f.date)}</span>
+        </div>
+        ${status ? `<a class="chip" href="${escapeHTML(status)}" target="_blank" rel="noopener">${ICON.link} מצב הטיסה</a>` : ""}
+      </div>
+      <div class="flight-route">
+        ${stop(f.depTime, f.from)}
+        <div class="flight-dur">${ICON.clock}${f.duration ? `<span>${escapeHTML(f.duration)}</span>` : ""}</div>
+        ${stop(f.arrTime, f.to, nextDay)}
+      </div>
+      ${f.note ? `<div class="tip">${ICON.bulb}<span>${escapeHTML(f.note)}</span></div>` : ""}
+    </div>
+  `;
+}
+
 function flightsSectionHTML() {
   const { flightIn, flightOut } = TRIP;
   if (!flightIn && !flightOut) return "";
-  const row = (f, label) => {
-    if (!f) return "";
-    const nextDay = f.arrDate && f.arrDate !== f.date ? ` (${dayMonth(f.arrDate)})` : "";
-    return `
-      <div class="info-row"><span class="k">${label} — ${hebWeekday(f.date)}, ${dayMonth(f.date)}</span><span class="v">${escapeHTML(f.flightNo || "")}</span></div>
-      <div class="info-row"><span class="k">${escapeHTML(f.from || "")} ${escapeHTML(f.depTime || "")}</span><span class="v">${escapeHTML(f.to || "")} ${escapeHTML(f.arrTime || "")}${nextDay}</span></div>
-    `;
-  };
-  const note = (flightOut && flightOut.note) || (flightIn && flightIn.note);
+  // כל טיסה מציגה את ההערה שלה. קודם הוצגה הערה אחת בלבד
+  // (flightOut.note || flightIn.note), ולכן ההערה של טיסת ההלוך — שבה כתוב
+  // כמה זמן לוקחת הנסיעה מהשדה למלון — לא הופיעה על המסך אף פעם.
   return `
     <div class="info-section">
       <h2>טיסות</h2>
-      <div class="card">
-        ${row(flightIn, "נחיתה")}
-        ${row(flightOut, "טיסת חזרה")}
-        ${note ? `<div class="tip">${ICON.bulb}<span>${escapeHTML(note)}</span></div>` : ""}
-      </div>
+      ${flightCardHTML(flightIn, "טיסת הלוך")}
+      ${flightCardHTML(flightOut, "טיסת חזרה")}
     </div>
   `;
 }

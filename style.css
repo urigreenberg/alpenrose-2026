@@ -1299,3 +1299,65 @@ body.lightbox-open { overflow: hidden; }
   font-weight: 600;
 }
 .plan-badge .icon { flex: none; }
+
+/* ---- כרטיס טיסה ----
+   ציר זמן אנכי: שעה, מקום, ובאמצע משך הטיסה. */
+.flight-card { padding: 14px 16px; }
+.flight-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.flight-id { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; }
+.flight-label { font-size: 14.5px; font-weight: 700; }
+.flight-no {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  direction: ltr;
+}
+.flight-date { width: 100%; color: var(--text-muted); font-size: 12.5px; }
+.flight-head .chip { flex: none; }
+
+.flight-route { padding: 12px 0 2px; }
+.flight-stop { display: flex; align-items: baseline; gap: 12px; }
+.flight-time {
+  flex: none;
+  min-width: 58px;
+  font-size: 19px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.01em;
+}
+.flight-nextday { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+.flight-place { color: var(--text-muted); font-size: 14px; line-height: 1.4; }
+/* הקו שבין ההמראה לנחיתה, עם משך הטיסה עליו */
+.flight-dur {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0;
+  /* מיושר לעמודת השעות: 58px רוחב + 12px רווח, אז מרכז העמודה ~29px */
+  padding-inline-start: 46px;
+  min-height: 26px;
+  color: var(--text-faint);
+  font-size: 12.5px;
+  position: relative;
+}
+.flight-dur::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 28px;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  border-radius: 1px;
+  background: var(--border);
+}
+.flight-dur .icon { flex: none; }
