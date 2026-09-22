@@ -1092,13 +1092,22 @@ const BASE_LABELS = { hotel: "המלון", apartment: "הדירה", house: "הב
 
 // טיסות מוצגות רק אם הן קיימות בקובץ הטיול: לטיול בארץ אין נחיתה והמראה,
 // והקוד הישן קרס על TRIP.flightIn.date כשהשדה חסר.
-/* קישור למצב הטיסה לפי מספר הטיסה. דרך חיפוש גוגל, שמציג כרטיס סטטוס חי —
-   ולא דרך אתר מעקב ספציפי, שאת מבנה הכתובת שלו אי אפשר לאמת מכאן. שדה
-   statusUrl בקובץ הטיול גובר, למי שרוצה לקשר להזמנה או לצ'ק-אין. */
-function flightStatusLink(f) {
-  if (f.statusUrl) return f.statusUrl;
-  if (!f.flightNo) return null;
-  return "https://www.google.com/search?q=" + encodeURIComponent(f.flightNo + " flight status");
+/* קישורי מעקב וסטטיסטיקה של טיסה. מגיעים מ-links בקובץ הטיול — מערך של
+   { label, url } — כי אתרי המעקב נבדלים זה מזה במה שהם נותנים, ואת מבנה
+   הכתובות שלהם אי אפשר לאמת מכאן; הן נכנסות כפי שנמסרו ולא מנוחשות.
+
+   בלי links נשארת ברירת המחדל: חיפוש גוגל לפי מספר הטיסה, שמציג כרטיס סטטוס
+   חי. כך טיול שאין בו את השדה החדש ממשיך לעבוד. */
+function flightLinks(f) {
+  const given = Array.isArray(f.links)
+    ? f.links.filter(l => l && l.url && l.label)   // רשומה חלקית לא תייצר צ'יפ ריק
+    : [];
+  if (given.length) return given;
+  if (!f.flightNo) return [];
+  return [{
+    label: "מצב הטיסה",
+    url: "https://www.google.com/search?q=" + encodeURIComponent(f.flightNo + " flight status")
+  }];
 }
 
 /* כרטיס טיסה אחד, כציר זמן אנכי: שעה, מקום, ובאמצע משך הטיסה.
@@ -1109,7 +1118,7 @@ function flightCardHTML(f, label) {
   if (!f) return "";
   const nextDay = f.arrDate && f.arrDate !== f.date
     ? ` <span class="flight-nextday">(${dayMonth(f.arrDate)})</span>` : "";
-  const status = flightStatusLink(f);
+  const links = flightLinks(f);
   const stop = (time, place, extra = "") => `
     <div class="flight-stop">
       <span class="flight-time">${escapeHTML(time || "")}${extra}</span>
@@ -1123,13 +1132,20 @@ function flightCardHTML(f, label) {
           ${f.flightNo ? `<span class="flight-no">${escapeHTML(f.flightNo)}</span>` : ""}
           <span class="flight-date">${hebWeekday(f.date)}, ${dayMonth(f.date)}</span>
         </div>
-        ${status ? `<a class="chip" href="${escapeHTML(status)}" target="_blank" rel="noopener">${ICON.link} מצב הטיסה</a>` : ""}
       </div>
       <div class="flight-route">
         ${stop(f.depTime, f.from)}
         <div class="flight-dur">${ICON.clock}${f.duration ? `<span>${escapeHTML(f.duration)}</span>` : ""}</div>
         ${stop(f.arrTime, f.to, nextDay)}
       </div>
+      ${links.length ? `
+        <div class="flight-links">
+          <span class="flight-links-label">מעקב וסטטיסטיקה</span>
+          <div class="chips">${links.map(l =>
+            `<a class="chip" href="${escapeHTML(l.url)}" target="_blank" rel="noopener">${ICON.link} ${escapeHTML(l.label)}</a>`
+          ).join("")}</div>
+          ${f.linksNote ? `<p class="flight-links-note">${escapeHTML(f.linksNote)}</p>` : ""}
+        </div>` : ""}
       ${f.note ? `<div class="tip">${ICON.bulb}<span>${escapeHTML(f.note)}</span></div>` : ""}
     </div>
   `;

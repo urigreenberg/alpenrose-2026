@@ -1361,3 +1361,27 @@ body.lightbox-open { overflow: hidden; }
   background: var(--border);
 }
 .flight-dur .icon { flex: none; }
+
+/* שורת קישורי המעקב בכרטיס הטיסה. מתחת למסלול ולא לצד הכותרת, כי ארבעה
+   צ'יפים לא נכנסים שם ברוחב של טלפון. */
+.flight-links {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.flight-links-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+.flight-links .chips { margin: 0; }
+
+/* הסתייגות ששייכת לקישורים עצמם — למשל איך לקרוא את הסטטיסטיקה שמאחוריהם */
+.flight-links-note {
+  margin: 8px 0 0;
+  color: var(--text-faint);
+  font-size: 11.5px;
+  line-height: 1.5;
+}

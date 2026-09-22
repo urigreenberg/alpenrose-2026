@@ -27,7 +27,21 @@
     "arrTime": "20:35",
     "arrDate": "2026-09-22",
     "note": "משם כשעה ו-45 דקות עד שעתיים נסיעה ללרמוס, תלוי באיסוף שלושת הרכבים השכורים.",
-    "duration": "4:05 שעות"
+    "duration": "4:05 שעות",
+    "links": [
+      {
+        "label": "FlightAware",
+        "url": "https://www.flightaware.com/live/flight/ELY253"
+      },
+      {
+        "label": "Flightradar24",
+        "url": "https://www.flightradar24.com/data/flights/ly253"
+      },
+      {
+        "label": "נחיתות במינכן",
+        "url": "https://www.munich-airport.com/flight-search-260587"
+      }
+    ]
   },
   "flightOut": {
     "date": "2026-09-29",
@@ -38,7 +52,26 @@
     "arrTime": "02:30",
     "arrDate": "2026-09-30",
     "note": "לילה ארוך עם שישה ילדים — נחיתה ב-02:30 ב-30 בספטמבר. יוצאים מהמלון בסביבות 15:30–16:00, עם מרווח לתדלוק, החזרת שלושת הרכבים השכורים והמזוודות.",
-    "duration": "3:45 שעות"
+    "duration": "3:45 שעות",
+    "links": [
+      {
+        "label": "TLV Flights (עברית)",
+        "url": "https://www.tlvflights.com/flight/LY254/"
+      },
+      {
+        "label": "FlightAware",
+        "url": "https://www.flightaware.com/live/flight/ELY254"
+      },
+      {
+        "label": "Flightradar24",
+        "url": "https://www.flightradar24.com/data/flights/ly254"
+      },
+      {
+        "label": "Trip.com",
+        "url": "https://www.trip.com/flights/status-ly254/"
+      }
+    ],
+    "linksNote": "שתי טיסות נושאות את המספר LY254 — אחת שנוחתת ב-20:55 ואחת ב-02:30, שהיא שלכם. הסטטיסטיקה המצרפית מערבבת את שתיהן, והעיכובים הגדולים היו דווקא בטיסות הערב."
   },
   "checklist": [
     "אהרנברג/Highline179 — יש אפשרות לקנות במקום ביום עצמו; לבדוק סטטוס/שעות (במיוחד Highline179, שיכול להיסגר ברוח חזקה) יום לפני",
