@@ -169,7 +169,7 @@ const STORE_PREFIX = "tp:";
 
 // חותמת גרסה, מוצגת בלשונית "מידע". מעלים אותה בכל דחיפה — כשמישהו אומר
 // "אצלי זה לא עובד", זו הדרך לדעת אם הוא בכלל מריץ את הקוד הנוכחי.
-const APP_BUILD = "2026-09-22.2";
+const APP_BUILD = "2026-09-24.1";
 
 // ה-Service Worker מגיש את המעטפת מהמטמון ומעדכן ברקע; כשהוא מגלה שהקוד
 // השתנה, הדף הזה כבר רץ עם הישן — אז הוא שולח הודעה ומציעים רענון.
@@ -465,6 +465,12 @@ function chipsHTML(block) {
   // ייעלם. קודם היה הפוך בפועל — כל מקום עם mapsQuery קיבל חיפוש גוגל,
   // וה-infoUrl השמור פשוט לא נפתח אף פעם.
   if (block.infoUrl) chips.push(`<a class="chip info" href="${escapeHTML(block.infoUrl)}" target="_blank" rel="noopener">${ICON.link} מידע נוסף</a>`);
+  // קישורים נוספים שנכתבים ידנית בקובץ הטיול, למשל חניון גיבוי — אותה תבנית
+  // בדיוק כמו links של הטיסות: { label, url, icon }, כשה-icon הוא מפתח ב-ICON.
+  (Array.isArray(block.links) ? block.links : [])
+    .filter(l => l && l.url && l.label)
+    .forEach(l => chips.push(
+      `<a class="chip" href="${escapeHTML(l.url)}" target="_blank" rel="noopener">${ICON[l.icon] || ICON.link} ${escapeHTML(l.label)}</a>`));
   if (!chips.length) return parkingNoteHTML(block);
   return `<div class="chips">${chips.join("")}</div>${parkingNoteHTML(block)}`;
 }
