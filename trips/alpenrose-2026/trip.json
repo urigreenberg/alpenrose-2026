@@ -111,10 +111,6 @@
       "coords": {
         "lat": 48.043024,
         "lng": 10.5916919
-      },
-      "image": {
-        "file": "images/allg-u-skyline-park-mua71nb0.jpg",
-        "credit": "נאספה מהרשת · לא נשמר המקור"
       }
     },
     {
@@ -159,10 +155,6 @@
       "desc": "גן חיות אלפיני אמיתי באינסברוק, עם בעלי חיים של הרי האלפים — גן חיות של ממש, לא פינת ליטוף.",
       "address": "Weiherburggasse 37, 6020 Innsbruck, Austria",
       "infoUrl": "https://alpenzoo.at/en/",
-      "image": {
-        "file": "images/alpenzoo-innsbruck-mua72euv.jpg",
-        "credit": "נאספה מהרשת · לא נשמר המקור"
-      },
       "drive": {
         "time": "כ-שעה",
         "dist": "",
@@ -201,10 +193,6 @@
       "coords": {
         "lat": 47.502264,
         "lng": 10.279404
-      },
-      "image": {
-        "file": "images/wonnemar-zvnthvpn-mua72xww.jpg",
-        "credit": "נאספה מהרשת · לא נשמר המקור"
       }
     },
     {
@@ -226,10 +214,6 @@
       "coords": {
         "lat": 47.5986352,
         "lng": 10.4114452
-      },
-      "image": {
-        "file": "images/allg-ulino-vvrtak-mua738xz.jpg",
-        "credit": "נאספה מהרשת · לא נשמר המקור"
       }
     },
     {
@@ -237,10 +221,6 @@
       "desc": "אגם עם נוף מדהים לצוגשפיצה, ליד תחנת הרכבל הבווארית. בוקר קצר ועצמאי: כ-25–30 דק׳ מהמלון, שביל נוח לאורך חלק מהאגם, וחזרה בזמן לארוחת הצהריים במלון.",
       "address": "Seeweg 2, 82491 Grainau, Germany",
       "infoUrl": "https://www.grainau.de/en/eibsee/",
-      "image": {
-        "file": "images/ayybzh-kbvkr-nprd-eibsee-mua73q40.jpg",
-        "credit": "נאספה מהרשת · לא נשמר המקור"
-      },
       "drive": {
         "time": "כ-25–30 דקות",
         "dist": "",
@@ -311,10 +291,6 @@
         "lat": 47.3737426,
         "lng": 10.8914345
       },
-      "image": {
-        "file": "images/mslvl-kytz-mzchlt-bbbrvyr-sommerrodelbahn-biberwier-mua7471c.jpg",
-        "credit": "נאספה מהרשת · לא נשמר המקור"
-      },
       "links": [
         {
           "label": "הכתבה של ORF טירול",
@@ -350,7 +326,8 @@
         "file": "images/ziegelwies.jpg",
         "credit": "Llez",
         "license": "CC BY-SA 3.0",
-        "commonsFile": "Baumkronenweg Walderlebniszentrum Ziegelwies 01.jpg"
+        "commonsFile": "Baumkronenweg Walderlebniszentrum Ziegelwies 01.jpg",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
       }
     },
     {
@@ -372,10 +349,6 @@
       "coords": {
         "lat": 47.5606205,
         "lng": 10.1386342
-      },
-      "image": {
-        "file": "images/alpsee-bergwelt-aymmnshtadt-rkbt-hrym-chlkh-vnvf-mua752i7.jpg",
-        "credit": "נאספה מהרשת · לא נשמר המקור"
       }
     },
     {
@@ -390,10 +363,6 @@
       "hours": "10:00–18:00",
       "mapsQuery": "Streichelzoo Bichlbach",
       "infoUrl": "http://www.streichelzoo.com/",
-      "image": {
-        "file": "images/gn-chyvt-lytvf-vmshchkym-bbyrklbk-streichelzoo-bichlbach-mua75lru.jpg",
-        "credit": "נאספה מהרשת · לא נשמר המקור"
-      },
       "drive": {
         "time": "כ-12 דקות",
         "dist": "",
@@ -453,11 +422,7 @@
           "text": "בתחנת העמק יש מגרש משחקים עם טרמפולינות וקארטים, אבל לפי האתר הוא מיועד לאורחי המסעדה שבתחנה — אם רוצים אותו, כדאי לתכנן לאכול שם."
         }
       ],
-      "mapsQuery": "Tiroler Zugspitzbahn Ehrwald Talstation",
-      "image": {
-        "file": "images/rkbl-lpsgh-mvzyavn-faszination-zugspitze-avptzyvnly-mu9wjh65.jpg",
-        "credit": "נאספה מהרשת · לא נשמר המקור"
-      }
+      "mapsQuery": "Tiroler Zugspitzbahn Ehrwald Talstation"
     },
     {
       "title": "מצוק הפרטנאך (Partnachklamm), גרמיש-פרטנקירכן",
@@ -488,12 +453,7 @@
         {
           "text": "בהריון: השביל צר ויש בו קטעים נמוכים שמחייבים להתכופף — ללכת לאט, ולשקול לוותר אם ההתכופפות לא נוחה."
         }
-      ],
-      "image": {
-        "file": "images/mtzvk-hprtnak-partnachklamm-grmysh-prtnkyrkn-mubhfc8q.webp",
-        "credit": "Mountain Moments",
-        "sourceUrl": "https://www.mountainmoments.com/wp-content/uploads/2022/02/Partnachklamm-Route-Map-Mountain-Moments-HIking-and-Photography-Tips-Gallery-1-1229x1536.jpeg"
-      }
+      ]
     }
   ],
   "days": [
@@ -521,11 +481,7 @@
               "text": "כדאי תיק יד קטן עם בגדי שינה, כלי רחצה ומשהו לאכול לכל משפחה — כדי לא לפרוק הכול בלילה."
             }
           ],
-          "mapsQuery": "REWE Terminalstraße Mitte 18 Flughafen München",
-          "image": {
-            "file": "images/nchyth-aysvf-rkbym-vknyvt-b-rewe-mu9v4i3j.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          }
+          "mapsQuery": "REWE Terminalstraße Mitte 18 Flughafen München"
         }
       ],
       "returnLeg": {
@@ -558,7 +514,8 @@
             "file": "images/heiterwangersee.jpg",
             "credit": "Rémih",
             "license": "CC BY-SA 4.0",
-            "commonsFile": "Heiterwanger See Fischer am See 01.jpg"
+            "commonsFile": "Heiterwanger See Fischer am See 01.jpg",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
           },
           "infoUrl": "https://www.fischeramsee.at/en/region-active/summer-autumn/active-at-the-lake/",
           "drive": {
@@ -602,11 +559,7 @@
             {
               "text": "יש מתקנים גם לקטנים."
             }
-          ],
-          "image": {
-            "file": "images/mgrsh-hmshchkym-lusspark-blrmvs-mu9vd1v8.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          }
+          ]
         }
       ],
       "returnLeg": {
@@ -642,10 +595,6 @@
             "dist": "",
             "from": "מהמלון"
           },
-          "image": {
-            "file": "images/gvndvlh-ualm-vmshchkym-btchnh-hamtzayt-hoch-imst-mu9w87j9.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          },
           "parkingQuery": "Imster Bergbahnen Talstation, Imst",
           "parkingNote": "הניווט מוביל לתחנת העמק של Imster Bergbahnen, ולא ל-UAlm שבאמצע ההר — לשם עולים בגונדולה. החניה בתחנת העמק חינם."
         },
@@ -662,10 +611,6 @@
           },
           "wxPlace": "Imst, Austria",
           "infoUrl": "https://www.imst.at/en/hoch-imst/alpine-coaster-hoch-imst.html",
-          "image": {
-            "file": "images/yrydh-bmslvl-hhrym-halpyny-alpine-coaster-mu9wdccv.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          },
           "tips": [
             {
               "text": "הרכיבה מגיל 3+ בליווי מבוגר — הילדים בני 3, 4, 4 ו-5 יכולים לרכוב; בני ה-1 וה-2 לא, אבל נהנים מהפארק שסביב. מומלץ שההרה תוותר על הרכבת.",
@@ -720,10 +665,6 @@
             }
           ],
           "mapsQuery": "Märchenwald Isartal Wolfratshausen",
-          "image": {
-            "file": "images/m-rchenwald-isartal-park-agdvt-byar-mua6xdf1.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          },
           "start": "09:30",
           "end": "14:00",
           "links": [
@@ -761,10 +702,6 @@
             "elev": 1125
           },
           "wxPlace": "Ehrwald, Austria",
-          "image": {
-            "file": "images/rkbl-vaz-didi-s-almsee-runde-mslvl-mshpchty-sbyb-hagm-mu9wpyfo.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          },
           "infoUrl": "https://www.almbahn.at/de/sommer/wandern-bergsteigen/didis-almsee-runde/",
           "drive": {
             "time": "כ-10 דקות",
@@ -808,11 +745,7 @@
               "text": "ערב למבוגרים בלבד. בהריון: אפשר להצטרף ולשבת, בלי אלכוהול."
             }
           ],
-          "mapsQuery": "Casino Innsbruck Salurner Straße 15",
-          "image": {
-            "file": "images/arb-pvkr-lbnym-bkzynv-aynsbrvk-casino-innsbruck-mu9wsjyu.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          }
+          "mapsQuery": "Casino Innsbruck Salurner Straße 15"
         }
       ],
       "returnLeg": {
@@ -842,11 +775,7 @@
           },
           "wxPlace": "Lermoos, Austria",
           "mapsQuery": "Alpenrose Familux Resort Lermoos",
-          "infoUrl": "https://www.hotelalpenrose.at/en/",
-          "image": {
-            "file": "images/kdvrgl-mshpchty-mua6u93w.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          }
+          "infoUrl": "https://www.hotelalpenrose.at/en/"
         },
         {
           "start": "10:30",
@@ -861,10 +790,6 @@
           },
           "wxPlace": "Lermoos, Austria",
           "indoor": true,
-          "image": {
-            "file": "images/hknt-kdvry-shvkvld-mua6umk2.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          },
           "mapsQuery": "Alpenrose Familux Resort Lermoos",
           "infoUrl": "https://www.hotelalpenrose.at/en/"
         },
@@ -880,10 +805,6 @@
             "elev": 1365
           },
           "wxPlace": "Berwang, Austria",
-          "image": {
-            "file": "images/shbyl-chvvyh-ayntraktyby-am-mym-vkdvry-atz-naturerlebnisweg-mitteregg-mua6v4hb.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          },
           "infoUrl": "https://www.berwang.tirol/en/hiking/nature-adventure-trail-mitteregg",
           "drive": {
             "time": "כ-25–30 דקות",
@@ -929,10 +850,6 @@
             "elev": 1034
           },
           "wxPlace": "Reutte, Austria",
-          "image": {
-            "file": "images/avlm-htyrh-ahrnbrg-malyt-mgrsh-mshchkym-tyrh-vgshr-tlvy-avptzyvnly-burgenwelt-ehrenberg-mua6vmta.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          },
           "infoUrl": "https://www.ehrenberg.at/de/home.html",
           "tips": [
             {
@@ -989,11 +906,7 @@
               "text": "יש גם פארק חבלים (rope course) צמוד לאאוטלט — אופציה אם רוצים לשבור את הקניות עם משהו לילדים, אבל הפעילות המרכזית של אחה\"צ הזה היא בלי ילדים."
             }
           ],
-          "mapsQuery": "FOC Füssen Outlet Center",
-          "image": {
-            "file": "images/achh-tz-knyvt-b-foc-f-ssen-outlet-center-lnshym-mua6w0u2.jpg",
-            "credit": "נאספה מהרשת · לא נשמר המקור"
-          }
+          "mapsQuery": "FOC Füssen Outlet Center"
         },
         {
           "title": "העיר העתיקה של פיסן ומפל הלך (אופציונלי)",
@@ -1051,7 +964,8 @@
             "file": "images/alpenrose-hotel.jpg",
             "credit": "Pixelteufel",
             "license": "CC BY 2.0",
-            "sourceUrl": "https://www.flickr.com/photos/99667320@N06/49478101357"
+            "sourceUrl": "https://www.flickr.com/photos/99667320@N06/49478101357",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0/"
           },
           "mapsQuery": "Alpenrose Familux Resort Lermoos",
           "infoUrl": "https://www.hotelalpenrose.at/en/"
@@ -1149,11 +1063,7 @@
                 "text": "כדאי תיק יד קטן עם בגדי שינה, כלי רחצה ומשהו לאכול לכל משפחה — כדי לא לפרוק הכול בלילה."
               }
             ],
-            "mapsQuery": "REWE Terminalstraße Mitte 18 Flughafen München",
-            "image": {
-              "file": "images/nchyth-aysvf-rkbym-vknyvt-b-rewe-mu9v4i3j.jpg",
-              "credit": "נאספה מהרשת · לא נשמר המקור"
-            }
+            "mapsQuery": "REWE Terminalstraße Mitte 18 Flughafen München"
           }
         ],
         "returnLeg": {
@@ -1186,7 +1096,8 @@
               "file": "images/heiterwangersee.jpg",
               "credit": "Rémih",
               "license": "CC BY-SA 4.0",
-              "commonsFile": "Heiterwanger See Fischer am See 01.jpg"
+              "commonsFile": "Heiterwanger See Fischer am See 01.jpg",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
             },
             "infoUrl": "https://www.fischeramsee.at/en/region-active/summer-autumn/active-at-the-lake/",
             "drive": {
@@ -1230,11 +1141,7 @@
               {
                 "text": "יש מתקנים גם לקטנים."
               }
-            ],
-            "image": {
-              "file": "images/mgrsh-hmshchkym-lusspark-blrmvs-mu9vd1v8.jpg",
-              "credit": "נאספה מהרשת · לא נשמר המקור"
-            }
+            ]
           }
         ],
         "returnLeg": {
@@ -1280,7 +1187,8 @@
               "file": "images/ziegelwies.jpg",
               "credit": "Llez",
               "license": "CC BY-SA 3.0",
-              "commonsFile": "Baumkronenweg Walderlebniszentrum Ziegelwies 01.jpg"
+              "commonsFile": "Baumkronenweg Walderlebniszentrum Ziegelwies 01.jpg",
+              "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
             },
             "tips": [
               {
@@ -1332,10 +1240,6 @@
               }
             ],
             "mapsQuery": "Märchenwald Isartal Wolfratshausen",
-            "image": {
-              "file": "images/m-rchenwald-isartal-park-agdvt-byar-mua6xdf1.jpg",
-              "credit": "נאספה מהרשת · לא נשמר המקור"
-            },
             "start": "09:30",
             "end": "14:00",
             "links": [
@@ -1380,10 +1284,6 @@
               "dist": "",
               "from": "מהמלון"
             },
-            "image": {
-              "file": "images/gvndvlh-ualm-vmshchkym-btchnh-hamtzayt-hoch-imst-mu9w87j9.jpg",
-              "credit": "נאספה מהרשת · לא נשמר המקור"
-            },
             "parkingQuery": "Imster Bergbahnen Talstation, Imst",
             "parkingNote": "הניווט מוביל לתחנת העמק של Imster Bergbahnen, ולא ל-UAlm שבאמצע ההר — לשם עולים בגונדולה. החניה בתחנת העמק חינם."
           },
@@ -1400,10 +1300,6 @@
             },
             "wxPlace": "Imst, Austria",
             "infoUrl": "https://www.imst.at/en/hoch-imst/alpine-coaster-hoch-imst.html",
-            "image": {
-              "file": "images/yrydh-bmslvl-hhrym-halpyny-alpine-coaster-mu9wdccv.jpg",
-              "credit": "נאספה מהרשת · לא נשמר המקור"
-            },
             "tips": [
               {
                 "text": "הרכיבה מגיל 3+ בליווי מבוגר — הילדים בני 3, 4, 4 ו-5 יכולים לרכוב; בני ה-1 וה-2 לא, אבל נהנים מהפארק שסביב. מומלץ שההרה תוותר על הרכבת.",
@@ -1441,11 +1337,7 @@
                 "text": "ערב למבוגרים בלבד. בהריון: אפשר להצטרף ולשבת, בלי אלכוהול."
               }
             ],
-            "mapsQuery": "Casino Innsbruck Salurner Straße 15",
-            "image": {
-              "file": "images/arb-pvkr-lbnym-bkzynv-aynsbrvk-casino-innsbruck-mu9wsjyu.jpg",
-              "credit": "נאספה מהרשת · לא נשמר המקור"
-            }
+            "mapsQuery": "Casino Innsbruck Salurner Straße 15"
           }
         ],
         "returnLeg": {
@@ -1480,10 +1372,6 @@
               "elev": 1125
             },
             "wxPlace": "Ehrwald, Austria",
-            "image": {
-              "file": "images/rkbl-vaz-didi-s-almsee-runde-mslvl-mshpchty-sbyb-hagm-mu9wpyfo.jpg",
-              "credit": "נאספה מהרשת · לא נשמר המקור"
-            },
             "infoUrl": "https://www.almbahn.at/de/sommer/wandern-bergsteigen/didis-almsee-runde/",
             "drive": {
               "time": "כ-10 דקות",
@@ -1521,10 +1409,6 @@
               "elev": 1034
             },
             "wxPlace": "Reutte, Austria",
-            "image": {
-              "file": "images/avlm-htyrh-ahrnbrg-malyt-mgrsh-mshchkym-tyrh-vgshr-tlvy-avptzyvnly-burgenwelt-ehrenberg-mua6vmta.jpg",
-              "credit": "נאספה מהרשת · לא נשמר המקור"
-            },
             "infoUrl": "https://www.ehrenberg.at/de/home.html",
             "tips": [
               {
@@ -1581,11 +1465,7 @@
                 "text": "יש גם פארק חבלים (rope course) צמוד לאאוטלט — אופציה אם רוצים לשבור את הקניות עם משהו לילדים, אבל הפעילות המרכזית של אחה\"צ הזה היא בלי ילדים."
               }
             ],
-            "mapsQuery": "FOC Füssen Outlet Center",
-            "image": {
-              "file": "images/achh-tz-knyvt-b-foc-f-ssen-outlet-center-lnshym-mua6w0u2.jpg",
-              "credit": "נאספה מהרשת · לא נשמר המקור"
-            }
+            "mapsQuery": "FOC Füssen Outlet Center"
           },
           {
             "title": "העיר העתיקה של פיסן ומפל הלך (אופציונלי)",
@@ -1643,7 +1523,8 @@
               "file": "images/alpenrose-hotel.jpg",
               "credit": "Pixelteufel",
               "license": "CC BY 2.0",
-              "sourceUrl": "https://www.flickr.com/photos/99667320@N06/49478101357"
+              "sourceUrl": "https://www.flickr.com/photos/99667320@N06/49478101357",
+              "licenseUrl": "https://creativecommons.org/licenses/by/2.0/"
             },
             "mapsQuery": "Alpenrose Familux Resort Lermoos",
             "infoUrl": "https://www.hotelalpenrose.at/en/"

@@ -169,7 +169,7 @@ const STORE_PREFIX = "tp:";
 
 // חותמת גרסה, מוצגת בלשונית "מידע". מעלים אותה בכל דחיפה — כשמישהו אומר
 // "אצלי זה לא עובד", זו הדרך לדעת אם הוא בכלל מריץ את הקוד הנוכחי.
-const APP_BUILD = "2026-09-29.1";
+const APP_BUILD = "2026-09-30.1";
 
 // ה-Service Worker מגיש את המעטפת מהמטמון ומעדכן ברקע; כשהוא מגלה שהקוד
 // השתנה, הדף הזה כבר רץ עם הישן — אז הוא שולח הודעה ומציעים רענון.
@@ -351,6 +351,18 @@ function bindPlanSwitch() {
    הרשמי), ו-infoLink גבר. עכשיו יש שדה אחד עם משמעות אחת. הקבצים שפורסמו
    כבר הומרו, אבל טיוטה שנשמרה במכשיר לפני ההמרה עדיין נושאת את הישן —
    בלי זה הקישור שלה היה נעלם בשקט. */
+/* תמונה שאין לה רישיון מתועד היא תמונה שאי אפשר לדעת אם מותר לפרסם, ולכן
+   היא לא מוצגת בכלל. בעבר שדה "קישור ישיר לתמונה" בעורך יצר image עם
+   license ריק, וכך נכנסו 22 תמונות שלא נשמר להן מקור. תמונה שהמשתמש העלה
+   מהמכשיר היא שלו ונשארת — אין לה רישיון לתעד. */
+function imageRightsCleared(image) {
+  if (!image) return false;
+  // own נכתב בפרסום, localAsset קיים לפניו — שניהם אומרים "התמונה של
+  // המשתמש". pending לבדו לא מספיק: גם קישור ישיר מסומן pending.
+  if (image.own || image.localAsset) return true;
+  return !!(image.license || image.commonsFile);
+}
+
 function migrateInfoLinks() {
   const altDays = (TRIP_RAW && TRIP_RAW.altPlan && TRIP_RAW.altPlan.days) || [];
   const allDays = [...((TRIP_RAW && TRIP_RAW.days) || []), ...altDays];
@@ -366,6 +378,9 @@ function migrateInfoLinks() {
     // הניווט נופל לשם המקום, שזו ממילא ההתנהגות הרצויה. בלי זה טיוטה
     // שנשמרה במכשיר לפני השינוי הייתה ממשיכה לשלוח לקואורדינטה הישנה.
     delete it.parking;
+    // בלי זה טיוטה שנשמרה לפני הניקוי הייתה ממשיכה להציג את התמונות ההן,
+    // ופרסום מהעורך היה דוחף אותן בחזרה לקובץ.
+    if (it.image && !imageRightsCleared(it.image)) delete it.image;
   }
 }
 
@@ -724,12 +739,20 @@ function creditSourceName(url) {
 
 function creditHTML(image) {
   if (!image || !image.credit) return "";
-  const text = escapeHTML(image.credit) + (image.license ? " · " + escapeHTML(image.license) : "");
   const href = image.sourceUrl || (image.commonsFile ? commonsFileUrl(image.commonsFile) : null);
-  if (!href) return `<span class="stop-credit">${ICON.camera} ${text}</span>`;
-  const site = image.commonsFile && !image.sourceUrl ? "ויקישיתוף" : creditSourceName(href);
-  return `<a class="stop-credit" href="${escapeHTML(href)}" target="_blank" rel="noopener">`
-    + `${ICON.camera} ${text}${site ? ", " + escapeHTML(site) : ""}</a>`;
+  const site = href ? (image.commonsFile && !image.sourceUrl ? "ויקישיתוף" : creditSourceName(href)) : "";
+  const name = escapeHTML(image.credit) + (site ? ", " + escapeHTML(site) : "");
+  const who = href
+    ? `<a href="${escapeHTML(href)}" target="_blank" rel="noopener">${name}</a>`
+    : name;
+  // רישיונות CC דורשים קישור לתנאי הרישיון ולא רק את שמו, אז שם הרישיון
+  // עצמו הוא הקישור. בלי licenseUrl נשאר טקסט — עדיין עדיף על כלום.
+  const lic = image.license
+    ? " · " + (image.licenseUrl
+        ? `<a href="${escapeHTML(image.licenseUrl)}" target="_blank" rel="noopener">${escapeHTML(image.license)}</a>`
+        : escapeHTML(image.license))
+    : "";
+  return `<span class="stop-credit">${ICON.camera} ${who}${lic}</span>`;
 }
 
 function imageHTML(image, item) {
