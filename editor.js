@@ -424,6 +424,19 @@ function edHost() {
   return el;
 }
 
+/* edOpenTrip קורא את הטיוטה גולמית ולא עובר דרך migrateInfoLinks, ולכן
+   הניקוי חייב לחזור כאן: בלעדיו פרסום מהעורך היה דוחף תמונות בלי רישיון
+   בחזרה לקובץ, אחרי שהאפליקציה עצמה כבר הפסיקה להציג אותן. */
+function edStripUnlicensedImages(trip) {
+  if (!trip) return trip;
+  const days = [...(trip.days || []), ...(((trip.altPlan || {}).days) || [])];
+  const items = [...days.flatMap(d => d.blocks || []), ...(trip.extras || [])];
+  for (const it of items) {
+    if (it && it.image && !imageRightsCleared(it.image)) delete it.image;
+  }
+  return trip;
+}
+
 async function edOpenTrip(id) {
   const draft = edReadDraft(id);
   if (draft) {
@@ -436,6 +449,7 @@ async function edOpenTrip(id) {
   }
   if (!ED.meta.trash) ED.meta.trash = [];
   if (!ED.trip.extras) ED.trip.extras = [];
+  edStripUnlicensedImages(ED.trip);
   ED.dirty = !!draft;
   ED.open = true;
   ED.form = null;
@@ -573,7 +587,7 @@ function edOpenForm(dayDate, index) {
   const day = ED.trip.days.find(d => d.date === dayDate);
   const block = index == null ? edEmptyBlock(dayDate) : edClone(day.blocks[index]);
   block._day = dayDate;
-  ED.form = { kind: "day", dayDate, index, block, results: null, busy: false, photos: null, wiki: null, wikiDismissed: false, query: "", photoUrlDraft: "" };
+  ED.form = { kind: "day", dayDate, index, block, results: null, busy: false, photos: null, wiki: null, wikiDismissed: false, query: "", photoUrlDraft: "", photoLicenseDraft: "" };
   edRender();
 }
 
@@ -583,7 +597,7 @@ function edEmptyExtra() {
 
 function edOpenExtraForm(index) {
   const block = index == null ? edEmptyExtra() : edClone(ED.trip.extras[index]);
-  ED.form = { kind: "extra", dayDate: null, index, block, results: null, busy: false, photos: null, wiki: null, wikiDismissed: false, query: "", photoUrlDraft: "" };
+  ED.form = { kind: "extra", dayDate: null, index, block, results: null, busy: false, photos: null, wiki: null, wikiDismissed: false, query: "", photoUrlDraft: "", photoLicenseDraft: "" };
   edRender();
 }
 
@@ -820,7 +834,8 @@ function edPhotoHTML(b) {
   return `
     <div class="ed-field"><span>תמונה</span></div>
     ${current}
-    ${manual ? `<label class="ed-field"><span>קרדיט (אופציונלי)</span><input data-image-credit value="${escapeHTML(b.image.credit || "")}" placeholder="שם הצלם, או השאירו ריק"></label>` : ""}
+    ${manual ? `<label class="ed-field"><span>קרדיט (אופציונלי)</span><input data-image-credit value="${escapeHTML(b.image.credit || "")}" placeholder="שם הצלם, או השאירו ריק"></label>
+    ${b.image.own ? `<p class="ed-hint">תמונה שלכם — לא צריך רישיון.</p>` : `<label class="ed-field"><span>רישיון</span><input data-image-license value="${escapeHTML(b.image.license || "")}" placeholder="למשל CC BY-SA 4.0"></label>`}` : ""}
 
     <div class="ed-field-row">
       <label class="ed-add" for="ed-photo-upload">${ICON.upload} ${b.image ? "החלפה מהמכשיר" : "העלאה מהמכשיר"}</label>
@@ -830,9 +845,10 @@ function edPhotoHTML(b) {
 
     <div class="ed-field-row">
       <label class="ed-field ed-flex2"><span>או קישור ישיר לתמונה</span><input data-photo-url value="${escapeHTML(f.photoUrlDraft || "")}" placeholder="https://…" dir="ltr"></label>
+      <label class="ed-field"><span>רישיון</span><input data-photo-license value="${escapeHTML(f.photoLicenseDraft || "")}" placeholder="למשל CC BY-SA 4.0"></label>
       <button class="ed-add" data-photo-url-use>שימוש בקישור</button>
     </div>
-    <p class="ed-hint">קישור עובד רק אם האתר המקורי מרשה הורדה חוצה-מקורות — אם הפרסום נכשל על התמונה הזו, כדאי להוריד אותה ולהעלות מהמכשיר במקום.</p>
+    <p class="ed-hint">לקישור חובה לציין רישיון — תמונה בלי רישיון מתועד לא מוצגת באפליקציה. קישור עובד רק אם האתר המקורי מרשה הורדה חוצה-מקורות; אם הפרסום נכשל על התמונה הזו, כדאי להוריד אותה ולהעלות מהמכשיר במקום.</p>
 
     ${commonsGrid}
   `;
@@ -886,6 +902,11 @@ function edOnInput(e) {
     return;
   }
   if (e.target.matches("[data-photo-url]")) { ED.form.photoUrlDraft = e.target.value; return; }
+  if (e.target.matches("[data-photo-license]")) { ED.form.photoLicenseDraft = e.target.value; return; }
+  if (e.target.matches("[data-image-license]")) {
+    if (ED.form.block.image) ED.form.block.image.license = e.target.value;
+    return;
+  }
   if (e.target.matches("[data-photo-upload]") && e.target.files[0]) {
     edAttachPhoto(e.target.files[0]);
     return;
@@ -1042,16 +1063,26 @@ async function edOnClick(e) {
 
   if (hit("[data-photo-url-use]")) {
     const url = (ED.form.photoUrlDraft || "").trim();
+    const license = (ED.form.photoLicenseDraft || "").trim();
     if (!url) { alert("צריך להזין קישור לתמונה."); return; }
+    // כך נכנסו 22 תמונות בלי מקור: הקישור יצר image עם license ריק, ואחר כך
+    // אי אפשר היה לדעת אם מותר לפרסם אותן. תמונה בלי רישיון מתועד לא מוצגת
+    // (ר' imageRightsCleared), אז עדיף לעצור כאן מלשמור משהו שייעלם.
+    if (!license) {
+      alert("צריך לציין את הרישיון של התמונה — אחרת אי אפשר לדעת אם מותר לפרסם אותה, והיא לא תוצג.");
+      return;
+    }
     ED.form.block.image = {
       file: `images/${edSlug(ED.form.block.title || "photo")}-${Date.now().toString(36)}.${edGuessImageExt(url)}`,
       thumb: url,
       credit: "",
-      license: "",
+      license,
+      sourceUrl: url,
       pending: true
     };
     ED.form.photos = null;
     ED.form.photoUrlDraft = "";
+    ED.form.photoLicenseDraft = "";
     edRender();
     return;
   }
@@ -1536,6 +1567,9 @@ async function edProcessPendingImages(items, dir, files, onStep, tripId) {
     files.push({ path: `${dir}/${item.image.file}`, base64: await edBlobToBase64(blob), size: blob.size });
     // מה שנשמר בקובץ הטיול הוא רק המבנה שהאפליקציה מרנדרת.
     const kept = { file: item.image.file };
+    // localAsset נעלם בפרסום, ובלעדיו תמונה שהמשתמש צילם נראית כמו תמונה
+    // בלי רישיון ו-imageRightsCleared הייתה מוחקת אותה. own שורד בקובץ.
+    if (item.image.localAsset) kept.own = true;
     if (item.image.credit) kept.credit = item.image.credit;
     if (item.image.license) kept.license = item.image.license;
     if (item.image.commonsFile) kept.commonsFile = item.image.commonsFile;
